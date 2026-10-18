@@ -1,0 +1,100 @@
+<!doctype html>
+<!--
+	MOCKUP ESTÁTICO · Iniciar sesión (acceso público)
+	Página real equivalente: src/pages/login-page.jsx
+	------------------------------------------------------------------
+	Qué muestra: formulario de usuario/contraseña y accesos rápidos de
+	demostración a cada rol (Admin, Médico, Paciente).
+	Esta carpeta Pro2 es la maqueta HTML del sistema "Centro de
+	Vacunación Salud": solo HTML/CSS/JS de presentación, sin lógica de
+	negocio, para leer la interfaz sin ejecutar React. Se ve igual que
+	los componentes de src/ porque usa las mismas librerías:
+	- Tailwind CSS v4 y daisyUI 5 (cargados desde vendor/, sin CDN).
+	- Tabler Icons (webfont): <i class="ti ti-...">; en React se usan
+	  los componentes @tabler/icons-react con los mismos nombres.
+	- Tema de colores "salud" definido en estilos.css y activado
+	  con data-theme="salud" en la etiqueta <html>.
+	Los datos (pacientes, vacunas, registros...) están escritos a mano
+	y equivalen a los de src/data/data-frontend.js.
+	Cómo usarla (funciona sola, sin el proyecto React):
+	1) `pnpm install` dentro de esta carpeta: instala las dependencias
+	   y copia los recursos a vendor/ automáticamente.
+	2) Abrir este index.html en el navegador, o `pnpm servir`.
+	No requiere build.
+-->
+<html lang="es" data-theme="salud">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Iniciar sesión — Centro de Vacunación Salud</title>
+		<!-- Recursos locales (sin CDN ni internet): se generan con
+		`pnpm install` en esta carpeta (scripts/preparar-assets.mjs) -->
+		<link href="vendor/inter/index.css" rel="stylesheet" />
+		<link href="vendor/tabler/tabler-icons.min.css" rel="stylesheet" />
+		<link href="vendor/daisyui/daisyui.css" rel="stylesheet" />
+		<link href="estilos.css" rel="stylesheet" />
+		<script src="vendor/tailwind/index.global.js"></script>
+	</head>
+	<body>
+		<main class="flex min-h-svh items-center justify-center bg-base-200 p-4">
+			<div class="w-full max-w-md">
+				<div class="mb-6 flex flex-col items-center gap-2 text-center">
+					<i class="ti ti-vaccine text-[44px] text-primary"></i>
+					<h1 class="font-bold text-2xl">Centro de Vacunación</h1>
+					<p class="text-sm opacity-70">
+						Sistema de gestión e inventario de vacunación
+					</p>
+				</div>
+
+				<!-- Formulario de acceso (maqueta: no valida credenciales) -->
+				<form class="card bg-base-100 shadow-sm">
+					<div class="card-body gap-4">
+						<h2 class="card-title text-lg">Iniciar sesión</h2>
+
+						<div class="flex flex-col gap-1">
+							<label class="label" for="usuario">Usuario</label>
+							<input
+								id="usuario"
+								type="text"
+								class="input w-full"
+								placeholder="Ingrese su usuario"
+							/>
+						</div>
+
+						<div class="flex flex-col gap-1">
+							<label class="label" for="clave">Contraseña</label>
+							<input
+								id="clave"
+								type="password"
+								class="input w-full"
+								placeholder="Ingrese su contraseña"
+							/>
+						</div>
+
+						<button type="button" class="btn btn-primary mt-2">
+							Entrar
+						</button>
+					</div>
+				</form>
+
+				<!-- Acceso rápido de demostración: entra directo a cada rol sin login -->
+				<div class="mt-6">
+					<p class="mb-2 text-center text-xs opacity-60">
+						Acceso rápido temporal
+					</p>
+					<div class="flex flex-wrap justify-center gap-2">
+						<a href="admin/index.html" class="btn btn-sm btn-outline">
+							Admin
+						</a>
+						<a href="medico/index.html" class="btn btn-sm btn-outline">
+							Médico
+						</a>
+						<a href="paciente/index.html" class="btn btn-sm btn-outline">
+							Paciente
+						</a>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

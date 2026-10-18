@@ -1,0 +1,178 @@
+<!doctype html>
+<!--
+	MOCKUP ESTÁTICO · Panel general (rol Admin)
+	Página real equivalente: src/pages/admin/admin-dashboard.jsx
+	------------------------------------------------------------------
+	Qué muestra: resumen del sistema en 3 tarjetas contadoras
+	(pacientes registrados, dosis en inventario y dosis aplicadas) y
+	la lista de alertas de stock mínimo.
+	Maqueta HTML/CSS del sistema (sin lógica de negocio): daisyUI 5 +
+	Tailwind v4 + Tabler Icons desde ../vendor/, tema "salud" en
+	../estilos.css y datos escritos a mano equivalentes a
+	src/data/data-frontend.js. Ver Pro2/index.html para el detalle
+	general de la carpeta.
+-->
+<html lang="es" data-theme="salud">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Panel general — Centro de Vacunación Salud</title>
+		<!-- Recursos locales (sin CDN ni internet): se generan con
+		`pnpm install` en esta carpeta (scripts/preparar-assets.mjs) -->
+		<link href="../vendor/inter/index.css" rel="stylesheet" />
+		<link href="../vendor/tabler/tabler-icons.min.css" rel="stylesheet" />
+		<link href="../vendor/daisyui/daisyui.css" rel="stylesheet" />
+		<link href="../estilos.css" rel="stylesheet" />
+		<script src="../vendor/tailwind/index.global.js"></script>
+	</head>
+	<body>
+		<div class="drawer lg:drawer-open">
+			<input id="menu-principal" type="checkbox" class="drawer-toggle" />
+			<div class="drawer-content flex min-h-svh flex-col bg-base-200">
+				<!-- Barra superior: botón de menú (móvil), logo, rol conectado y salir -->
+				<div class="navbar sticky top-0 z-10 border-base-300 border-b bg-base-100">
+					<div class="navbar-start gap-2">
+						<label
+							for="menu-principal"
+							class="btn btn-ghost btn-square drawer-button lg:hidden"
+							aria-label="Abrir menú"
+						>
+							<i class="ti ti-menu-2 text-[22px]"></i>
+						</label>
+						<span class="flex items-center gap-2 font-semibold">
+							<i class="ti ti-vaccine text-[24px] text-primary"></i>
+							<span class="hidden sm:inline">
+								Centro de Vacunación Salud
+							</span>
+						</span>
+					</div>
+					<div class="navbar-end gap-3">
+						<span class="hidden text-right text-xs sm:block">
+							<span class="block font-medium">Admin</span>
+						</span>
+						<a href="../index.html" class="btn btn-outline btn-sm">
+							<i class="ti ti-logout text-[18px]"></i>
+							Salir
+						</a>
+					</div>
+				</div>
+				<main class="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-6">
+					<div class="flex flex-col gap-6">
+						<header>
+							<h1 class="font-bold text-2xl">Panel general</h1>
+							<p class="text-sm opacity-70">
+								Resumen del sistema y control global de inventario.
+							</p>
+						</header>
+
+						<!-- Tarjetas de resumen: totales del sistema
+						(pacientes, dosis en inventario y dosis aplicadas) -->
+						<div
+							class="stats stats-vertical w-full bg-base-100 shadow-sm sm:stats-horizontal"
+						>
+							<div class="stat">
+								<div class="stat-figure text-primary">
+									<i class="ti ti-users text-[28px]"></i>
+								</div>
+								<div class="stat-title">Pacientes registrados</div>
+								<div class="stat-value text-primary">3</div>
+								<div class="stat-desc">
+									Cuentas de pacientes activas
+								</div>
+							</div>
+							<div class="stat">
+								<div class="stat-figure text-primary">
+									<i class="ti ti-vaccine text-[28px]"></i>
+								</div>
+								<div class="stat-title">Vacunas en inventario</div>
+								<div class="stat-value text-primary">770</div>
+								<div class="stat-desc">5 tipos de vacuna</div>
+							</div>
+							<div class="stat">
+								<div class="stat-figure text-accent">
+									<i class="ti ti-clipboard-plus text-[28px]"></i>
+								</div>
+								<div class="stat-title">Dosis aplicadas</div>
+								<div class="stat-value text-accent">7</div>
+								<div class="stat-desc">Registros históricos</div>
+							</div>
+						</div>
+
+						<div class="grid gap-4">
+							<!-- Vacunas cuyo stock está por debajo del mínimo -->
+							<div class="card bg-base-100 shadow-sm">
+								<div class="card-body">
+									<h2 class="card-title text-base">
+										Alerta de stock mínimo
+									</h2>
+									<ul class="flex flex-col gap-2">
+										<li
+											class="flex items-center justify-between gap-2 rounded-box bg-base-200 px-3 py-2"
+										>
+											<span class="flex items-center gap-2 text-sm">
+												<i
+													class="ti ti-alert-triangle text-[18px] text-warning"
+												></i>
+												Hepatitis B
+											</span>
+											<span class="badge badge-warning badge-sm">
+												75 / mín. 90
+											</span>
+										</li>
+										<li
+											class="flex items-center justify-between gap-2 rounded-box bg-base-200 px-3 py-2"
+										>
+											<span class="flex items-center gap-2 text-sm">
+												<i
+													class="ti ti-alert-triangle text-[18px] text-warning"
+												></i>
+												Tétanos
+											</span>
+											<span class="badge badge-warning badge-sm">
+												55 / mín. 70
+											</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+			</div>
+			<!-- Menú lateral (drawer de daisyUI): navegación del rol Admin -->
+			<div class="drawer-side z-20">
+				<label
+					for="menu-principal"
+					aria-label="Cerrar menú"
+					class="drawer-overlay"
+				></label>
+				<aside class="flex min-h-full w-72 flex-col bg-base-100">
+					<div class="border-base-300 border-b p-4">
+						<p class="font-semibold">Menú</p>
+						<p class="text-xs opacity-60">Admin</p>
+					</div>
+					<ul class="menu w-full flex-1 p-3">
+						<li>
+							<a href="index.html" class="menu-active">
+								<i class="ti ti-layout-dashboard text-[20px]"></i>
+								Panel general
+							</a>
+						</li>
+						<li>
+							<a href="inventario.html">
+								<i class="ti ti-box-seam text-[20px]"></i>
+								Inventario y cuentas
+							</a>
+						</li>
+						<li>
+							<a href="vacunas.html">
+								<i class="ti ti-search text-[20px]"></i>
+								Buscar vacuna
+							</a>
+						</li>
+					</ul>
+				</aside>
+			</div>
+		</div>
+	</body>
+</html>

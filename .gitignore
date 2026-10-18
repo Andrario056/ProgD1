@@ -1,0 +1,5 @@
+# Dependencias instaladas con `pnpm install`
+node_modules/
+
+# Recursos generados desde node_modules por `pnpm install` (scripts/preparar-assets.mjs)
+vendor/

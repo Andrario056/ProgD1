@@ -1,0 +1,313 @@
+<!doctype html>
+<!--
+	MOCKUP ESTÁTICO · Panel de atención (rol Médico)
+	Página real equivalente: src/pages/medico/medico-dashboard.jsx
+	------------------------------------------------------------------
+	Qué muestra:
+	1. Accesos directos a las dos tareas del médico (registrar
+	   paciente y registrar vacuna aplicada).
+	2. Stock actual de cada vacuna, en ámbar las que están por
+	   debajo del mínimo.
+	3. Tabla con las últimas 5 vacunas aplicadas en el centro.
+	Maqueta HTML/CSS del sistema (sin lógica de negocio): daisyUI 5 +
+	Tailwind v4 + Tabler Icons desde ../vendor/, tema "salud" en
+	../estilos.css y datos escritos a mano equivalentes a
+	src/data/data-frontend.js. Ver Pro2/index.html para el detalle
+	general de la carpeta.
+-->
+<html lang="es" data-theme="salud">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Panel de atención — Centro de Vacunación Salud</title>
+		<!-- Recursos locales (sin CDN ni internet): se generan con
+		`pnpm install` en esta carpeta (scripts/preparar-assets.mjs) -->
+		<link href="../vendor/inter/index.css" rel="stylesheet" />
+		<link href="../vendor/tabler/tabler-icons.min.css" rel="stylesheet" />
+		<link href="../vendor/daisyui/daisyui.css" rel="stylesheet" />
+		<link href="../estilos.css" rel="stylesheet" />
+		<script src="../vendor/tailwind/index.global.js"></script>
+	</head>
+	<body>
+		<div class="drawer lg:drawer-open">
+			<input id="menu-principal" type="checkbox" class="drawer-toggle" />
+			<div class="drawer-content flex min-h-svh flex-col bg-base-200">
+				<!-- Barra superior: botón de menú (móvil), logo, rol conectado y salir -->
+				<div class="navbar sticky top-0 z-10 border-base-300 border-b bg-base-100">
+					<div class="navbar-start gap-2">
+						<label
+							for="menu-principal"
+							class="btn btn-ghost btn-square drawer-button lg:hidden"
+							aria-label="Abrir menú"
+						>
+							<i class="ti ti-menu-2 text-[22px]"></i>
+						</label>
+						<span class="flex items-center gap-2 font-semibold">
+							<i class="ti ti-vaccine text-[24px] text-primary"></i>
+							<span class="hidden sm:inline">
+								Centro de Vacunación Salud
+							</span>
+						</span>
+					</div>
+					<div class="navbar-end gap-3">
+						<span class="hidden text-right text-xs sm:block">
+							<span class="block font-medium">Médico</span>
+						</span>
+						<a href="../index.html" class="btn btn-outline btn-sm">
+							<i class="ti ti-logout text-[18px]"></i>
+							Salir
+						</a>
+					</div>
+				</div>
+				<main class="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-6">
+					<div class="flex flex-col gap-6">
+						<header>
+							<h1 class="font-bold text-2xl">Panel de atención</h1>
+							<p class="text-sm opacity-70">
+								Registro de pacientes y carga de vacunas aplicadas
+								en consulta.
+							</p>
+						</header>
+
+						<div class="grid gap-4 sm:grid-cols-2">
+							<a
+								href="pacientes.html"
+								class="card bg-base-100 shadow-sm transition hover:bg-base-200"
+							>
+								<div class="card-body flex-row items-center gap-4">
+									<i
+										class="ti ti-user-plus text-[32px] text-primary"
+									></i>
+									<div>
+										<h2 class="card-title text-base">
+											Registrar paciente
+										</h2>
+										<p class="text-sm opacity-70">
+											Crea la cuenta y ficha de la persona
+											atendida.
+										</p>
+									</div>
+								</div>
+							</a>
+
+							<a
+								href="vacunas.html"
+								class="card bg-base-100 shadow-sm transition hover:bg-base-200"
+							>
+								<div class="card-body flex-row items-center gap-4">
+									<i
+										class="ti ti-clipboard-plus text-[32px] text-accent"
+									></i>
+									<div>
+										<h2 class="card-title text-base">
+											Registrar vacuna aplicada
+										</h2>
+										<p class="text-sm opacity-70">
+											Carga tipo de vacuna, lote, fecha y
+											atención.
+										</p>
+									</div>
+								</div>
+							</a>
+						</div>
+
+						<!-- Stock actual de cada vacuna; badge en ámbar cuando el
+						stock queda por debajo del mínimo definido -->
+						<section class="card bg-base-100 shadow-sm">
+							<div class="card-body gap-3">
+								<h2 class="card-title flex items-center gap-2 text-base">
+									<i class="ti ti-box-seam text-[18px]"></i>
+									Stock de inventario
+								</h2>
+								<div
+									class="flex items-center justify-between gap-3 rounded-box bg-base-200 p-3"
+								>
+									<div>
+										<p class="font-medium">COVID-19</p>
+										<p class="text-xs opacity-60">
+											Mínimo 100 dosis
+										</p>
+									</div>
+									<span class="badge badge-success badge-sm">
+										320 dosis
+									</span>
+								</div>
+								<div
+									class="flex items-center justify-between gap-3 rounded-box bg-base-200 p-3"
+								>
+									<div>
+										<p class="font-medium">Influenza</p>
+										<p class="text-xs opacity-60">
+											Mínimo 80 dosis
+										</p>
+									</div>
+									<span class="badge badge-success badge-sm">
+										180 dosis
+									</span>
+								</div>
+								<div
+									class="flex items-center justify-between gap-3 rounded-box bg-base-200 p-3"
+								>
+									<div>
+										<p class="font-medium">Hepatitis B</p>
+										<p class="text-xs opacity-60">
+											Mínimo 90 dosis
+										</p>
+									</div>
+									<span class="badge badge-warning badge-sm">
+										75 dosis
+									</span>
+								</div>
+								<div
+									class="flex items-center justify-between gap-3 rounded-box bg-base-200 p-3"
+								>
+									<div>
+										<p class="font-medium">Sarampión</p>
+										<p class="text-xs opacity-60">
+											Mínimo 60 dosis
+										</p>
+									</div>
+									<span class="badge badge-success badge-sm">
+										140 dosis
+									</span>
+								</div>
+								<div
+									class="flex items-center justify-between gap-3 rounded-box bg-base-200 p-3"
+								>
+									<div>
+										<p class="font-medium">Tétanos</p>
+										<p class="text-xs opacity-60">
+											Mínimo 70 dosis
+										</p>
+									</div>
+									<span class="badge badge-warning badge-sm">
+										55 dosis
+									</span>
+								</div>
+							</div>
+						</section>
+
+						<!-- Tabla con las últimas 5 vacunas aplicadas en el centro -->
+						<section class="card bg-base-100 shadow-sm">
+							<div class="card-body">
+								<h2 class="card-title text-base">
+									Últimos registros de vacunación
+								</h2>
+								<div class="overflow-x-auto">
+									<table class="table table-sm">
+										<thead>
+											<tr>
+												<th>Paciente</th>
+												<th>Vacuna</th>
+												<th>Lote</th>
+												<th>Fecha</th>
+												<th>Atención</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="font-medium">
+													Carla Rivas
+												</td>
+												<td>Sarampión</td>
+												<td>SRM-2290</td>
+												<td>2026-10-14</td>
+												<td class="max-w-48 truncate">
+													Primera dosis sarampión
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">
+													Ana Torres
+												</td>
+												<td>COVID-19</td>
+												<td>PFZ-2026-A1</td>
+												<td>2026-10-13</td>
+												<td class="max-w-48 truncate">
+													Primera dosis COVID-19
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">
+													Luis Mendoza
+												</td>
+												<td>Hepatitis B</td>
+												<td>GSK-5510</td>
+												<td>2026-10-11</td>
+												<td class="max-w-48 truncate">
+													Primera dosis Hepatitis B
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">
+													Luis Mendoza
+												</td>
+												<td>COVID-19</td>
+												<td>PFZ-2026-A2</td>
+												<td>2026-09-22</td>
+												<td class="max-w-48 truncate">
+													Refuerzo COVID-19
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">
+													Ana Torres
+												</td>
+												<td>Tétanos</td>
+												<td>BTN-1123</td>
+												<td>2026-08-14</td>
+												<td class="max-w-48 truncate">
+													Refuerzo tétanos
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+					</div>
+				</main>
+			</div>
+			<!-- Menú lateral (drawer de daisyUI): navegación del rol Médico -->
+			<div class="drawer-side z-20">
+				<label
+					for="menu-principal"
+					aria-label="Cerrar menú"
+					class="drawer-overlay"
+				></label>
+				<aside class="flex min-h-full w-72 flex-col bg-base-100">
+					<div class="border-base-300 border-b p-4">
+						<p class="font-semibold">Menú</p>
+						<p class="text-xs opacity-60">Médico</p>
+					</div>
+					<ul class="menu w-full flex-1 p-3">
+						<li>
+							<a href="index.html" class="menu-active">
+								<i class="ti ti-layout-dashboard text-[20px]"></i>
+								Panel de atención
+							</a>
+						</li>
+						<li>
+							<a href="pacientes.html">
+								<i class="ti ti-user-plus text-[20px]"></i>
+								Registrar paciente
+							</a>
+						</li>
+						<li>
+							<a href="consulta.html">
+								<i class="ti ti-user-search text-[20px]"></i>
+								Consultar perfil
+							</a>
+						</li>
+						<li>
+							<a href="vacunas.html">
+								<i class="ti ti-clipboard-plus text-[20px]"></i>
+								Registrar vacuna
+							</a>
+						</li>
+					</ul>
+				</aside>
+			</div>
+		</div>
+	</body>
+</html>

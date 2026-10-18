@@ -1,0 +1,475 @@
+<!doctype html>
+<!--
+	MOCKUP ESTÁTICO · Consultar perfil (rol Médico)
+	Página real equivalente: src/pages/consulta/consulta-perfil.jsx
+	------------------------------------------------------------------
+	Qué muestra: búsqueda de un paciente por cédula (solo números; el
+	"V-" es opcional) y, debajo, su ficha y esquema de vacunación con
+	las dosis aplicadas y las faltantes.
+	Nota de maqueta: el resultado se muestra ya buscado con la cédula
+	de ejemplo (Ana Torres). En la app React aparece al pulsar
+	"Buscar", con un aviso si la cédula no existe. La misma pantalla
+	existe para el paciente en ../paciente/consulta.html.
+	Maqueta HTML/CSS del sistema (sin lógica de negocio): daisyUI 5 +
+	Tailwind v4 + Tabler Icons desde ../vendor/, tema "salud" en
+	../estilos.css y datos escritos a mano equivalentes a
+	src/data/data-frontend.js. Ver Pro2/index.html para el detalle
+	general de la carpeta.
+-->
+<html lang="es" data-theme="salud">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Consultar perfil — Centro de Vacunación Salud</title>
+		<!-- Recursos locales (sin CDN ni internet): se generan con
+		`pnpm install` en esta carpeta (scripts/preparar-assets.mjs) -->
+		<link href="../vendor/inter/index.css" rel="stylesheet" />
+		<link href="../vendor/tabler/tabler-icons.min.css" rel="stylesheet" />
+		<link href="../vendor/daisyui/daisyui.css" rel="stylesheet" />
+		<link href="../estilos.css" rel="stylesheet" />
+		<script src="../vendor/tailwind/index.global.js"></script>
+	</head>
+	<body>
+		<div class="drawer lg:drawer-open">
+			<input id="menu-principal" type="checkbox" class="drawer-toggle" />
+			<div class="drawer-content flex min-h-svh flex-col bg-base-200">
+				<!-- Barra superior: botón de menú (móvil), logo, rol conectado y salir -->
+				<div class="navbar sticky top-0 z-10 border-base-300 border-b bg-base-100">
+					<div class="navbar-start gap-2">
+						<label
+							for="menu-principal"
+							class="btn btn-ghost btn-square drawer-button lg:hidden"
+							aria-label="Abrir menú"
+						>
+							<i class="ti ti-menu-2 text-[22px]"></i>
+						</label>
+						<span class="flex items-center gap-2 font-semibold">
+							<i class="ti ti-vaccine text-[24px] text-primary"></i>
+							<span class="hidden sm:inline">
+								Centro de Vacunación Salud
+							</span>
+						</span>
+					</div>
+					<div class="navbar-end gap-3">
+						<span class="hidden text-right text-xs sm:block">
+							<span class="block font-medium">Médico</span>
+						</span>
+						<a href="../index.html" class="btn btn-outline btn-sm">
+							<i class="ti ti-logout text-[18px]"></i>
+							Salir
+						</a>
+					</div>
+				</div>
+				<main class="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-6">
+					<div class="flex flex-col gap-6">
+						<header>
+							<h1 class="font-bold text-2xl">Consultar perfil</h1>
+							<p class="text-sm opacity-70">
+								Ingresa la cédula de un paciente registrado para
+								ver su ficha y su esquema de vacunación.
+							</p>
+						</header>
+
+						<!-- Búsqueda por cédula (maqueta: el botón no procesa nada) -->
+						<form class="card bg-base-100 shadow-sm">
+							<div class="card-body gap-3">
+								<div
+									class="flex flex-col gap-3 sm:flex-row sm:items-end"
+								>
+									<div class="flex flex-col gap-1 sm:flex-1">
+										<label
+											class="label"
+											for="consultaCedula"
+										>
+											Cédula
+										</label>
+										<input
+											id="consultaCedula"
+											type="text"
+											class="input w-full"
+											placeholder="10234567"
+											required
+										/>
+									</div>
+									<button
+										type="button"
+										class="btn btn-primary"
+									>
+										<i class="ti ti-search text-[18px]"></i>
+										Buscar
+									</button>
+								</div>
+
+								<p class="text-xs opacity-60">
+									Escribe solo los números (el "V-" es
+									opcional). Cédulas de prueba: 10234567 ·
+									14567890 · 18987654
+								</p>
+							</div>
+						</form>
+
+						<!-- Resultado de la consulta (ejemplo con Ana Torres;
+						en la app React aparece tras buscar la cédula) -->
+						<div class="flex flex-col gap-4">
+							<!-- Ficha del paciente: avatar y datos personales -->
+							<div class="card bg-base-100 shadow-sm">
+								<div class="card-body gap-4">
+									<div class="flex items-center gap-4">
+										<div class="avatar avatar-placeholder">
+											<div
+												class="w-16 rounded-full bg-primary text-primary-content"
+											>
+												<i
+													class="ti ti-user text-[32px]"
+												></i>
+											</div>
+										</div>
+										<div>
+											<h2 class="card-title text-lg">
+												Ana Torres
+											</h2>
+											<p class="text-sm opacity-70">
+												V-10234567
+											</p>
+										</div>
+									</div>
+
+									<div class="grid gap-3 sm:grid-cols-2">
+										<div
+											class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+										>
+											<div>
+												<p class="text-xs opacity-60">
+													Fecha de nacimiento
+												</p>
+												<p class="font-medium">
+													1992-04-18
+												</p>
+											</div>
+										</div>
+										<div
+											class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+										>
+											<div>
+												<p class="text-xs opacity-60">
+													Sexo
+												</p>
+												<p class="font-medium">
+													Femenino
+												</p>
+											</div>
+										</div>
+										<div
+											class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+										>
+											<i
+												class="ti ti-phone mt-0.5 text-[20px] text-primary"
+											></i>
+											<div>
+												<p class="text-xs opacity-60">
+													Teléfono
+												</p>
+												<p class="font-medium">
+													0414-1234567
+												</p>
+											</div>
+										</div>
+										<div
+											class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+										>
+											<i
+												class="ti ti-mail mt-0.5 text-[20px] text-primary"
+											></i>
+											<div>
+												<p class="text-xs opacity-60">
+													Correo electrónico
+												</p>
+												<p class="font-medium">
+													ana.torres@correo.com
+												</p>
+											</div>
+										</div>
+										<div
+											class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+										>
+											<i
+												class="ti ti-map-pin mt-0.5 text-[20px] text-primary"
+											></i>
+											<div>
+												<p class="text-xs opacity-60">
+													Dirección
+												</p>
+												<p class="font-medium">
+													Av. Libertador, Caracas
+												</p>
+											</div>
+										</div>
+										<div
+											class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+										>
+											<i
+												class="ti ti-map-pin mt-0.5 text-[20px] text-primary"
+											></i>
+											<div>
+												<p class="text-xs opacity-60">
+													Región
+												</p>
+												<p class="font-medium">
+													Capital
+												</p>
+											</div>
+										</div>
+										<div
+											class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+										>
+											<i
+												class="ti ti-droplet mt-0.5 text-[20px] text-primary"
+											></i>
+											<div>
+												<p class="text-xs opacity-60">
+													Tipo de sangre
+												</p>
+												<p class="font-medium">O+</p>
+											</div>
+										</div>
+										<div
+											class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+										>
+											<div>
+												<p class="text-xs opacity-60">
+													Alergias
+												</p>
+												<p class="font-medium">
+													Ninguna
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Esquema de vacunación: aplicadas y faltantes -->
+							<div class="card bg-base-100 shadow-sm">
+								<div class="card-body gap-3">
+									<h3 class="card-title text-base">
+										Esquema de vacunación
+									</h3>
+									<p class="text-sm opacity-70">
+										3 de 5 vacunas aplicadas
+									</p>
+
+									<div class="grid gap-4 lg:grid-cols-2">
+										<div>
+											<h4 class="mb-2 text-sm font-medium">
+												Vacunas aplicadas
+											</h4>
+											<ul class="flex flex-col gap-2">
+												<li
+													class="flex items-center justify-between gap-3 rounded-box bg-base-200 px-3 py-2"
+												>
+													<span
+														class="flex items-center gap-2"
+													>
+														<i
+															class="ti ti-circle-check text-[18px] text-success"
+														></i>
+														<span>
+															<span
+																class="block text-sm font-medium"
+															>
+																COVID-19
+															</span>
+															<span
+																class="block text-xs opacity-60"
+															>
+																Primera dosis
+																COVID-19 · Lote
+																PFZ-2026-A1
+															</span>
+														</span>
+													</span>
+													<span
+														class="badge badge-success badge-sm"
+													>
+														2026-10-13
+													</span>
+												</li>
+												<li
+													class="flex items-center justify-between gap-3 rounded-box bg-base-200 px-3 py-2"
+												>
+													<span
+														class="flex items-center gap-2"
+													>
+														<i
+															class="ti ti-circle-check text-[18px] text-success"
+														></i>
+														<span>
+															<span
+																class="block text-sm font-medium"
+															>
+																Tétanos
+															</span>
+															<span
+																class="block text-xs opacity-60"
+															>
+																Refuerzo tétanos ·
+																Lote BTN-1123
+															</span>
+														</span>
+													</span>
+													<span
+														class="badge badge-success badge-sm"
+													>
+														2026-08-14
+													</span>
+												</li>
+												<li
+													class="flex items-center justify-between gap-3 rounded-box bg-base-200 px-3 py-2"
+												>
+													<span
+														class="flex items-center gap-2"
+													>
+														<i
+															class="ti ti-circle-check text-[18px] text-success"
+														></i>
+														<span>
+															<span
+																class="block text-sm font-medium"
+															>
+																Influenza
+															</span>
+															<span
+																class="block text-xs opacity-60"
+															>
+																Influenza
+																estacional · Lote
+																SNF-8871
+															</span>
+														</span>
+													</span>
+													<span
+														class="badge badge-success badge-sm"
+													>
+														2025-12-15
+													</span>
+												</li>
+											</ul>
+										</div>
+
+										<div>
+											<h4 class="mb-2 text-sm font-medium">
+												Vacunas faltantes
+											</h4>
+											<ul class="flex flex-col gap-2">
+												<li
+													class="flex items-center justify-between gap-3 rounded-box bg-base-200 px-3 py-2"
+												>
+													<span
+														class="flex items-center gap-2"
+													>
+														<i
+															class="ti ti-alert-triangle text-[18px] text-warning"
+														></i>
+														<span>
+															<span
+																class="block text-sm font-medium"
+															>
+																Hepatitis B
+															</span>
+															<span
+																class="block text-xs opacity-60"
+															>
+																Pendiente ·
+																esquema de 3
+																dosis, cada 30 días
+															</span>
+														</span>
+													</span>
+													<span
+														class="badge badge-warning badge-sm"
+													>
+														Falta
+													</span>
+												</li>
+												<li
+													class="flex items-center justify-between gap-3 rounded-box bg-base-200 px-3 py-2"
+												>
+													<span
+														class="flex items-center gap-2"
+													>
+														<i
+															class="ti ti-alert-triangle text-[18px] text-warning"
+														></i>
+														<span>
+															<span
+																class="block text-sm font-medium"
+															>
+																Sarampión
+															</span>
+															<span
+																class="block text-xs opacity-60"
+															>
+																Pendiente ·
+																esquema de 2
+																dosis, cada 30 días
+															</span>
+														</span>
+													</span>
+													<span
+														class="badge badge-warning badge-sm"
+													>
+														Falta
+													</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+			</div>
+			<!-- Menú lateral (drawer de daisyUI): navegación del rol Médico -->
+			<div class="drawer-side z-20">
+				<label
+					for="menu-principal"
+					aria-label="Cerrar menú"
+					class="drawer-overlay"
+				></label>
+				<aside class="flex min-h-full w-72 flex-col bg-base-100">
+					<div class="border-base-300 border-b p-4">
+						<p class="font-semibold">Menú</p>
+						<p class="text-xs opacity-60">Médico</p>
+					</div>
+					<ul class="menu w-full flex-1 p-3">
+						<li>
+							<a href="index.html">
+								<i class="ti ti-layout-dashboard text-[20px]"></i>
+								Panel de atención
+							</a>
+						</li>
+						<li>
+							<a href="pacientes.html">
+								<i class="ti ti-user-plus text-[20px]"></i>
+								Registrar paciente
+							</a>
+						</li>
+						<li>
+							<a href="consulta.html" class="menu-active">
+								<i class="ti ti-user-search text-[20px]"></i>
+								Consultar perfil
+							</a>
+						</li>
+						<li>
+							<a href="vacunas.html">
+								<i class="ti ti-clipboard-plus text-[20px]"></i>
+								Registrar vacuna
+							</a>
+						</li>
+					</ul>
+				</aside>
+			</div>
+		</div>
+	</body>
+</html>

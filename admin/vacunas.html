@@ -1,0 +1,925 @@
+<!doctype html>
+<!--
+	MOCKUP ESTÁTICO · Buscar vacuna (rol Admin)
+	Página real equivalente: src/pages/admin/admin-vacunas.jsx
+	------------------------------------------------------------------
+	Qué muestra:
+	1. Filtro de registros: búsqueda por texto (vacuna, nombre o
+	   cédula) y por tipo de vacuna. La lógica está en el script
+	   ../js/filtro-vacunas.js.
+	2. Selector de vacuna y ficha de la seleccionada, con alertas de
+	   stock, "próximo llamado estimado" y disponibilidad por región.
+	   El cambio de ficha está en ../js/detalle-vacuna.js.
+	Maqueta HTML/CSS del sistema (sin lógica de negocio): daisyUI 5 +
+	Tailwind v4 + Tabler Icons desde ../vendor/, tema "salud" en
+	../estilos.css y datos escritos a mano equivalentes a
+	src/data/data-frontend.js. Ver Pro2/index.html para el detalle
+	general de la carpeta.
+-->
+<html lang="es" data-theme="salud">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Buscar vacuna — Centro de Vacunación Salud</title>
+		<!-- Recursos locales (sin CDN ni internet): se generan con
+		`pnpm install` en esta carpeta (scripts/preparar-assets.mjs) -->
+		<link href="../vendor/inter/index.css" rel="stylesheet" />
+		<link href="../vendor/tabler/tabler-icons.min.css" rel="stylesheet" />
+		<link href="../vendor/daisyui/daisyui.css" rel="stylesheet" />
+		<link href="../estilos.css" rel="stylesheet" />
+		<script src="../vendor/tailwind/index.global.js"></script>
+	</head>
+	<body>
+		<div class="drawer lg:drawer-open">
+			<input id="menu-principal" type="checkbox" class="drawer-toggle" />
+			<div class="drawer-content flex min-h-svh flex-col bg-base-200">
+				<!-- Barra superior: botón de menú (móvil), logo, rol conectado y salir -->
+				<div class="navbar sticky top-0 z-10 border-base-300 border-b bg-base-100">
+					<div class="navbar-start gap-2">
+						<label
+							for="menu-principal"
+							class="btn btn-ghost btn-square drawer-button lg:hidden"
+							aria-label="Abrir menú"
+						>
+							<i class="ti ti-menu-2 text-[22px]"></i>
+						</label>
+						<span class="flex items-center gap-2 font-semibold">
+							<i class="ti ti-vaccine text-[24px] text-primary"></i>
+							<span class="hidden sm:inline">
+								Centro de Vacunación Salud
+							</span>
+						</span>
+					</div>
+					<div class="navbar-end gap-3">
+						<span class="hidden text-right text-xs sm:block">
+							<span class="block font-medium">Admin</span>
+						</span>
+						<a href="../index.html" class="btn btn-outline btn-sm">
+							<i class="ti ti-logout text-[18px]"></i>
+							Salir
+						</a>
+					</div>
+				</div>
+				<main class="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-6">
+					<div class="flex flex-col gap-6">
+						<header>
+							<h1 class="font-bold text-2xl">
+								Búsqueda por vacuna específica
+							</h1>
+							<p class="text-sm opacity-70">
+								Filtra los registros por vacuna, nombre o cédula.
+								Consulta información, alertas de aplicación y
+								disponibilidad regional de una vacuna.
+							</p>
+						</header>
+
+						<!-- Filtro de la tabla de registros; su comportamiento
+						está en ../js/filtro-vacunas.js -->
+						<section class="card bg-base-100 shadow-sm">
+							<div class="card-body gap-4">
+								<h2 class="card-title text-base">
+									Filtro de registros de vacunación
+								</h2>
+
+								<div
+									class="flex flex-col gap-3 sm:flex-row sm:items-end"
+								>
+									<div class="flex flex-1 flex-col gap-1">
+										<label class="label" for="busqueda">
+											Buscar
+										</label>
+										<input
+											id="busqueda"
+											type="text"
+											class="input w-full"
+											placeholder="Vacuna, nombre o cédula"
+										/>
+									</div>
+									<div class="flex flex-col gap-1">
+										<label
+											class="label"
+											for="filtro-vacuna"
+										>
+											Vacuna
+										</label>
+										<select
+											id="filtro-vacuna"
+											class="select w-full sm:w-56"
+										>
+											<option value="">
+												Todas las vacunas
+											</option>
+											<option value="COVID-19">
+												COVID-19
+											</option>
+											<option value="Influenza">
+												Influenza
+											</option>
+											<option value="Hepatitis B">
+												Hepatitis B
+											</option>
+											<option value="Sarampión">
+												Sarampión
+											</option>
+											<option value="Tétanos">
+												Tétanos
+											</option>
+										</select>
+									</div>
+								</div>
+
+								<p class="text-xs opacity-60" id="contador">
+									Mostrando 7 de 7 registros
+								</p>
+
+								<div class="overflow-x-auto">
+									<table class="table table-sm" id="tabla-registros">
+										<thead>
+											<tr>
+												<th>Vacuna</th>
+												<th>Paciente</th>
+												<th>Cédula</th>
+												<th>Lote</th>
+												<th>Fecha</th>
+												<th>Atención</th>
+												<th>Médico</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr
+												data-vacuna="Sarampión"
+												data-paciente="Carla Rivas"
+											>
+												<td>
+													<span
+														class="badge badge-ghost badge-sm"
+													>
+														Sarampión
+													</span>
+												</td>
+												<td class="font-medium">
+													Carla Rivas
+												</td>
+												<td>V-18987654</td>
+												<td>SRM-2290</td>
+												<td>2026-10-14</td>
+												<td class="max-w-48 truncate">
+													Primera dosis sarampión
+												</td>
+												<td>Dra. Elena Pérez</td>
+											</tr>
+											<tr
+												data-vacuna="COVID-19"
+												data-paciente="Ana Torres"
+											>
+												<td>
+													<span
+														class="badge badge-ghost badge-sm"
+													>
+														COVID-19
+													</span>
+												</td>
+												<td class="font-medium">
+													Ana Torres
+												</td>
+												<td>V-10234567</td>
+												<td>PFZ-2026-A1</td>
+												<td>2026-10-13</td>
+												<td class="max-w-48 truncate">
+													Primera dosis COVID-19
+												</td>
+												<td>Dra. Elena Pérez</td>
+											</tr>
+											<tr
+												data-vacuna="Hepatitis B"
+												data-paciente="Luis Mendoza"
+											>
+												<td>
+													<span
+														class="badge badge-ghost badge-sm"
+													>
+														Hepatitis B
+													</span>
+												</td>
+												<td class="font-medium">
+													Luis Mendoza
+												</td>
+												<td>V-14567890</td>
+												<td>GSK-5510</td>
+												<td>2026-10-11</td>
+												<td class="max-w-48 truncate">
+													Primera dosis Hepatitis B
+												</td>
+												<td>Dr. Andrés Gómez</td>
+											</tr>
+											<tr
+												data-vacuna="COVID-19"
+												data-paciente="Luis Mendoza"
+											>
+												<td>
+													<span
+														class="badge badge-ghost badge-sm"
+													>
+														COVID-19
+													</span>
+												</td>
+												<td class="font-medium">
+													Luis Mendoza
+												</td>
+												<td>V-14567890</td>
+												<td>PFZ-2026-A2</td>
+												<td>2026-09-22</td>
+												<td class="max-w-48 truncate">
+													Refuerzo COVID-19
+												</td>
+												<td>Dra. Elena Pérez</td>
+											</tr>
+											<tr
+												data-vacuna="Tétanos"
+												data-paciente="Ana Torres"
+											>
+												<td>
+													<span
+														class="badge badge-ghost badge-sm"
+													>
+														Tétanos
+													</span>
+												</td>
+												<td class="font-medium">
+													Ana Torres
+												</td>
+												<td>V-10234567</td>
+												<td>BTN-1123</td>
+												<td>2026-08-14</td>
+												<td class="max-w-48 truncate">
+													Refuerzo tétanos
+												</td>
+												<td>Dra. Elena Pérez</td>
+											</tr>
+											<tr
+												data-vacuna="COVID-19"
+												data-paciente="Carla Rivas"
+											>
+												<td>
+													<span
+														class="badge badge-ghost badge-sm"
+													>
+														COVID-19
+													</span>
+												</td>
+												<td class="font-medium">
+													Carla Rivas
+												</td>
+												<td>V-18987654</td>
+												<td>PFZ-2026-B7</td>
+												<td>2026-08-05</td>
+												<td class="max-w-48 truncate">
+													Refuerzo COVID-19 pediátrico
+												</td>
+												<td>Dr. Andrés Gómez</td>
+											</tr>
+											<tr
+												data-vacuna="Influenza"
+												data-paciente="Ana Torres"
+											>
+												<td>
+													<span
+														class="badge badge-ghost badge-sm"
+													>
+														Influenza
+													</span>
+												</td>
+												<td class="font-medium">
+													Ana Torres
+												</td>
+												<td>V-10234567</td>
+												<td>SNF-8871</td>
+												<td>2025-12-15</td>
+												<td class="max-w-48 truncate">
+													Influenza estacional
+												</td>
+												<td>Dr. Andrés Gómez</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<p
+									class="text-sm opacity-70"
+									id="sin-resultados"
+									hidden
+								>
+									Sin registros que coincidan con el filtro.
+								</p>
+							</div>
+						</section>
+
+						<!-- Selector de vacuna: la ficha que se muestra abajo
+						cambia con la opción elegida (../js/detalle-vacuna.js).
+						En la app React esta selección se resuelve con estado. -->
+						<section class="card bg-base-100 shadow-sm">
+							<div class="card-body gap-4">
+								<label class="label" for="vacuna">
+									Seleccione una vacuna
+								</label>
+								<select
+									id="vacuna"
+									class="select w-full sm:max-w-md"
+								>
+									<option value="COVID-19" selected>
+										COVID-19 — Pfizer
+									</option>
+									<option value="Influenza">
+										Influenza — Sanofi
+									</option>
+									<option value="Hepatitis B">
+										Hepatitis B — GlaxoSmithKline
+									</option>
+									<option value="Sarampión">
+										Sarampión — Serum Institute
+									</option>
+									<option value="Tétanos">
+										Tétanos — Instituto Butantan
+									</option>
+								</select>
+							</div>
+						</section>
+
+						<!-- Ficha de la vacuna seleccionada: las demás quedan
+						ocultas hasta elegirlas en el selector de arriba -->
+						<div
+							class="grid gap-4 lg:grid-cols-3"
+							data-detalle-vacuna="COVID-19"
+						>
+									<div
+										class="card bg-base-100 shadow-sm lg:col-span-2"
+									>
+										<div class="card-body">
+											<h2 class="card-title text-base">
+												COVID-19
+											</h2>
+											<p class="text-sm opacity-70">
+												Vacuna de ARN mensajero contra el
+												SARS-CoV-2.
+											</p>
+											<div class="mt-2 grid gap-3 sm:grid-cols-2">
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Laboratorio
+													</p>
+													<p class="font-medium">Pfizer</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Esquema
+													</p>
+													<p class="font-medium">
+														2 dosis · cada 21 días
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Disponible
+													</p>
+													<p class="font-medium">
+														320 dosis
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Aplicaciones registradas
+													</p>
+													<p class="font-medium">3</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="flex flex-col gap-4">
+										<div class="card bg-base-100 shadow-sm">
+											<div class="card-body gap-3">
+												<h2 class="card-title text-base">
+													Alertas y recordatorios
+												</h2>
+												<div class="flex items-start gap-2 text-sm">
+													<i
+														class="ti ti-calendar-event mt-0.5 text-[18px] text-primary"
+													></i>
+													<span>
+														Próximo llamado
+														estimado:
+														<strong>2026-11-03</strong>
+														(21 días desde la última
+														aplicación).
+													</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="card bg-base-100 shadow-sm">
+											<div class="card-body gap-3">
+												<h2
+													class="card-title flex items-center gap-2 text-base"
+												>
+													<i
+														class="ti ti-map-pin text-[18px]"
+													></i>
+													Disponibilidad regional
+												</h2>
+											<div class="flex flex-wrap gap-2">
+												<span class="badge badge-success">
+													Capital
+												</span>
+												<span class="badge badge-success">
+													Zona Norte
+												</span>
+												<span class="badge badge-ghost">
+													Zona Sur
+												</span>
+												<span class="badge badge-success">
+													Zona Este
+												</span>
+												<span class="badge badge-success">
+													Zona Oeste
+												</span>
+											</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							<div
+								class="grid gap-4 lg:grid-cols-3"
+								data-detalle-vacuna="Influenza"
+								hidden
+							>
+									<div
+										class="card bg-base-100 shadow-sm lg:col-span-2"
+									>
+										<div class="card-body">
+											<h2 class="card-title text-base">
+												Influenza
+											</h2>
+											<p class="text-sm opacity-70">
+												Vacuna anual contra los virus de
+												la influenza estacional.
+											</p>
+											<div class="mt-2 grid gap-3 sm:grid-cols-2">
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Laboratorio
+													</p>
+													<p class="font-medium">Sanofi</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Esquema
+													</p>
+													<p class="font-medium">
+														1 dosis · cada 365 días
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Disponible
+													</p>
+													<p class="font-medium">
+														180 dosis
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Aplicaciones registradas
+													</p>
+													<p class="font-medium">1</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="flex flex-col gap-4">
+										<div class="card bg-base-100 shadow-sm">
+											<div class="card-body gap-3">
+												<h2 class="card-title text-base">
+													Alertas y recordatorios
+												</h2>
+												<div class="flex items-start gap-2 text-sm">
+													<i
+														class="ti ti-calendar-event mt-0.5 text-[18px] text-primary"
+													></i>
+													<span>
+														Próximo llamado
+														estimado:
+														<strong>2026-12-15</strong>
+														(365 días desde la última
+														aplicación).
+													</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="card bg-base-100 shadow-sm">
+											<div class="card-body gap-3">
+												<h2
+													class="card-title flex items-center gap-2 text-base"
+												>
+													<i
+														class="ti ti-map-pin text-[18px]"
+													></i>
+													Disponibilidad regional
+												</h2>
+											<div class="flex flex-wrap gap-2">
+												<span class="badge badge-success">
+													Capital
+												</span>
+												<span class="badge badge-ghost">
+													Zona Norte
+												</span>
+												<span class="badge badge-success">
+													Zona Sur
+												</span>
+												<span class="badge badge-ghost">
+													Zona Este
+												</span>
+												<span class="badge badge-success">
+													Zona Oeste
+												</span>
+											</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							<div
+								class="grid gap-4 lg:grid-cols-3"
+								data-detalle-vacuna="Hepatitis B"
+								hidden
+							>
+									<div
+										class="card bg-base-100 shadow-sm lg:col-span-2"
+									>
+										<div class="card-body">
+											<h2 class="card-title text-base">
+												Hepatitis B
+											</h2>
+											<p class="text-sm opacity-70">
+												Esquema de tres dosis para
+												inmunización contra hepatitis B.
+											</p>
+											<div class="mt-2 grid gap-3 sm:grid-cols-2">
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Laboratorio
+													</p>
+													<p class="font-medium">
+														GlaxoSmithKline
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Esquema
+													</p>
+													<p class="font-medium">
+														3 dosis · cada 30 días
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Disponible
+													</p>
+													<p class="font-medium">
+														75 dosis
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Aplicaciones registradas
+													</p>
+													<p class="font-medium">1</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="flex flex-col gap-4">
+										<div class="card bg-base-100 shadow-sm">
+											<div class="card-body gap-3">
+												<h2 class="card-title text-base">
+													Alertas y recordatorios
+												</h2>
+												<div
+													role="alert"
+													class="alert alert-error text-sm"
+												>
+													<i
+														class="ti ti-alert-triangle text-[18px]"
+													></i>
+													Stock por debajo del mínimo
+													(90 dosis).
+												</div>
+												<div class="flex items-start gap-2 text-sm">
+													<i
+														class="ti ti-calendar-event mt-0.5 text-[18px] text-primary"
+													></i>
+													<span>
+														Próximo llamado
+														estimado:
+														<strong>2026-11-10</strong>
+														(30 días desde la última
+														aplicación).
+													</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="card bg-base-100 shadow-sm">
+											<div class="card-body gap-3">
+												<h2
+													class="card-title flex items-center gap-2 text-base"
+												>
+													<i
+														class="ti ti-map-pin text-[18px]"
+													></i>
+													Disponibilidad regional
+												</h2>
+											<div class="flex flex-wrap gap-2">
+												<span class="badge badge-success">
+													Capital
+												</span>
+												<span class="badge badge-success">
+													Zona Norte
+												</span>
+												<span class="badge badge-ghost">
+													Zona Sur
+												</span>
+												<span class="badge badge-ghost">
+													Zona Este
+												</span>
+												<span class="badge badge-success">
+													Zona Oeste
+												</span>
+											</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							<div
+								class="grid gap-4 lg:grid-cols-3"
+								data-detalle-vacuna="Sarampión"
+								hidden
+							>
+									<div
+										class="card bg-base-100 shadow-sm lg:col-span-2"
+									>
+										<div class="card-body">
+											<h2 class="card-title text-base">
+												Sarampión
+											</h2>
+											<p class="text-sm opacity-70">
+												Vacuna triple viral para
+												poblaciones pediátricas.
+											</p>
+											<div class="mt-2 grid gap-3 sm:grid-cols-2">
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Laboratorio
+													</p>
+													<p class="font-medium">
+														Serum Institute
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Esquema
+													</p>
+													<p class="font-medium">
+														2 dosis · cada 30 días
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Disponible
+													</p>
+													<p class="font-medium">
+														140 dosis
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Aplicaciones registradas
+													</p>
+													<p class="font-medium">1</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="flex flex-col gap-4">
+										<div class="card bg-base-100 shadow-sm">
+											<div class="card-body gap-3">
+												<h2 class="card-title text-base">
+													Alertas y recordatorios
+												</h2>
+												<div class="flex items-start gap-2 text-sm">
+													<i
+														class="ti ti-calendar-event mt-0.5 text-[18px] text-primary"
+													></i>
+													<span>
+														Próximo llamado
+														estimado:
+														<strong>2026-11-13</strong>
+														(30 días desde la última
+														aplicación).
+													</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="card bg-base-100 shadow-sm">
+											<div class="card-body gap-3">
+												<h2
+													class="card-title flex items-center gap-2 text-base"
+												>
+													<i
+														class="ti ti-map-pin text-[18px]"
+													></i>
+													Disponibilidad regional
+												</h2>
+											<div class="flex flex-wrap gap-2">
+												<span class="badge badge-ghost">
+													Capital
+												</span>
+												<span class="badge badge-success">
+													Zona Norte
+												</span>
+												<span class="badge badge-success">
+													Zona Sur
+												</span>
+												<span class="badge badge-success">
+													Zona Este
+												</span>
+												<span class="badge badge-success">
+													Zona Oeste
+												</span>
+											</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							<div
+								class="grid gap-4 lg:grid-cols-3"
+								data-detalle-vacuna="Tétanos"
+								hidden
+							>
+									<div
+										class="card bg-base-100 shadow-sm lg:col-span-2"
+									>
+										<div class="card-body">
+											<h2 class="card-title text-base">
+												Tétanos
+											</h2>
+											<p class="text-sm opacity-70">
+												Toxoide tetánico de refuerzo cada
+												diez años.
+											</p>
+											<div class="mt-2 grid gap-3 sm:grid-cols-2">
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Laboratorio
+													</p>
+													<p class="font-medium">
+														Instituto Butantan
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Esquema
+													</p>
+													<p class="font-medium">
+														1 dosis · cada 3650 días
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Disponible
+													</p>
+													<p class="font-medium">
+														55 dosis
+													</p>
+												</div>
+												<div class="rounded-box bg-base-200 p-3">
+													<p class="text-xs opacity-60">
+														Aplicaciones registradas
+													</p>
+													<p class="font-medium">1</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="flex flex-col gap-4">
+										<div class="card bg-base-100 shadow-sm">
+											<div class="card-body gap-3">
+												<h2 class="card-title text-base">
+													Alertas y recordatorios
+												</h2>
+												<div
+													role="alert"
+													class="alert alert-error text-sm"
+												>
+													<i
+														class="ti ti-alert-triangle text-[18px]"
+													></i>
+													Stock por debajo del mínimo
+													(70 dosis).
+												</div>
+												<div class="flex items-start gap-2 text-sm">
+													<i
+														class="ti ti-calendar-event mt-0.5 text-[18px] text-primary"
+													></i>
+													<span>
+														Próximo llamado
+														estimado:
+														<strong>2036-08-11</strong>
+														(3650 días desde la última
+														aplicación).
+													</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="card bg-base-100 shadow-sm">
+											<div class="card-body gap-3">
+												<h2
+													class="card-title flex items-center gap-2 text-base"
+												>
+													<i
+														class="ti ti-map-pin text-[18px]"
+													></i>
+													Disponibilidad regional
+												</h2>
+											<div class="flex flex-wrap gap-2">
+												<span class="badge badge-success">
+													Capital
+												</span>
+												<span class="badge badge-success">
+													Zona Norte
+												</span>
+												<span class="badge badge-ghost">
+													Zona Sur
+												</span>
+												<span class="badge badge-ghost">
+													Zona Este
+												</span>
+												<span class="badge badge-success">
+													Zona Oeste
+												</span>
+											</div>
+											</div>
+										</div>
+									</div>
+								</div>
+					</div>
+				</main>
+			</div>
+			<!-- Menú lateral (drawer de daisyUI): navegación del rol Admin -->
+			<div class="drawer-side z-20">
+				<label
+					for="menu-principal"
+					aria-label="Cerrar menú"
+					class="drawer-overlay"
+				></label>
+				<aside class="flex min-h-full w-72 flex-col bg-base-100">
+					<div class="border-base-300 border-b p-4">
+						<p class="font-semibold">Menú</p>
+						<p class="text-xs opacity-60">Admin</p>
+					</div>
+					<ul class="menu w-full flex-1 p-3">
+						<li>
+							<a href="index.html">
+								<i class="ti ti-layout-dashboard text-[20px]"></i>
+								Panel general
+							</a>
+						</li>
+						<li>
+							<a href="inventario.html">
+								<i class="ti ti-box-seam text-[20px]"></i>
+								Inventario y cuentas
+							</a>
+						</li>
+						<li>
+							<a href="vacunas.html" class="menu-active">
+								<i class="ti ti-search text-[20px]"></i>
+								Buscar vacuna
+							</a>
+						</li>
+					</ul>
+				</aside>
+			</div>
+		</div>
+		<script src="../js/filtro-vacunas.js"></script>
+		<script src="../js/detalle-vacuna.js"></script>
+	</body>
+</html>

@@ -1,0 +1,308 @@
+<!doctype html>
+<!--
+	MOCKUP ESTÁTICO · Inventario y cuentas (rol Admin)
+	Página real equivalente: src/pages/admin/admin-inventario.jsx
+	------------------------------------------------------------------
+	Qué muestra: dos tablas de gestión.
+	1. Stock de vacunas: dosis aplicadas, disponibles, mínimo exigido
+	   y estado (verde = suficiente, ámbar = medio, rojo = bajo).
+	2. Cuentas del sistema: usuarios con acceso, su perfil y estado.
+	Maqueta HTML/CSS del sistema (sin lógica de negocio): daisyUI 5 +
+	Tailwind v4 + Tabler Icons desde ../vendor/, tema "salud" en
+	../estilos.css y datos escritos a mano equivalentes a
+	src/data/data-frontend.js. Ver Pro2/index.html para el detalle
+	general de la carpeta.
+-->
+<html lang="es" data-theme="salud">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Inventario y cuentas — Centro de Vacunación Salud</title>
+		<!-- Recursos locales (sin CDN ni internet): se generan con
+		`pnpm install` en esta carpeta (scripts/preparar-assets.mjs) -->
+		<link href="../vendor/inter/index.css" rel="stylesheet" />
+		<link href="../vendor/tabler/tabler-icons.min.css" rel="stylesheet" />
+		<link href="../vendor/daisyui/daisyui.css" rel="stylesheet" />
+		<link href="../estilos.css" rel="stylesheet" />
+		<script src="../vendor/tailwind/index.global.js"></script>
+	</head>
+	<body>
+		<div class="drawer lg:drawer-open">
+			<input id="menu-principal" type="checkbox" class="drawer-toggle" />
+			<div class="drawer-content flex min-h-svh flex-col bg-base-200">
+				<!-- Barra superior: botón de menú (móvil), logo, rol conectado y salir -->
+				<div class="navbar sticky top-0 z-10 border-base-300 border-b bg-base-100">
+					<div class="navbar-start gap-2">
+						<label
+							for="menu-principal"
+							class="btn btn-ghost btn-square drawer-button lg:hidden"
+							aria-label="Abrir menú"
+						>
+							<i class="ti ti-menu-2 text-[22px]"></i>
+						</label>
+						<span class="flex items-center gap-2 font-semibold">
+							<i class="ti ti-vaccine text-[24px] text-primary"></i>
+							<span class="hidden sm:inline">
+								Centro de Vacunación Salud
+							</span>
+						</span>
+					</div>
+					<div class="navbar-end gap-3">
+						<span class="hidden text-right text-xs sm:block">
+							<span class="block font-medium">Admin</span>
+						</span>
+						<a href="../index.html" class="btn btn-outline btn-sm">
+							<i class="ti ti-logout text-[18px]"></i>
+							Salir
+						</a>
+					</div>
+				</div>
+				<main class="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-6">
+					<div class="flex flex-col gap-6">
+						<header>
+							<h1 class="font-bold text-2xl">
+								Gestión general e inventario
+							</h1>
+							<p class="text-sm opacity-70">
+								Control de registros, cuentas del sistema y stock
+								general de vacunas.
+							</p>
+						</header>
+
+						<!-- Tabla de stock: dosis aplicadas, disponibles, mínimo
+						exigido y estado de cada vacuna -->
+						<section class="card bg-base-100 shadow-sm">
+							<div class="card-body">
+								<h2 class="card-title text-base">Stock de vacunas</h2>
+								<div class="overflow-x-auto">
+									<table class="table table-sm">
+										<thead>
+											<tr>
+												<th>Vacuna</th>
+												<th>Laboratorio</th>
+												<th>Dosis aplicadas</th>
+												<th>Disponible</th>
+												<th>Mínimo</th>
+												<th>Estado</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="font-medium">COVID-19</td>
+												<td>Pfizer</td>
+												<td>3</td>
+												<td>320</td>
+												<td>100</td>
+												<td>
+													<span class="badge badge-success badge-sm">
+														Stock suficiente
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">Influenza</td>
+												<td>Sanofi</td>
+												<td>1</td>
+												<td>180</td>
+												<td>80</td>
+												<td>
+													<span class="badge badge-success badge-sm">
+														Stock suficiente
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">Hepatitis B</td>
+												<td>GlaxoSmithKline</td>
+												<td>1</td>
+												<td>75</td>
+												<td>90</td>
+												<td>
+													<span class="badge badge-error badge-sm">
+														Stock bajo
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">Sarampión</td>
+												<td>Serum Institute</td>
+												<td>1</td>
+												<td>140</td>
+												<td>60</td>
+												<td>
+													<span class="badge badge-success badge-sm">
+														Stock suficiente
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">Tétanos</td>
+												<td>Instituto Butantan</td>
+												<td>1</td>
+												<td>55</td>
+												<td>70</td>
+												<td>
+													<span class="badge badge-error badge-sm">
+														Stock bajo
+													</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+
+						<!-- Cuentas con acceso al sistema, su perfil y estado -->
+						<section class="card bg-base-100 shadow-sm">
+							<div class="card-body">
+								<h2 class="card-title text-base">
+									Cuentas del sistema
+								</h2>
+								<div class="overflow-x-auto">
+									<table class="table table-sm">
+										<thead>
+											<tr>
+												<th>Usuario</th>
+												<th>Nombre</th>
+												<th>Perfil</th>
+												<th>Correo</th>
+												<th>Estado</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="font-medium">admin</td>
+												<td>Carlos Núñez</td>
+												<td>
+													<span class="badge badge-ghost badge-sm">
+														Admin
+													</span>
+												</td>
+												<td>admin@salud.com</td>
+												<td>
+													<span class="badge badge-success badge-sm">
+														Activo
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">medico</td>
+												<td>Dra. Elena Pérez</td>
+												<td>
+													<span class="badge badge-ghost badge-sm">
+														Médico
+													</span>
+												</td>
+												<td>medico@salud.com</td>
+												<td>
+													<span class="badge badge-success badge-sm">
+														Activo
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">paciente</td>
+												<td>Ana Torres</td>
+												<td>
+													<span class="badge badge-ghost badge-sm">
+														Paciente
+													</span>
+												</td>
+												<td>ana.torres@correo.com</td>
+												<td>
+													<span class="badge badge-success badge-sm">
+														Activo
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">lmendoza</td>
+												<td>Luis Mendoza</td>
+												<td>
+													<span class="badge badge-ghost badge-sm">
+														Paciente
+													</span>
+												</td>
+												<td>luis.mendoza@correo.com</td>
+												<td>
+													<span class="badge badge-success badge-sm">
+														Activo
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">agomez</td>
+												<td>Dr. Andrés Gómez</td>
+												<td>
+													<span class="badge badge-ghost badge-sm">
+														Médico
+													</span>
+												</td>
+												<td>agomez@salud.com</td>
+												<td>
+													<span class="badge badge-success badge-sm">
+														Activo
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="font-medium">crivas</td>
+												<td>Carla Rivas</td>
+												<td>
+													<span class="badge badge-ghost badge-sm">
+														Paciente
+													</span>
+												</td>
+												<td>representante.rivas@correo.com</td>
+												<td>
+													<span class="badge badge-success badge-sm">
+														Activo
+													</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+					</div>
+				</main>
+			</div>
+			<!-- Menú lateral (drawer de daisyUI): navegación del rol Admin -->
+			<div class="drawer-side z-20">
+				<label
+					for="menu-principal"
+					aria-label="Cerrar menú"
+					class="drawer-overlay"
+				></label>
+				<aside class="flex min-h-full w-72 flex-col bg-base-100">
+					<div class="border-base-300 border-b p-4">
+						<p class="font-semibold">Menú</p>
+						<p class="text-xs opacity-60">Admin</p>
+					</div>
+					<ul class="menu w-full flex-1 p-3">
+						<li>
+							<a href="index.html">
+								<i class="ti ti-layout-dashboard text-[20px]"></i>
+								Panel general
+							</a>
+						</li>
+						<li>
+							<a href="inventario.html" class="menu-active">
+								<i class="ti ti-box-seam text-[20px]"></i>
+								Inventario y cuentas
+							</a>
+						</li>
+						<li>
+							<a href="vacunas.html">
+								<i class="ti ti-search text-[20px]"></i>
+								Buscar vacuna
+							</a>
+						</li>
+					</ul>
+				</aside>
+			</div>
+		</div>
+	</body>
+</html>

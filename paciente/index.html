@@ -1,0 +1,380 @@
+<!doctype html>
+<!--
+	MOCKUP ESTÁTICO · Mi perfil (rol Paciente)
+	Página real equivalente: src/pages/paciente/paciente-perfil.jsx
+	------------------------------------------------------------------
+	Qué muestra: ficha del paciente (avatar y datos personales) y el
+	esquema de vacunación: barra de progreso, vacunas aplicadas y
+	vacunas faltantes.
+	Importante: el menú del paciente tiene dos vistas, igual que en
+	la app React (src/components/app-shell.jsx): "Mi perfil" (esta
+	página) y "Consultar perfil" (paciente/consulta.html).
+	Maqueta HTML/CSS del sistema (sin lógica de negocio): daisyUI 5 +
+	Tailwind v4 + Tabler Icons desde ../vendor/, tema "salud" en
+	../estilos.css y datos escritos a mano equivalentes a
+	src/data/data-frontend.js. Ver Pro2/index.html para el detalle
+	general de la carpeta.
+-->
+<html lang="es" data-theme="salud">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Mi perfil — Centro de Vacunación Salud</title>
+		<!-- Recursos locales (sin CDN ni internet): se generan con
+		`pnpm install` en esta carpeta (scripts/preparar-assets.mjs) -->
+		<link href="../vendor/inter/index.css" rel="stylesheet" />
+		<link href="../vendor/tabler/tabler-icons.min.css" rel="stylesheet" />
+		<link href="../vendor/daisyui/daisyui.css" rel="stylesheet" />
+		<link href="../estilos.css" rel="stylesheet" />
+		<script src="../vendor/tailwind/index.global.js"></script>
+	</head>
+	<body>
+		<div class="drawer lg:drawer-open">
+			<input id="menu-principal" type="checkbox" class="drawer-toggle" />
+			<div class="drawer-content flex min-h-svh flex-col bg-base-200">
+				<!-- Barra superior: botón de menú (móvil), logo, rol conectado y salir -->
+				<div class="navbar sticky top-0 z-10 border-base-300 border-b bg-base-100">
+					<div class="navbar-start gap-2">
+						<label
+							for="menu-principal"
+							class="btn btn-ghost btn-square drawer-button lg:hidden"
+							aria-label="Abrir menú"
+						>
+							<i class="ti ti-menu-2 text-[22px]"></i>
+						</label>
+						<span class="flex items-center gap-2 font-semibold">
+							<i class="ti ti-vaccine text-[24px] text-primary"></i>
+							<span class="hidden sm:inline">
+								Centro de Vacunación Salud
+							</span>
+						</span>
+					</div>
+					<div class="navbar-end gap-3">
+						<span class="hidden text-right text-xs sm:block">
+							<span class="block font-medium">Paciente</span>
+						</span>
+						<a href="../index.html" class="btn btn-outline btn-sm">
+							<i class="ti ti-logout text-[18px]"></i>
+							Salir
+						</a>
+					</div>
+				</div>
+				<main class="mx-auto w-full max-w-6xl flex-1 p-4 sm:p-6">
+					<div class="flex flex-col gap-6">
+						<header>
+							<h1 class="font-bold text-2xl">Mi perfil</h1>
+							<p class="text-sm opacity-70">
+								Información personal y esquema de vacunación.
+							</p>
+						</header>
+
+						<!-- Ficha del paciente: avatar y datos personales -->
+						<div class="card bg-base-100 shadow-sm">
+							<div class="card-body gap-4">
+								<div class="flex items-center gap-4">
+									<div class="avatar avatar-placeholder">
+										<div
+											class="w-16 rounded-full bg-primary text-primary-content"
+										>
+											<i class="ti ti-user text-[32px]"></i>
+										</div>
+									</div>
+									<div>
+										<h2 class="card-title text-lg">Ana Torres</h2>
+										<p class="text-sm opacity-70">V-10234567</p>
+									</div>
+								</div>
+
+								<div class="grid gap-3 sm:grid-cols-2">
+									<div
+										class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+									>
+										<div>
+											<p class="text-xs opacity-60">
+												Fecha de nacimiento
+											</p>
+											<p class="font-medium">1992-04-18</p>
+										</div>
+									</div>
+									<div
+										class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+									>
+										<div>
+											<p class="text-xs opacity-60">Sexo</p>
+											<p class="font-medium">Femenino</p>
+										</div>
+									</div>
+									<div
+										class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+									>
+										<i
+											class="ti ti-phone mt-0.5 text-[20px] text-primary"
+										></i>
+										<div>
+											<p class="text-xs opacity-60">Teléfono</p>
+											<p class="font-medium">0414-1234567</p>
+										</div>
+									</div>
+									<div
+										class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+									>
+										<i
+											class="ti ti-mail mt-0.5 text-[20px] text-primary"
+										></i>
+										<div>
+											<p class="text-xs opacity-60">
+												Correo electrónico
+											</p>
+											<p class="font-medium">
+												ana.torres@correo.com
+											</p>
+										</div>
+									</div>
+									<div
+										class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+									>
+										<i
+											class="ti ti-map-pin mt-0.5 text-[20px] text-primary"
+										></i>
+										<div>
+											<p class="text-xs opacity-60">Dirección</p>
+											<p class="font-medium">
+												Av. Libertador, Caracas
+											</p>
+										</div>
+									</div>
+									<div
+										class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+									>
+										<i
+											class="ti ti-map-pin mt-0.5 text-[20px] text-primary"
+										></i>
+										<div>
+											<p class="text-xs opacity-60">Región</p>
+											<p class="font-medium">Capital</p>
+										</div>
+									</div>
+									<div
+										class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+									>
+										<i
+											class="ti ti-droplet mt-0.5 text-[20px] text-primary"
+										></i>
+										<div>
+											<p class="text-xs opacity-60">
+												Tipo de sangre
+											</p>
+											<p class="font-medium">O+</p>
+										</div>
+									</div>
+									<div
+										class="flex items-start gap-3 rounded-box bg-base-200 p-3"
+									>
+										<div>
+											<p class="text-xs opacity-60">Alergias</p>
+											<p class="font-medium">Ninguna</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Esquema de vacunación: progreso, vacunas aplicadas
+						y vacunas que faltan completar -->
+						<section class="flex flex-col gap-4">
+							<div>
+								<h2 class="font-bold text-xl">Mis vacunas</h2>
+								<p class="text-sm opacity-70">
+									Esquema de vacunación registrado en el centro.
+								</p>
+							</div>
+
+							<div class="flex flex-wrap items-center gap-3">
+								<span class="text-sm opacity-70">
+									3 de 5 vacunas aplicadas
+								</span>
+							</div>
+
+							<div class="grid gap-4 lg:grid-cols-2">
+								<div class="card bg-base-100 shadow-sm">
+									<div class="card-body gap-3">
+										<h3 class="card-title text-base">
+											Vacunas aplicadas
+										</h3>
+										<ul class="flex flex-col gap-2">
+											<li
+												class="flex items-center justify-between gap-3 rounded-box bg-base-200 px-3 py-2"
+											>
+												<span class="flex items-center gap-2">
+													<i
+														class="ti ti-circle-check text-[18px] text-success"
+													></i>
+													<span>
+														<span
+															class="block text-sm font-medium"
+														>
+															COVID-19
+														</span>
+														<span
+															class="block text-xs opacity-60"
+														>
+															Primera dosis COVID-19 · Lote
+															PFZ-2026-A1
+														</span>
+													</span>
+												</span>
+												<span class="badge badge-success badge-sm">
+													2026-10-13
+												</span>
+											</li>
+											<li
+												class="flex items-center justify-between gap-3 rounded-box bg-base-200 px-3 py-2"
+											>
+												<span class="flex items-center gap-2">
+													<i
+														class="ti ti-circle-check text-[18px] text-success"
+													></i>
+													<span>
+														<span
+															class="block text-sm font-medium"
+														>
+															Tétanos
+														</span>
+														<span
+															class="block text-xs opacity-60"
+														>
+															Refuerzo tétanos · Lote BTN-1123
+														</span>
+													</span>
+												</span>
+												<span class="badge badge-success badge-sm">
+													2026-08-14
+												</span>
+											</li>
+											<li
+												class="flex items-center justify-between gap-3 rounded-box bg-base-200 px-3 py-2"
+											>
+												<span class="flex items-center gap-2">
+													<i
+														class="ti ti-circle-check text-[18px] text-success"
+													></i>
+													<span>
+														<span
+															class="block text-sm font-medium"
+														>
+															Influenza
+														</span>
+														<span
+															class="block text-xs opacity-60"
+														>
+															Influenza estacional · Lote
+															SNF-8871
+														</span>
+													</span>
+												</span>
+												<span class="badge badge-success badge-sm">
+													2025-12-15
+												</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="card bg-base-100 shadow-sm">
+									<div class="card-body gap-3">
+										<h3 class="card-title text-base">
+											Vacunas faltantes
+										</h3>
+										<ul class="flex flex-col gap-2">
+											<li
+												class="flex items-center justify-between gap-3 rounded-box bg-base-200 px-3 py-2"
+											>
+												<span class="flex items-center gap-2">
+													<i
+														class="ti ti-alert-triangle text-[18px] text-warning"
+													></i>
+													<span>
+														<span
+															class="block text-sm font-medium"
+														>
+															Hepatitis B
+														</span>
+														<span
+															class="block text-xs opacity-60"
+														>
+															Pendiente · esquema de 3 dosis,
+															cada 30 días
+														</span>
+													</span>
+												</span>
+												<span class="badge badge-warning badge-sm">
+													Falta
+												</span>
+											</li>
+											<li
+												class="flex items-center justify-between gap-3 rounded-box bg-base-200 px-3 py-2"
+											>
+												<span class="flex items-center gap-2">
+													<i
+														class="ti ti-alert-triangle text-[18px] text-warning"
+													></i>
+													<span>
+														<span
+															class="block text-sm font-medium"
+														>
+															Sarampión
+														</span>
+														<span
+															class="block text-xs opacity-60"
+														>
+															Pendiente · esquema de 2 dosis,
+															cada 30 días
+														</span>
+													</span>
+												</span>
+												<span class="badge badge-warning badge-sm">
+													Falta
+												</span>
+											</li>
+										</ul>
+										<p class="text-xs opacity-60">
+											Acude al centro para completar el esquema.
+										</p>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</main>
+			</div>
+			<!-- Menú lateral (drawer de daisyUI): el paciente solo tiene "Mi perfil" -->
+			<div class="drawer-side z-20">
+				<label
+					for="menu-principal"
+					aria-label="Cerrar menú"
+					class="drawer-overlay"
+				></label>
+				<aside class="flex min-h-full w-72 flex-col bg-base-100">
+					<div class="border-base-300 border-b p-4">
+						<p class="font-semibold">Menú</p>
+						<p class="text-xs opacity-60">Paciente</p>
+					</div>
+					<ul class="menu w-full flex-1 p-3">
+						<li>
+							<a href="index.html" class="menu-active">
+								<i class="ti ti-user-circle text-[20px]"></i>
+								Mi perfil
+							</a>
+						</li>
+						<li>
+							<a href="consulta.html">
+								<i class="ti ti-user-search text-[20px]"></i>
+								Consultar perfil
+							</a>
+						</li>
+					</ul>
+				</aside>
+			</div>
+		</div>
+	</body>
+</html>

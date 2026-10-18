@@ -1,0 +1,50 @@
+/*
+	TEMA VISUAL "SALUD"
+	-------------------
+	daisyUI 5 define sus temas con variables CSS (no hay
+	tailwind.config.js). Aquí se declara el tema propio del sistema,
+	activado en todas las páginas con <html data-theme="salud">.
+	Variables principales:
+	- base-100/200/300 .... fondos de tarjetas, página y bordes.
+	- primary ............. azul institucional (énfasis y acciones).
+	- accent / success .... verde (estados correctos y médicos).
+	- warning / error ..... ámbar y rojo (alertas de stock, faltantes).
+	- radius-* ............ redondeo de componentes.
+	- border .............. grosor del borde de los componentes.
+*/
+[data-theme="salud"] {
+	color-scheme: light;
+	--color-base-100: #ffffff;
+	--color-base-200: #f4f8fd;
+	--color-base-300: #e6f0fa;
+	--color-base-content: #2c3e50;
+	--color-primary: #0066cc;
+	--color-primary-content: #ffffff;
+	--color-secondary: #e6f0fa;
+	--color-secondary-content: #0066cc;
+	--color-accent: #2e7d32;
+	--color-accent-content: #ffffff;
+	--color-neutral: #2c3e50;
+	--color-neutral-content: #ffffff;
+	--color-info: #0066cc;
+	--color-info-content: #ffffff;
+	--color-success: #2e7d32;
+	--color-success-content: #ffffff;
+	--color-warning: #b45309;
+	--color-warning-content: #ffffff;
+	--color-error: #c62828;
+	--color-error-content: #ffffff;
+	--radius-selector: 0.5rem;
+	--radius-field: 0.5rem;
+	--radius-box: 0.75rem;
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+	--border: 1px;
+	--depth: 0;
+	--noise: 0;
+}
+
+/* Tipografía base del sistema (Inter Variable se carga desde vendor/inter) */
+body {
+	font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+}
