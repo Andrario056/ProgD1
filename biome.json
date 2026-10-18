@@ -1,0 +1,140 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"includes": [
+			"**",
+			"!**/.next",
+			"!**/node_modules",
+			"!**/src/generated",
+			"!Pro2/vendor"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"indentStyle": "tab",
+		"indentWidth": 3,
+		"lineEnding": "lf",
+		"lineWidth": 80,
+		"attributePosition": "multiline",
+		"bracketSameLine": true,
+		"bracketSpacing": true,
+		"expand": "always",
+		"useEditorconfig": false
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended",
+			"correctness": {
+				"noUnusedVariables": "warn",
+				"noUndeclaredVariables": "error",
+				"noUnusedImports": "warn",
+				"noUnreachable": "error"
+			},
+			"security": {
+				"noGlobalEval": "error",
+				"noDangerouslySetInnerHtml": "error",
+				"noBlankTarget": "error"
+			},
+			"performance": {
+				"noImgElement": "warn"
+			},
+			"style": {
+				"useConst": "off",
+				"useImportType": "warn",
+				"useNamingConvention": {
+					"level": "warn",
+					"options": {
+						"strictCase": true,
+						"conventions": [
+							{
+								"selector": {
+									"kind": "variable"
+								},
+								"formats": [
+									"PascalCase"
+								]
+							},
+							{
+								"selector": {
+									"kind": "function"
+								},
+								"formats": [
+									"PascalCase"
+								]
+							},
+							{
+								"selector": {
+									"kind": "typeLike"
+								},
+								"formats": [
+									"PascalCase"
+								]
+							},
+							{
+								"selector": {
+									"kind": "const"
+								},
+								"formats": [
+									"CONSTANT_CASE"
+								]
+							}
+						]
+					}
+				}
+			},
+			"suspicious": {
+				"noDoubleEquals": "error",
+				"noDuplicateObjectKeys": "error",
+				"noDuplicateJsxProps": "error",
+				"noConsole": "warn",
+				"noVar": "warn"
+			},
+			"a11y": {
+				"useAltText": "error",
+				"useKeyWithClickEvents": "error"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"jsxQuoteStyle": "single",
+			"trailingCommas": "none",
+			"quoteProperties": "asNeeded",
+			"semicolons": "always",
+			"arrowParentheses": "always",
+			"bracketSameLine": false,
+			"quoteStyle": "single",
+			"attributePosition": "multiline",
+			"bracketSpacing": true
+		}
+	},
+	"css": {
+		"formatter": {
+			"enabled": true
+		},
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
+	"html": {
+		"formatter": {
+			"selfCloseVoidElements": "always"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	}
+}
