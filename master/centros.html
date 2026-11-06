@@ -1,0 +1,187 @@
+﻿<!doctype html>
+<html lang="es" data-theme="salud" data-inicio="../index.html">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Salud Vacunas · Centros de vacunación</title>
+		<link rel="stylesheet" href="../assets/css/estilos.css" />
+		<script src="../src/js/nucleo.js"></script>
+		<script src="../src/js/datos.js"></script>
+		<script src="../src/js/publico.js"></script>
+		<script src="../src/js/historial.js"></script>
+		<script src="../src/js/app.js"></script>
+	</head>
+	<body data-pagina="master-centros">
+		<div class="min-h-svh bg-base-200">
+			<header class="sticky top-0 z-20 border-base-300 border-b bg-base-100/95 backdrop-blur print:hidden">
+				<div class="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
+					<div class="flex min-h-14 items-center justify-between gap-4">
+						<a href="historial.html" class="flex min-w-0 items-center gap-3">
+							<span class="flex size-9 shrink-0 items-center justify-center rounded-box bg-primary text-primary-content">
+								<span class="icono icono-vaccine size-[21px]" aria-hidden="true"></span>
+							</span>
+							<span class="min-w-0">
+								<span class="block truncate font-semibold leading-tight">Salud Vacunas</span>
+								<span class="block truncate text-base-content/55 text-sm">Sistema de vacunación</span>
+							</span>
+						</a>
+						<div class="flex shrink-0 items-center gap-3">
+							<span class="hidden text-right font-medium text-sm sm:inline">Perfil 3</span>
+							<button type="button" data-salir class="inline-flex min-h-10 items-center gap-2 rounded-lg px-3 font-medium text-primary text-sm transition hover:bg-primary/10" aria-label="Salir">
+								<span class="icono icono-logout size-[18px]" aria-hidden="true"></span>
+								<span class="hidden sm:inline">Salir</span>
+							</button>
+						</div>
+					</div>
+					<nav aria-label="Navegación principal" class="flex gap-1 overflow-x-auto pb-1">
+						<a href="historial.html" class="shrink-0 rounded-lg px-3 py-1.5 font-medium text-base-content/65 text-sm transition hover:bg-base-200 hover:text-base-content">Vacunaciones</a>
+						<a href="centros.html" aria-current="page" class="shrink-0 rounded-lg bg-primary/10 px-3 py-1.5 font-medium text-primary text-sm transition">Centros</a>
+						<a href="consulta.html" class="shrink-0 rounded-lg px-3 py-1.5 font-medium text-base-content/65 text-sm transition hover:bg-base-200 hover:text-base-content">Consultar</a>
+						<a href="certificados.html" class="shrink-0 rounded-lg px-3 py-1.5 font-medium text-base-content/65 text-sm transition hover:bg-base-200 hover:text-base-content">Certificados</a>
+						<a href="avisos.html" class="shrink-0 rounded-lg px-3 py-1.5 font-medium text-base-content/65 text-sm transition hover:bg-base-200 hover:text-base-content">Avisos</a>
+					</nav>
+				</div>
+			</header>
+
+			<main class="mx-auto w-full max-w-[1600px] flex-1 px-4 py-4 sm:px-6 sm:py-5 lg:px-10 lg:py-6">
+				<div data-centros class="flex flex-col gap-4">
+					<header>
+						<h1 class="font-semibold text-2xl text-base-content tracking-tight sm:text-3xl">Centros de vacunación</h1>
+						<p class="mt-2 max-w-3xl text-base text-base-content/65">Registra nuevos centros de la red y administra los existentes. Al eliminar un centro se conservan los usuarios y el historial de vacunación.</p>
+					</header>
+
+					<section class="rounded-2xl bg-base-100 p-4 shadow-sm ring-1 ring-base-300/50 sm:p-5">
+						<h2 class="font-semibold text-lg tracking-tight">Registrar un centro</h2>
+						<form data-form-centro class="mt-3 flex flex-col gap-3">
+							<div data-centro-alerta></div>
+							<div class="flex flex-col gap-3">
+								<div class="flex flex-col gap-1.5 lg:col-span-2">
+									<label for="centroNombre" class="font-medium text-sm">Nombre del centro<span class="text-error"> *</span></label>
+									<input id="centroNombre" name="nombre" type="text" class="input h-10 w-full rounded-xl" placeholder="Ej. Ambulatorio La Pastora" />
+								</div>
+								<div class="flex flex-col gap-1.5">
+									<label for="centroTipo" class="font-medium text-sm">Tipo de centro<span class="text-error"> *</span></label>
+									<select id="centroTipo" name="tipoCentro" class="select h-10 w-full rounded-xl" required>
+										<option value="">Selecciona un tipo</option>
+										<option value="1">Subregión</option>
+										<option value="2">CDI</option>
+										<option value="3">Módulo</option>
+										<option value="4">Hospital</option>
+									</select>
+								</div>
+								<div class="flex flex-col gap-1.5">
+									<label for="centroTelefono" class="font-medium text-sm">Teléfono</label>
+									<input id="centroTelefono" name="telefono" type="tel" class="input h-10 w-full rounded-xl" placeholder="0212-5550000" />
+								</div>
+								<label for="centroAutorizado" class="flex min-h-10 w-full cursor-pointer items-center gap-3 rounded-xl border border-base-300 px-3">
+									<input id="centroAutorizado" name="autorizado" type="checkbox" class="checkbox checkbox-primary checkbox-sm" />
+									<span class="font-medium text-sm">Centro autorizado para operar</span>
+								</label>
+								<div class="flex flex-col gap-1.5">
+									<label for="centroEstado" class="font-medium text-sm">Estado<span class="text-error"> *</span></label>
+									<select id="centroEstado" name="estado" class="select h-10 w-full rounded-xl">
+										<option value="">Selecciona un estado</option>
+										<option value="Distrito Capital">Distrito Capital</option>
+										<option value="Miranda">Miranda</option>
+										<option value="Carabobo">Carabobo</option>
+										<option value="Aragua">Aragua</option>
+										<option value="Zulia">Zulia</option>
+										<option value="Táchira">Táchira</option>
+									</select>
+								</div>
+								<div class="flex flex-col gap-1.5">
+									<label for="centroMunicipio" class="font-medium text-sm">Municipio<span class="text-error"> *</span></label>
+									<input id="centroMunicipio" name="municipio" type="text" class="input h-10 w-full rounded-xl" placeholder="Ej. Libertador" />
+								</div>
+								<div class="flex flex-col gap-1.5">
+									<label for="centroParroquia" class="font-medium text-sm">Parroquia</label>
+									<input id="centroParroquia" name="parroquia" type="text" class="input h-10 w-full rounded-xl" placeholder="Ej. Altagracia" />
+								</div>
+								<div class="flex flex-col gap-1.5 sm:col-span-2 lg:col-span-3">
+									<label for="centroDireccion" class="font-medium text-sm">Dirección</label>
+									<input id="centroDireccion" name="direccion" type="text" class="input h-10 w-full rounded-xl" placeholder="Av. principal, sector..." />
+								</div>
+							</div>
+							<div class="flex flex-wrap gap-2">
+								<button type="submit" class="btn btn-primary min-h-11 rounded-xl font-medium text-base">Registrar centro</button>
+								<button type="reset" class="btn btn-outline min-h-11 rounded-xl font-medium text-base">Limpiar formulario</button>
+							</div>
+						</form>
+					</section>
+
+					<section class="rounded-2xl bg-base-100 p-4 shadow-sm ring-1 ring-base-300/50 sm:p-5">
+						<h2 class="font-semibold text-lg tracking-tight">Centros registrados</h2>
+						<p class="mt-1 text-base-content/60 text-sm">La eliminación pide confirmación en la misma vista y conserva los registros clínicos.</p>
+						<div class="mt-3 overflow-x-auto">
+							<table class="table table-sm">
+								<thead>
+									<tr>
+										<th>Centro y dirección</th>
+										<th>Tipo y autorización</th>
+										<th>Ubicación</th>
+										<th>Teléfono</th>
+										<th class="text-right">Acción</th>
+									</tr>
+								</thead>
+								<tbody data-tabla-centros></tbody>
+							</table>
+						</div>
+					</section>
+				</div>
+			</main>
+		</div>
+
+		<div hidden data-datos-centros>
+			<article data-centro data-centro-id="c1" data-nombre="Centro de Vacunación Libertador" data-tipo-centro="3" data-autorizado="true" data-estado="Distrito Capital" data-municipio="Libertador" data-direccion="Av. Sucre, Caracas" data-telefono="0212-5550101" data-region="Capital" data-parroquia="Altagracia"></article>
+			<article data-centro data-centro-id="c2" data-nombre="Ambulatorio Chacao" data-tipo-centro="2" data-autorizado="true" data-estado="Distrito Capital" data-municipio="Chacao" data-direccion="Av. Francisco de Miranda, Chacao" data-telefono="0212-5550202" data-region="Capital" data-parroquia="Chacao"></article>
+			<article data-centro data-centro-id="c3" data-nombre="Hospital Universitario Valencia" data-tipo-centro="4" data-autorizado="true" data-estado="Carabobo" data-municipio="Valencia" data-direccion="Av. Bolívar Norte, Valencia" data-telefono="0241-5550303" data-region="Central" data-parroquia="San José"></article>
+			<article data-centro data-centro-id="c4" data-nombre="Ambulatorio Maracaibo Norte" data-tipo-centro="2" data-autorizado="true" data-estado="Zulia" data-municipio="Maracaibo" data-direccion="Av. 5 de Julio, Maracaibo" data-telefono="0261-5550404" data-region="Occidente" data-parroquia="Juana de Ávila"></article>
+			<article data-centro data-centro-id="c5" data-nombre="Centro de Salud Los Teques" data-tipo-centro="2" data-autorizado="true" data-estado="Miranda" data-municipio="Guaicaipuro" data-direccion="Calle Bolívar, Los Teques" data-telefono="0212-5550505" data-region="Capital" data-parroquia="Guaicaipuro"></article>
+		</div>
+
+		<div hidden data-datos-usuarios>
+			<article data-usuario data-usuario-id="p1" data-nombre="Ana Torres" data-cedula="V-10234567" data-nacimiento="1991-04-18" data-sexo="Femenino" data-region="Capital" data-estado="Distrito Capital" data-municipio="Libertador" data-telefono="0414-1234567" data-correo="ana.torres@correo.com" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-sangre="O+" data-direccion="Av. Sucre, Caracas" data-alergias="Penicilina" data-registrado-por="Enf. Carmen Díaz" data-registrado-por-cedula="V-11222333" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101"></article>
+			<article data-usuario data-usuario-id="p2" data-nombre="José Ramírez" data-cedula="V-14567890" data-nacimiento="1978-09-02" data-sexo="Masculino" data-region="Capital" data-estado="Distrito Capital" data-municipio="Chacao" data-telefono="0424-2345678" data-correo="jose.ramirez@correo.com" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-sangre="A+" data-direccion="Calle 5, Caracas" data-alergias="Ninguna" data-registrado-por="Enf. Carmen Díaz" data-registrado-por-cedula="V-11222333" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101"></article>
+			<article data-usuario data-usuario-id="p3" data-nombre="Héctor Paredes" data-cedula="V-8765432" data-nacimiento="1965-12-11" data-sexo="Masculino" data-region="Capital" data-estado="Distrito Capital" data-municipio="Chacao" data-telefono="0412-3456789" data-correo="hector.paredes@correo.com" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-sangre="O-" data-direccion="Av. Francisco de Miranda, Chacao" data-alergias="Ninguna" data-registrado-por="Enf. Rosa Núñez" data-registrado-por-cedula="V-22333444" data-centro-direccion="Av. Francisco de Miranda, Chacao" data-centro-telefono="0212-5550202"></article>
+			<article data-usuario data-usuario-id="p4" data-nombre="Luisana Méndez" data-cedula="V-19345678" data-nacimiento="1998-06-25" data-sexo="Femenino" data-region="Capital" data-estado="Distrito Capital" data-municipio="Chacao" data-telefono="0416-4567890" data-correo="luisana.mendez@correo.com" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-sangre="AB+" data-direccion="Calle Los Ángeles, Chacao" data-alergias="Sulfonamidas" data-registrado-por="Enf. Rosa Núñez" data-registrado-por-cedula="V-22333444" data-centro-direccion="Av. Francisco de Miranda, Chacao" data-centro-telefono="0212-5550202"></article>
+			<article data-usuario data-usuario-id="p5" data-nombre="Carlos Blanco" data-cedula="V-12345678" data-nacimiento="1985-02-14" data-sexo="Masculino" data-region="Capital" data-estado="Miranda" data-municipio="Guaicaipuro" data-telefono="0414-5678901" data-correo="carlos.blanco@correo.com" data-centro-id="c5" data-centro="Centro de Salud Los Teques" data-sangre="B+" data-direccion="Calle Bolívar, Los Teques" data-alergias="Ninguna" data-registrado-por="Lic. Pedro Salas" data-registrado-por-cedula="V-33444555" data-centro-direccion="Calle Bolívar, Los Teques" data-centro-telefono="0212-5550505"></article>
+			<article data-usuario data-usuario-id="p6" data-nombre="María Fernanda Rojas" data-cedula="V-20123456" data-nacimiento="1993-11-30" data-sexo="Femenino" data-region="Capital" data-estado="Distrito Capital" data-municipio="Libertador" data-telefono="0426-6789012" data-correo="maria.rojas@correo.com" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-sangre="O+" data-direccion="Parroquia La Vega, Caracas" data-alergias="Látex" data-registrado-por="Enf. Carmen Díaz" data-registrado-por-cedula="V-11222333" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101"></article>
+			<article data-usuario data-usuario-id="p7" data-nombre="Pedro Castillo" data-cedula="V-9876543" data-nacimiento="1970-07-08" data-sexo="Masculino" data-region="Capital" data-estado="Miranda" data-municipio="Guaicaipuro" data-telefono="0412-7890123" data-correo="pedro.castillo@correo.com" data-centro-id="c5" data-centro="Centro de Salud Los Teques" data-sangre="A-" data-direccion="Sector El Trigo, Los Teques" data-alergias="Aspirina" data-registrado-por="Lic. Pedro Salas" data-registrado-por-cedula="V-33444555" data-centro-direccion="Calle Bolívar, Los Teques" data-centro-telefono="0212-5550505"></article>
+			<article data-usuario data-usuario-id="p8" data-nombre="Daniela Suárez" data-cedula="V-21456789" data-nacimiento="2000-03-19" data-sexo="Femenino" data-region="Capital" data-estado="Distrito Capital" data-municipio="Chacao" data-telefono="0414-8901234" data-correo="daniela.suarez@correo.com" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-sangre="B-" data-direccion="Urbanización Bello Campo, Chacao" data-alergias="Ninguna" data-registrado-por="Enf. Rosa Núñez" data-registrado-por-cedula="V-22333444" data-centro-direccion="Av. Francisco de Miranda, Chacao" data-centro-telefono="0212-5550202"></article>
+			<article data-usuario data-usuario-id="p9" data-nombre="Jorge Herrera" data-cedula="V-11223344" data-nacimiento="1988-01-05" data-sexo="Masculino" data-region="Central" data-estado="Carabobo" data-municipio="Valencia" data-telefono="0414-9012345" data-correo="jorge.herrera@correo.com" data-centro-id="c3" data-centro="Hospital Universitario Valencia" data-sangre="O+" data-direccion="Av. Bolívar Norte, Valencia" data-alergias="Ninguna" data-registrado-por="Dr. Luis Ortega" data-registrado-por-cedula="V-44555666" data-centro-direccion="Av. Bolívar Norte, Valencia" data-centro-telefono="0241-5550303"></article>
+			<article data-usuario data-usuario-id="p10" data-nombre="Rosa Martínez" data-cedula="V-55667788" data-nacimiento="1975-05-22" data-sexo="Femenino" data-region="Occidente" data-estado="Zulia" data-municipio="Maracaibo" data-telefono="0414-0123456" data-correo="rosa.martinez@correo.com" data-centro-id="c4" data-centro="Ambulatorio Maracaibo Norte" data-sangre="AB-" data-direccion="Av. 5 de Julio, Maracaibo" data-alergias="Mariscos" data-registrado-por="Dra. Elena Pérez" data-registrado-por-cedula="V-55666777" data-centro-direccion="Av. 5 de Julio, Maracaibo" data-centro-telefono="0261-5550404"></article>
+		</div>
+		<div hidden data-datos-registros>
+			<table><tbody>
+				<tr data-registro data-id="r1" data-fecha="2024-03-12" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2403" data-dosis="Dosis 1 de 2" data-usuario-id="p1" data-usuario="Ana Torres" data-cedula="V-10234567" data-edad="35" data-telefono="0414-1234567" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Esquema COVID-19 iniciado" data-cantidad="0.3" data-lote-vence="2025-12-31"></tr>
+				<tr data-registro data-id="r2" data-fecha="2024-04-09" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2403" data-dosis="Dosis 2 de 2" data-usuario-id="p1" data-usuario="Ana Torres" data-cedula="V-10234567" data-edad="35" data-telefono="0414-1234567" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Esquema COVID-19 completado" data-cantidad="0.3" data-lote-vence="2025-12-31"></tr>
+				<tr data-registro data-id="r3" data-fecha="2024-05-21" data-vacuna-id="v-fiebre" data-vacuna="Fiebre amarilla" data-tipo="Virus atenuado" data-procedencia="Internacional" data-lote="FIE-2401" data-dosis="Dosis única" data-usuario-id="p1" data-usuario="Ana Torres" data-cedula="V-10234567" data-edad="35" data-telefono="0414-1234567" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Enf. Carmen Díaz" data-cargo="Enfermera vacunadora" data-atencion="Certificado de viaje" data-cantidad="0.5" data-lote-vence="2026-05-31"></tr>
+				<tr data-registro data-id="r4" data-fecha="2025-11-04" data-vacuna-id="v-influenza" data-vacuna="Influenza" data-tipo="Virus inactivado" data-procedencia="Internacional" data-lote="INF-2502" data-dosis="Refuerzo anual" data-usuario-id="p1" data-usuario="Ana Torres" data-cedula="V-10234567" data-edad="34" data-telefono="0414-1234567" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Enf. Carmen Díaz" data-cargo="Enfermera vacunadora" data-atencion="Campaña de influenza" data-cantidad="0.5" data-lote-vence="2026-12-31"></tr>
+				<tr data-registro data-id="r5" data-fecha="2024-06-15" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2402" data-dosis="Dosis 1 de 2" data-usuario-id="p2" data-usuario="José Ramírez" data-cedula="V-14567890" data-edad="48" data-telefono="0424-2345678" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Primera dosis" data-cantidad="0.3" data-lote-vence="2025-06-30"></tr>
+				<tr data-registro data-id="r6" data-fecha="2025-10-12" data-vacuna-id="v-influenza" data-vacuna="Influenza" data-tipo="Virus inactivado" data-procedencia="Internacional" data-lote="INF-2502" data-dosis="Refuerzo anual" data-usuario-id="p2" data-usuario="José Ramírez" data-cedula="V-14567890" data-edad="47" data-telefono="0424-2345678" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Campaña anual" data-cantidad="0.5" data-lote-vence="2026-12-31"></tr>
+				<tr data-registro data-id="r7" data-fecha="2023-08-10" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2301" data-dosis="Dosis 1 de 2" data-usuario-id="p3" data-usuario="Héctor Paredes" data-cedula="V-8765432" data-edad="60" data-telefono="0412-3456789" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-municipio="Chacao" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dr. Luis Ortega" data-cargo="Médico vacunador" data-atencion="Primera dosis" data-cantidad="0.3" data-lote-vence="2024-06-30"></tr>
+				<tr data-registro data-id="r8" data-fecha="2023-09-07" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2301" data-dosis="Dosis 2 de 2" data-usuario-id="p3" data-usuario="Héctor Paredes" data-cedula="V-8765432" data-edad="60" data-telefono="0412-3456789" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-municipio="Chacao" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dr. Luis Ortega" data-cargo="Médico vacunador" data-atencion="Segunda dosis" data-cantidad="0.3" data-lote-vence="2024-06-30"></tr>
+				<tr data-registro data-id="r9" data-fecha="2023-10-02" data-vacuna-id="v-fiebre" data-vacuna="Fiebre amarilla" data-tipo="Virus atenuado" data-procedencia="Internacional" data-lote="FIE-2301" data-dosis="Dosis única" data-usuario-id="p3" data-usuario="Héctor Paredes" data-cedula="V-8765432" data-edad="60" data-telefono="0412-3456789" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-municipio="Chacao" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Enf. Rosa Núñez" data-cargo="Enfermera vacunadora" data-atencion="Viaje internacional" data-cantidad="0.5" data-lote-vence="2024-12-31"></tr>
+				<tr data-registro data-id="r10" data-fecha="2022-02-18" data-vacuna-id="v-tetanos" data-vacuna="Tétanos" data-tipo="Toxoide" data-procedencia="Nacional" data-lote="TET-2201" data-dosis="Refuerzo" data-usuario-id="p3" data-usuario="Héctor Paredes" data-cedula="V-8765432" data-edad="60" data-telefono="0412-3456789" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-municipio="Chacao" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dr. Luis Ortega" data-cargo="Médico vacunador" data-atencion="Herida cortante" data-cantidad="0.5" data-lote-vence="2032-02-28"></tr>
+				<tr data-registro data-id="r11" data-fecha="2025-01-20" data-vacuna-id="v-hepatitis" data-vacuna="Hepatitis B" data-tipo="Recombinante" data-procedencia="Internacional" data-lote="HEP-2501" data-dosis="Dosis 1 de 3" data-usuario-id="p4" data-usuario="Luisana Méndez" data-cedula="V-19345678" data-edad="28" data-telefono="0416-4567890" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-municipio="Chacao" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dr. Luis Ortega" data-cargo="Médico vacunador" data-atencion="Inicio de esquema" data-cantidad="1.0" data-lote-vence="2027-04-30"></tr>
+				<tr data-registro data-id="r12" data-fecha="2025-02-20" data-vacuna-id="v-hepatitis" data-vacuna="Hepatitis B" data-tipo="Recombinante" data-procedencia="Internacional" data-lote="HEP-2501" data-dosis="Dosis 2 de 3" data-usuario-id="p4" data-usuario="Luisana Méndez" data-cedula="V-19345678" data-edad="28" data-telefono="0416-4567890" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-municipio="Chacao" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Enf. Rosa Núñez" data-cargo="Enfermera vacunadora" data-atencion="Segunda dosis" data-cantidad="1.0" data-lote-vence="2027-04-30"></tr>
+				<tr data-registro data-id="r13" data-fecha="2025-12-01" data-vacuna-id="v-influenza" data-vacuna="Influenza" data-tipo="Virus inactivado" data-procedencia="Internacional" data-lote="INF-2502" data-dosis="Refuerzo anual" data-usuario-id="p4" data-usuario="Luisana Méndez" data-cedula="V-19345678" data-edad="27" data-telefono="0416-4567890" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-municipio="Chacao" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dr. Luis Ortega" data-cargo="Médico vacunador" data-atencion="Campaña anual" data-cantidad="0.5" data-lote-vence="2026-12-31"></tr>
+				<tr data-registro data-id="r14" data-fecha="2025-05-05" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2501" data-dosis="Dosis 1 de 2" data-usuario-id="p5" data-usuario="Carlos Blanco" data-cedula="V-12345678" data-edad="41" data-telefono="0414-5678901" data-centro-id="c5" data-centro="Centro de Salud Los Teques" data-municipio="Guaicaipuro" data-estado="Miranda" data-region="Capital" data-aplicador="Dra. Ana Gil" data-cargo="Médico vacunador" data-atencion="Primera dosis" data-cantidad="0.3" data-lote-vence="2026-09-30"></tr>
+				<tr data-registro data-id="r15" data-fecha="2025-06-11" data-vacuna-id="v-tetanos" data-vacuna="Tétanos" data-tipo="Toxoide" data-procedencia="Nacional" data-lote="TET-2501" data-dosis="Refuerzo" data-usuario-id="p5" data-usuario="Carlos Blanco" data-cedula="V-12345678" data-edad="41" data-telefono="0414-5678901" data-centro-id="c5" data-centro="Centro de Salud Los Teques" data-municipio="Guaicaipuro" data-estado="Miranda" data-region="Capital" data-aplicador="Dra. Ana Gil" data-cargo="Médico vacunador" data-atencion="Refuerzo decenal" data-cantidad="0.5" data-lote-vence="2035-06-30"></tr>
+				<tr data-registro data-id="r16" data-fecha="2024-09-14" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2402" data-dosis="Dosis 1 de 2" data-usuario-id="p6" data-usuario="María Fernanda Rojas" data-cedula="V-20123456" data-edad="32" data-telefono="0426-6789012" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Primera dosis" data-cantidad="0.3" data-lote-vence="2025-06-30"></tr>
+				<tr data-registro data-id="r17" data-fecha="2024-10-12" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2402" data-dosis="Dosis 2 de 2" data-usuario-id="p6" data-usuario="María Fernanda Rojas" data-cedula="V-20123456" data-edad="32" data-telefono="0426-6789012" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Segunda dosis" data-cantidad="0.3" data-lote-vence="2025-06-30"></tr>
+				<tr data-registro data-id="r18" data-fecha="2024-11-08" data-vacuna-id="v-fiebre" data-vacuna="Fiebre amarilla" data-tipo="Virus atenuado" data-procedencia="Internacional" data-lote="FIE-2401" data-dosis="Dosis única" data-usuario-id="p6" data-usuario="María Fernanda Rojas" data-cedula="V-20123456" data-edad="32" data-telefono="0426-6789012" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Enf. Carmen Díaz" data-cargo="Enfermera vacunadora" data-atencion="Viaje" data-cantidad="0.5" data-lote-vence="2026-05-31"></tr>
+				<tr data-registro data-id="r19" data-fecha="2025-03-03" data-vacuna-id="v-vph" data-vacuna="VPH" data-tipo="Recombinante" data-procedencia="Internacional" data-lote="VPH-2501" data-dosis="Dosis 1 de 2" data-usuario-id="p6" data-usuario="María Fernanda Rojas" data-cedula="V-20123456" data-edad="31" data-telefono="0426-6789012" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Enf. Carmen Díaz" data-cargo="Enfermera vacunadora" data-atencion="Prevención de VPH" data-cantidad="0.5" data-lote-vence="2027-03-31"></tr>
+				<tr data-registro data-id="r20" data-fecha="2025-08-19" data-vacuna-id="v-influenza" data-vacuna="Influenza" data-tipo="Virus inactivado" data-procedencia="Internacional" data-lote="INF-2501" data-dosis="Refuerzo anual" data-usuario-id="p7" data-usuario="Pedro Castillo" data-cedula="V-9876543" data-edad="56" data-telefono="0412-7890123" data-centro-id="c5" data-centro="Centro de Salud Los Teques" data-municipio="Guaicaipuro" data-estado="Miranda" data-region="Capital" data-aplicador="Dra. Ana Gil" data-cargo="Médico vacunador" data-atencion="Campaña anual" data-cantidad="0.5" data-lote-vence="2026-06-30"></tr>
+				<tr data-registro data-id="r21" data-fecha="2024-02-27" data-vacuna-id="v-sarampion" data-vacuna="Sarampión" data-tipo="Virus atenuado" data-procedencia="Internacional" data-lote="SAR-2401" data-dosis="Dosis 1 de 2" data-usuario-id="p7" data-usuario="Pedro Castillo" data-cedula="V-9876543" data-edad="56" data-telefono="0412-7890123" data-centro-id="c5" data-centro="Centro de Salud Los Teques" data-municipio="Guaicaipuro" data-estado="Miranda" data-region="Capital" data-aplicador="Dra. Ana Gil" data-cargo="Médico vacunador" data-atencion="Esquema de sarampión" data-cantidad="0.5" data-lote-vence="2026-02-28"></tr>
+				<tr data-registro data-id="r22" data-fecha="2025-07-07" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2501" data-dosis="Dosis 1 de 2" data-usuario-id="p8" data-usuario="Daniela Suárez" data-cedula="V-21456789" data-edad="26" data-telefono="0414-8901234" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-municipio="Chacao" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dr. Luis Ortega" data-cargo="Médico vacunador" data-atencion="Primera dosis" data-cantidad="0.3" data-lote-vence="2026-09-30"></tr>
+				<tr data-registro data-id="r23" data-fecha="2025-08-01" data-vacuna-id="v-fiebre" data-vacuna="Fiebre amarilla" data-tipo="Virus atenuado" data-procedencia="Internacional" data-lote="FIE-2501" data-dosis="Dosis única" data-usuario-id="p8" data-usuario="Daniela Suárez" data-cedula="V-21456789" data-edad="26" data-telefono="0414-8901234" data-centro-id="c2" data-centro="Ambulatorio Chacao" data-municipio="Chacao" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Enf. Rosa Núñez" data-cargo="Enfermera vacunadora" data-atencion="Viaje" data-cantidad="0.5" data-lote-vence="2027-05-31"></tr>
+				<tr data-registro data-id="r24" data-fecha="2024-01-15" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2401" data-dosis="Dosis 1 de 2" data-usuario-id="p9" data-usuario="Jorge Herrera" data-cedula="V-11223344" data-edad="38" data-telefono="0414-9012345" data-centro-id="c3" data-centro="Hospital Universitario Valencia" data-municipio="Valencia" data-estado="Carabobo" data-region="Central" data-aplicador="Dr. Miguel León" data-cargo="Médico vacunador" data-atencion="Primera dosis" data-cantidad="0.3" data-lote-vence="2025-03-31"></tr>
+				<tr data-registro data-id="r25" data-fecha="2024-02-15" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2401" data-dosis="Dosis 2 de 2" data-usuario-id="p9" data-usuario="Jorge Herrera" data-cedula="V-11223344" data-edad="38" data-telefono="0414-9012345" data-centro-id="c3" data-centro="Hospital Universitario Valencia" data-municipio="Valencia" data-estado="Carabobo" data-region="Central" data-aplicador="Dr. Miguel León" data-cargo="Médico vacunador" data-atencion="Segunda dosis" data-cantidad="0.3" data-lote-vence="2025-03-31"></tr>
+				<tr data-registro data-id="r26" data-fecha="2025-09-10" data-vacuna-id="v-influenza" data-vacuna="Influenza" data-tipo="Virus inactivado" data-procedencia="Internacional" data-lote="INF-2502" data-dosis="Refuerzo anual" data-usuario-id="p10" data-usuario="Rosa Martínez" data-cedula="V-55667788" data-edad="51" data-telefono="0414-0123456" data-centro-id="c4" data-centro="Ambulatorio Maracaibo Norte" data-municipio="Maracaibo" data-estado="Zulia" data-region="Occidente" data-aplicador="Enf. Sofía Paredes" data-cargo="Enfermera vacunadora" data-atencion="Campaña anual" data-cantidad="0.5" data-lote-vence="2026-12-31"></tr>
+				<tr data-registro data-id="r27" data-fecha="2025-07-22" data-vacuna-id="v-tetanos" data-vacuna="Tétanos" data-tipo="Toxoide" data-procedencia="Nacional" data-lote="TET-2501" data-dosis="Refuerzo" data-usuario-id="p10" data-usuario="Rosa Martínez" data-cedula="V-55667788" data-edad="51" data-telefono="0414-0123456" data-centro-id="c4" data-centro="Ambulatorio Maracaibo Norte" data-municipio="Maracaibo" data-estado="Zulia" data-region="Occidente" data-aplicador="Enf. Sofía Paredes" data-cargo="Enfermera vacunadora" data-atencion="Herida" data-cantidad="0.5" data-lote-vence="2035-06-30"></tr>
+			</tbody></table>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,156 @@
+﻿<!doctype html>
+<html lang="es" data-theme="salud" data-inicio="../index.html">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Salud Vacunas · Avisos</title>
+		<link rel="stylesheet" href="../assets/css/estilos.css" />
+		<script src="../src/js/nucleo.js"></script>
+		<script src="../src/js/datos.js"></script>
+		<script src="../src/js/publico.js"></script>
+		<script src="../src/js/avisos.js"></script>
+		<script src="../src/js/app.js"></script>
+	</head>
+	<body data-pagina="master-avisos">
+		<div class="min-h-svh bg-base-200">
+			<header class="sticky top-0 z-20 border-base-300 border-b bg-base-100/95 backdrop-blur print:hidden">
+				<div class="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
+					<div class="flex min-h-14 items-center justify-between gap-4">
+						<a href="historial.html" class="flex min-w-0 items-center gap-3">
+							<span class="flex size-9 shrink-0 items-center justify-center rounded-box bg-primary text-primary-content">
+								<span class="icono icono-vaccine size-[21px]" aria-hidden="true"></span>
+							</span>
+							<span class="min-w-0">
+								<span class="block truncate font-semibold leading-tight">Salud Vacunas</span>
+								<span class="block truncate text-base-content/55 text-sm">Sistema de vacunación</span>
+							</span>
+						</a>
+						<div class="flex shrink-0 items-center gap-3">
+							<span class="hidden text-right font-medium text-sm sm:inline">Perfil 3</span>
+							<button type="button" data-salir class="inline-flex min-h-10 items-center gap-2 rounded-lg px-3 font-medium text-primary text-sm transition hover:bg-primary/10" aria-label="Salir">
+								<span class="icono icono-logout size-[18px]" aria-hidden="true"></span>
+								<span class="hidden sm:inline">Salir</span>
+							</button>
+						</div>
+					</div>
+					<nav aria-label="Navegación principal" class="flex gap-1 overflow-x-auto pb-1">
+						<a href="historial.html" class="shrink-0 rounded-lg px-3 py-1.5 font-medium text-base-content/65 text-sm transition hover:bg-base-200 hover:text-base-content">Vacunaciones</a>
+						<a href="centros.html" class="shrink-0 rounded-lg px-3 py-1.5 font-medium text-base-content/65 text-sm transition hover:bg-base-200 hover:text-base-content">Centros</a>
+						<a href="consulta.html" class="shrink-0 rounded-lg px-3 py-1.5 font-medium text-base-content/65 text-sm transition hover:bg-base-200 hover:text-base-content">Consultar</a>
+						<a href="certificados.html" class="shrink-0 rounded-lg px-3 py-1.5 font-medium text-base-content/65 text-sm transition hover:bg-base-200 hover:text-base-content">Certificados</a>
+						<a href="avisos.html" aria-current="page" class="shrink-0 rounded-lg bg-primary/10 px-3 py-1.5 font-medium text-primary text-sm transition">Avisos</a>
+					</nav>
+				</div>
+			</header>
+
+			<main class="mx-auto w-full max-w-[1600px] flex-1 px-4 py-4 sm:px-6 sm:py-5 lg:px-10 lg:py-6">
+				<div data-avisos class="flex flex-col gap-4">
+					<header>
+						<h1 class="font-semibold text-2xl text-base-content tracking-tight sm:text-3xl">Avisos</h1>
+						<p class="mt-2 max-w-4xl text-base text-base-content/65">Prepara avisos por correo para los usuarios de la red. Puedes usar un usuario de referencia y las variables del mensaje para personalizar cada aviso.</p>
+					</header>
+
+					<section class="rounded-2xl bg-base-100 p-4 shadow-sm ring-1 ring-base-300/50 sm:p-5">
+						<form data-form-aviso class="flex flex-col gap-4">
+							<div data-aviso-alerta></div>
+							<div data-aviso-exito hidden></div>
+
+							<div class="flex flex-col gap-3">
+								<div class="flex flex-col gap-1.5">
+									<label for="avisoTipo" class="font-medium text-sm">Tipo de aviso</label>
+									<select id="avisoTipo" name="tipo" class="select h-10 w-full rounded-xl" data-aviso-tipo>
+										<option value="vacunacion">Vacunación pendiente</option>
+										<option value="faltantes">Vacunas faltantes</option>
+										<option value="emergencia">Emergencia</option>
+									</select>
+								</div>
+								<div class="flex flex-col gap-1.5">
+									<label for="avisoAsunto" class="font-medium text-sm">Asunto del aviso<span class="text-error"> *</span></label>
+									<input id="avisoAsunto" name="asunto" type="text" class="input h-10 w-full rounded-xl" data-aviso-asunto />
+								</div>
+							</div>
+
+							<div class="flex flex-col gap-3">
+								<div>
+									<label for="avisoUsuario" class="font-medium text-sm">Usuario de referencia (opcional)</label>
+									<div class="relative mt-1.5">
+										<label class="input h-10 w-full rounded-xl">
+											<span class="icono icono-search size-[17px] text-base-content/40" aria-hidden="true"></span>
+											<input id="avisoUsuario" type="search" class="grow" data-aviso-usuario-busqueda placeholder="Cédula o nombre del usuario" autocomplete="off" />
+										</label>
+										<div data-aviso-usuario-sugerencias hidden class="absolute z-30 mt-1 w-full overflow-hidden rounded-xl border border-base-300 bg-base-100 shadow-lg"></div>
+									</div>
+									<div class="mt-2" data-aviso-usuario></div>
+								</div>
+
+								<div>
+									<label for="avisoDestinatario" class="font-medium text-sm">Destinatarios</label>
+									<div class="relative mt-1.5">
+										<label class="input h-10 w-full rounded-xl">
+											<span class="icono icono-search size-[17px] text-base-content/40" aria-hidden="true"></span>
+											<input id="avisoDestinatario" type="search" class="grow" data-aviso-destinatario-busqueda placeholder="Buscar por nombre o correo" autocomplete="off" />
+										</label>
+										<div data-aviso-destinatarios-lista hidden class="absolute z-30 mt-1 max-h-48 w-full overflow-y-auto rounded-xl border border-base-300 bg-base-100 shadow-lg"></div>
+									</div>
+									<div class="mt-2 flex flex-wrap gap-2" data-destinatarios-chips></div>
+								</div>
+							</div>
+
+							<div class="flex flex-col gap-1.5">
+								<label for="avisoMensaje" class="font-medium text-sm">Mensaje del aviso<span class="text-error"> *</span></label>
+								<textarea id="avisoMensaje" name="mensaje" class="textarea min-h-28 w-full rounded-xl" data-aviso-mensaje></textarea>
+								<p class="text-base-content/55 text-xs">Variables disponibles: <code class="rounded bg-base-200 px-1 py-0.5">{destinatario}</code>, <code class="rounded bg-base-200 px-1 py-0.5">{usuario}</code>, <code class="rounded bg-base-200 px-1 py-0.5">{centro}</code> y <code class="rounded bg-base-200 px-1 py-0.5">{vacunas}</code>.</p>
+							</div>
+
+							<div class="flex flex-wrap gap-2 border-base-300 border-t pt-5">
+								<button type="submit" class="btn btn-primary min-h-11 rounded-xl font-medium text-base">Registrar y preparar correo</button>
+								<button type="reset" class="btn btn-outline min-h-11 rounded-xl font-medium text-base">Limpiar formulario</button>
+							</div>
+							<p class="text-base-content/55 text-xs">En la demostración el correo no se envía realmente.</p>
+						</form>
+					</section>
+
+					<section class="rounded-2xl bg-base-100 p-4 shadow-sm ring-1 ring-base-300/50 sm:p-5">
+						<div class="flex flex-wrap items-center justify-between gap-3">
+							<div>
+								<h2 class="font-semibold text-lg tracking-tight">Avisos registrados</h2>
+								<p class="mt-1 text-base-content/60 text-sm">Historial de avisos preparados en esta sesión.</p>
+							</div>
+							<a data-abrir-correo hidden href="#" class="btn btn-outline btn-sm min-h-10 rounded-xl">
+								<span class="icono icono-mail size-4" aria-hidden="true"></span>
+								Abrir cliente de correo
+							</a>
+						</div>
+						<div class="mt-4 overflow-x-auto">
+							<table class="table table-sm">
+								<thead>
+									<tr>
+										<th>Fecha</th>
+										<th>Destinatario</th>
+										<th>Asunto</th>
+										<th>Estado</th>
+									</tr>
+								</thead>
+								<tbody data-lista-avisos></tbody>
+							</table>
+						</div>
+					</section>
+				</div>
+			</main>
+		</div>
+
+		<div hidden data-datos-usuarios>
+			<article data-usuario data-usuario-id="p1" data-nombre="Ana Torres" data-cedula="V-10234567" data-nacimiento="1991-04-18" data-centro="Centro de Vacunación Libertador" data-region="Capital" data-pendientes="Sin vacunas pendientes" data-correo="ana.torres@correo.com" data-registrado-por="Enf. Carmen Díaz" data-registrado-por-cedula="V-11222333" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101"></article>
+			<article data-usuario data-usuario-id="p2" data-nombre="José Ramírez" data-cedula="V-14567890" data-nacimiento="1978-09-02" data-centro="Centro de Vacunación Libertador" data-region="Capital" data-pendientes="COVID-19 (1 dosis); Fiebre amarilla (1 dosis)" data-correo="jose.ramirez@correo.com" data-registrado-por="Enf. Carmen Díaz" data-registrado-por-cedula="V-11222333" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101"></article>
+			<article data-usuario data-usuario-id="p3" data-nombre="Héctor Paredes" data-cedula="V-8765432" data-nacimiento="1965-12-11" data-centro="Ambulatorio Chacao" data-region="Capital" data-pendientes="Sin vacunas pendientes" data-correo="hector.paredes@correo.com" data-registrado-por="Enf. Rosa Núñez" data-registrado-por-cedula="V-22333444" data-centro-direccion="Av. Francisco de Miranda, Chacao" data-centro-telefono="0212-5550202"></article>
+			<article data-usuario data-usuario-id="p4" data-nombre="Luisana Méndez" data-cedula="V-19345678" data-nacimiento="1998-06-25" data-centro="Ambulatorio Chacao" data-region="Capital" data-pendientes="COVID-19 (2 dosis); Fiebre amarilla (1 dosis); Hepatitis B (1 dosis)" data-correo="luisana.mendez@correo.com" data-registrado-por="Enf. Rosa Núñez" data-registrado-por-cedula="V-22333444" data-centro-direccion="Av. Francisco de Miranda, Chacao" data-centro-telefono="0212-5550202"></article>
+			<article data-usuario data-usuario-id="p5" data-nombre="Carlos Blanco" data-cedula="V-12345678" data-nacimiento="1985-02-14" data-centro="Centro de Salud Los Teques" data-region="Capital" data-pendientes="COVID-19 (1 dosis); Fiebre amarilla (1 dosis)" data-correo="carlos.blanco@correo.com" data-registrado-por="Lic. Pedro Salas" data-registrado-por-cedula="V-33444555" data-centro-direccion="Calle Bolívar, Los Teques" data-centro-telefono="0212-5550505"></article>
+			<article data-usuario data-usuario-id="p6" data-nombre="María Fernanda Rojas" data-cedula="V-20123456" data-nacimiento="1993-11-30" data-centro="Centro de Vacunación Libertador" data-region="Capital" data-pendientes="VPH (1 dosis); Influenza (1 dosis)" data-correo="maria.rojas@correo.com" data-registrado-por="Enf. Carmen Díaz" data-registrado-por-cedula="V-11222333" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101"></article>
+			<article data-usuario data-usuario-id="p7" data-nombre="Pedro Castillo" data-cedula="V-9876543" data-nacimiento="1970-07-08" data-centro="Centro de Salud Los Teques" data-region="Capital" data-pendientes="COVID-19 (2 dosis); Fiebre amarilla (1 dosis); Sarampión (1 dosis)" data-correo="pedro.castillo@correo.com" data-registrado-por="Lic. Pedro Salas" data-registrado-por-cedula="V-33444555" data-centro-direccion="Calle Bolívar, Los Teques" data-centro-telefono="0212-5550505"></article>
+			<article data-usuario data-usuario-id="p8" data-nombre="Daniela Suárez" data-cedula="V-21456789" data-nacimiento="2000-03-19" data-centro="Ambulatorio Chacao" data-region="Capital" data-pendientes="COVID-19 (1 dosis)" data-correo="daniela.suarez@correo.com" data-registrado-por="Enf. Rosa Núñez" data-registrado-por-cedula="V-22333444" data-centro-direccion="Av. Francisco de Miranda, Chacao" data-centro-telefono="0212-5550202"></article>
+			<article data-usuario data-usuario-id="p9" data-nombre="Jorge Herrera" data-cedula="V-11223344" data-nacimiento="1988-01-05" data-centro="Hospital Universitario Valencia" data-region="Central" data-pendientes="Fiebre amarilla (1 dosis)" data-correo="jorge.herrera@correo.com" data-registrado-por="Dr. Luis Ortega" data-registrado-por-cedula="V-44555666" data-centro-direccion="Av. Bolívar Norte, Valencia" data-centro-telefono="0241-5550303"></article>
+			<article data-usuario data-usuario-id="p10" data-nombre="Rosa Martínez" data-cedula="V-55667788" data-nacimiento="1975-05-22" data-centro="Ambulatorio Maracaibo Norte" data-region="Occidente" data-pendientes="COVID-19 (2 dosis); Fiebre amarilla (1 dosis)" data-correo="rosa.martinez@correo.com" data-registrado-por="Dra. Elena Pérez" data-registrado-por-cedula="V-55666777" data-centro-direccion="Av. 5 de Julio, Maracaibo" data-centro-telefono="0261-5550404"></article>
+		</div>
+	</body>
+</html>

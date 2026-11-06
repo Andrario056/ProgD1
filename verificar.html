@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es" data-theme="salud">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Salud Vacunas · Verificar certificado médico</title>
+		<link rel="stylesheet" href="assets/css/estilos.css" />
+		<script src="src/js/nucleo.js"></script>
+		<script src="src/js/datos.js"></script>
+		<script src="src/js/comun.js"></script>
+		<script src="src/js/publico.js"></script>
+		<script src="src/js/app.js"></script>
+	</head>
+	<body data-pagina="verificar">
+		<div class="min-h-svh bg-base-200">
+			<header class="border-base-300 border-b bg-base-100 print:hidden">
+				<div class="mx-auto flex min-h-14 max-w-4xl items-center justify-between gap-4 px-4 sm:px-6">
+					<a href="index.html" class="flex min-w-0 items-center gap-3">
+						<span class="flex size-9 shrink-0 items-center justify-center rounded-box bg-primary text-primary-content">
+							<span class="icono icono-certificate size-[21px]" aria-hidden="true"></span>
+						</span>
+						<span class="min-w-0">
+							<span class="block truncate font-semibold leading-tight">Salud Vacunas</span>
+							<span class="block truncate text-base-content/55 text-sm">Verificación pública</span>
+						</span>
+					</a>
+					<div class="flex shrink-0 items-center gap-2">
+						<button type="button" data-tema aria-label="Cambiar a modo oscuro" title="Cambiar a modo oscuro" aria-pressed="false" class="inline-flex min-h-10 items-center gap-2 rounded-lg px-3 font-medium text-base-content/70 text-sm transition hover:bg-base-200 hover:text-base-content">
+							<span data-tema-icono="luna" aria-hidden="true">
+								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/></svg>
+							</span>
+							<span data-tema-icono="sol" hidden aria-hidden="true">
+								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"/></svg>
+							</span>
+							<span class="hidden sm:inline" data-tema-texto>Modo oscuro</span>
+						</button>
+						<a href="index.html" class="btn btn-ghost btn-sm rounded-lg text-primary">
+							<span class="icono icono-arrow-left size-4" aria-hidden="true"></span>
+							Volver
+						</a>
+					</div>
+				</div>
+			</header>
+
+			<main class="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 sm:py-10">
+				<div class="flex flex-col gap-4">
+					<header>
+						<h1 class="font-semibold text-2xl tracking-tight sm:text-3xl">Verificar un certificado médico</h1>
+						<p class="mt-2 text-base text-base-content/65">Escribe el código único que aparece en el certificado o la cédula del usuario para comprobar su validez, vigencia, sello y firma digital.</p>
+					</header>
+
+					<section class="rounded-2xl bg-base-100 p-4 shadow-sm ring-1 ring-base-300/50 sm:p-5">
+						<form data-form-verificar class="flex flex-col gap-3 sm:flex-row sm:items-end">
+							<div class="flex min-w-0 flex-1 flex-col gap-1.5">
+								<label for="verificarCodigo" class="font-medium text-sm">Código o cédula del certificado</label>
+								<input id="verificarCodigo" type="search" class="input h-10 w-full rounded-xl font-mono uppercase" data-verificar-codigo placeholder="CERT-2026-0001 o V-10234567" autocomplete="off" />
+							</div>
+							<div class="flex gap-2">
+								<button type="submit" class="btn btn-primary min-h-10 rounded-xl">
+									<span class="icono icono-search size-[18px]" aria-hidden="true"></span>
+									Verificar
+								</button>
+								<button type="button" class="btn btn-outline min-h-10 rounded-xl" data-verificar-limpiar hidden>Limpiar</button>
+							</div>
+						</form>
+						<div class="mt-4" data-verificar-alerta></div>
+						<p class="mt-4 text-base-content/50 text-xs">Códigos de demostración: CERT-2026-0002, CERT-2026-0001 y CERT-2025-0001.</p>
+					</section>
+
+					<div data-verificar-resultado class="flex flex-col gap-5"></div>
+				</div>
+			</main>
+		</div>
+
+		<div hidden data-datos-certificados>
+			<article data-certificado data-codigo="CERT-2026-0002" data-usuario-id="p1" data-estado="Vigente" data-emision="2026-02-10" data-vigencia="2027-02-10" data-examen-fecha="2026-02-08" data-centro="Centro de Vacunación Libertador" data-centro-id="c1" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101" data-centro-municipio="Libertador" data-centro-estado="Distrito Capital" data-centro-tipo="3" data-bioanalista="Lic. Marta Rivas" data-medico="Dra. Elena Pérez" data-emisor="Sub-región Capital · Salud Vacunas" data-observaciones="Usuario apto para actividades laborales y viaje." data-sello="Válido" data-firma="Válida" data-usuario-nombre="Ana Torres" data-usuario-cedula="V-10234567" data-usuario-nacimiento="1991-04-18" data-usuario-sexo="Femenino" data-usuario-telefono="0414-1234567" data-usuario-correo="ana.torres@correo.com" data-usuario-centro="Centro de Vacunación Libertador" data-usuario-region="Capital" data-usuario-municipio="Libertador" data-usuario-estado="Distrito Capital" data-usuario-direccion="Av. Sucre, Caracas" data-usuario-sangre="O+" data-usuario-alergias="Penicilina">
+				<span data-examen-tipo data-nombre="Hematología" data-descripcion="Hemograma completo" data-resultado="14.2" data-unidad="g/dL" data-referencia="12.0 - 16.0"></span>
+				<span data-examen-tipo data-nombre="Química sanguínea" data-descripcion="Glucosa en ayunas" data-resultado="92" data-unidad="mg/dL" data-referencia="70 - 100"></span>
+			
+				<span data-documento data-nombre="Informe-hematologia.pdf" data-tipo="application/pdf" data-tamano="245760"></span>
+				<span data-documento data-nombre="Glucosa-ayunas.pdf" data-tipo="application/pdf" data-tamano="180224"></span>
+				<span data-dosis-respaldo data-vacuna="COVID-19" data-dosis="Dosis 2 de 2" data-fecha="2024-04-09" data-lote="COV-2403" data-lote-vence="2025-12-31" data-centro="Centro de Vacunación Libertador" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador"></span>
+				<span data-dosis-respaldo data-vacuna="Fiebre amarilla" data-dosis="Dosis única" data-fecha="2024-05-21" data-lote="FIE-2401" data-lote-vence="2026-05-31" data-centro="Centro de Vacunación Libertador" data-aplicador="Enf. Carmen Díaz" data-cargo="Enfermera vacunadora"></span>
+			</article>
+			<article data-certificado data-codigo="CERT-2025-0001" data-usuario-id="p2" data-estado="Vencido" data-emision="2025-01-15" data-vigencia="2026-01-15" data-examen-fecha="2025-01-12" data-centro="Centro de Vacunación Libertador" data-centro-id="c1" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101" data-centro-municipio="Libertador" data-centro-estado="Distrito Capital" data-centro-tipo="3" data-bioanalista="Lic. Marta Rivas" data-medico="Dra. Elena Pérez" data-emisor="Sub-región Capital · Salud Vacunas" data-observaciones="Certificado vencido; requiere renovación." data-sello="Válido" data-firma="Válida" data-usuario-nombre="José Ramírez" data-usuario-cedula="V-14567890" data-usuario-nacimiento="1978-09-02" data-usuario-sexo="Masculino" data-usuario-telefono="0424-2345678" data-usuario-correo="jose.ramirez@correo.com" data-usuario-centro="Centro de Vacunación Libertador" data-usuario-region="Capital" data-usuario-municipio="Chacao" data-usuario-estado="Distrito Capital" data-usuario-direccion="Calle 5, Caracas" data-usuario-sangre="A+" data-usuario-alergias="Ninguna">
+				<span data-examen-tipo data-nombre="Hematología" data-descripcion="Hemograma completo" data-resultado="13.8" data-unidad="g/dL" data-referencia="13.0 - 17.0"></span>
+			
+				<span data-documento data-nombre="Hematologia-2025.pdf" data-tipo="application/pdf" data-tamano="210944"></span>
+				<span data-dosis-respaldo data-vacuna="COVID-19" data-dosis="Dosis 1 de 2" data-fecha="2024-06-15" data-lote="COV-2402" data-lote-vence="2025-12-31" data-centro="Centro de Vacunación Libertador" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador"></span>
+			</article>
+			<article data-certificado data-codigo="CERT-2026-0001" data-usuario-id="p3" data-estado="Vigente" data-emision="2026-01-20" data-vigencia="2027-01-20" data-examen-fecha="2026-01-18" data-centro="Ambulatorio Chacao" data-centro-id="c2" data-centro-direccion="Av. Francisco de Miranda, Chacao" data-centro-telefono="0212-5550202" data-centro-municipio="Chacao" data-centro-estado="Distrito Capital" data-centro-tipo="2" data-bioanalista="Lic. Pedro Salas" data-medico="Dr. Luis Ortega" data-emisor="Sub-región Capital · Salud Vacunas" data-observaciones="Usuario apto para actividades deportivas." data-sello="Válido" data-firma="Válida" data-usuario-nombre="Héctor Paredes" data-usuario-cedula="V-8765432" data-usuario-nacimiento="1965-12-11" data-usuario-sexo="Masculino" data-usuario-telefono="0412-3456789" data-usuario-correo="hector.paredes@correo.com" data-usuario-centro="Ambulatorio Chacao" data-usuario-region="Capital" data-usuario-municipio="Chacao" data-usuario-estado="Distrito Capital" data-usuario-direccion="Av. Francisco de Miranda, Chacao" data-usuario-sangre="O-" data-usuario-alergias="Ninguna">
+				<span data-examen-tipo data-nombre="Química sanguínea" data-descripcion="Perfil lipídico" data-resultado="185" data-unidad="mg/dL" data-referencia="&lt; 200"></span>
+				<span data-examen-tipo data-nombre="Microbiología" data-descripcion="Urocultivo" data-resultado="Negativo" data-unidad="—" data-referencia="Negativo"></span>
+			
+				<span data-documento data-nombre="Perfil-lipidico.pdf" data-tipo="application/pdf" data-tamano="198656"></span>
+				<span data-documento data-nombre="Urocultivo.pdf" data-tipo="application/pdf" data-tamano="175104"></span>
+				<span data-dosis-respaldo data-vacuna="COVID-19" data-dosis="Dosis 2 de 2" data-fecha="2023-09-07" data-lote="COV-2301" data-lote-vence="2024-12-31" data-centro="Ambulatorio Chacao" data-aplicador="Dr. Luis Ortega" data-cargo="Médico vacunador"></span>
+				<span data-dosis-respaldo data-vacuna="Fiebre amarilla" data-dosis="Dosis única" data-fecha="2023-10-02" data-lote="FIE-2301" data-lote-vence="2025-05-31" data-centro="Ambulatorio Chacao" data-aplicador="Enf. Rosa Núñez" data-cargo="Enfermera vacunadora"></span>
+			</article>
+		</div>
+	</body>
+</html>

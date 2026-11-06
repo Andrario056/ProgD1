@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="es" data-theme="salud" data-inicio="../../index.html">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Salud Vacunas · Registrar usuario</title>
+		<link rel="stylesheet" href="../../assets/css/estilos.css" />
+		<script src="../../src/js/nucleo.js"></script>
+		<script src="../../src/js/datos.js"></script>
+		<script src="../../src/js/publico.js"></script>
+		<script src="../../src/js/centro.js"></script>
+		<script src="../../src/js/app.js"></script>
+	</head>
+	<body data-pagina="centro-registrar-usuario">
+		<div class="min-h-svh bg-base-200">
+			<header class="sticky top-0 z-20 border-base-300 border-b bg-base-100/95 backdrop-blur print:hidden">
+				<div class="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
+					<div class="flex min-h-14 items-center justify-between gap-4">
+						<a href="registrar.html" class="flex min-w-0 items-center gap-3">
+							<span class="flex size-9 shrink-0 items-center justify-center rounded-box bg-primary text-primary-content">
+								<span class="icono icono-vaccine size-[21px]" aria-hidden="true"></span>
+							</span>
+							<span class="min-w-0">
+								<span class="block truncate font-semibold leading-tight">Salud Vacunas</span>
+								<span class="block truncate text-base-content/55 text-sm">Sistema de vacunación</span>
+							</span>
+						</a>
+						<div class="flex shrink-0 items-center gap-3">
+							<span class="hidden text-right font-medium text-sm sm:inline">Perfil 1</span>
+							<button type="button" data-salir class="inline-flex min-h-10 items-center gap-2 rounded-lg px-3 font-medium text-primary text-sm transition hover:bg-primary/10" aria-label="Salir">
+								<span class="icono icono-logout size-[18px]" aria-hidden="true"></span>
+								<span class="hidden sm:inline">Salir</span>
+							</button>
+						</div>
+					</div>
+					<nav aria-label="Navegación principal" class="flex gap-1 overflow-x-auto pb-1">
+						<a href="registrar.html" aria-current="page" class="shrink-0 rounded-lg bg-primary/10 px-3 py-1.5 font-medium text-primary text-sm transition">Registrar usuario</a>
+						<a href="../vacunas/registrar.html" class="shrink-0 rounded-lg px-3 py-1.5 font-medium text-base-content/65 text-sm transition hover:bg-base-200 hover:text-base-content">Registrar vacunación</a>
+					</nav>
+				</div>
+			</header>
+
+			<main class="mx-auto w-full max-w-[1600px] flex-1 px-4 py-4 sm:px-6 sm:py-5 lg:px-10 lg:py-6">
+				<div class="flex flex-col gap-4">
+					<header>
+						<h1 class="font-semibold text-2xl text-base-content tracking-tight sm:text-3xl">Registrar usuario</h1>
+						<p class="mt-2 max-w-3xl text-base text-base-content/65">El usuario quedará asociado a <span class="font-medium text-base-content" data-centro-nombre>tu centro de salud</span>. Puedes crear su cuenta de acceso de forma opcional.</p>
+					</header>
+
+					<div data-registro-exito hidden></div>
+
+					<section class="min-w-0 rounded-2xl bg-base-100 shadow-sm ring-1 ring-base-300/50">
+						<div class="flex min-w-0 flex-col gap-5 p-5 sm:gap-6 sm:p-6 lg:p-8">
+							<form data-form-usuario class="flex flex-col gap-3">
+								<div data-form-usuario-alerta></div>
+
+								<div class="flex flex-col gap-3">
+									<div class="flex flex-col gap-1.5 xl:col-span-2">
+										<label for="enfermero" class="font-medium text-sm">Enfermero registrando<span class="text-error"> *</span></label>
+										<input id="enfermero" name="enfermero" type="text" class="input h-10 w-full rounded-xl" placeholder="Nombre del enfermero" autocomplete="name" />
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="enfermeroCedula" class="font-medium text-sm">Cédula del enfermero o personal<span class="text-error"> *</span></label>
+										<input id="enfermeroCedula" name="enfermeroCedula" type="text" class="input h-10 w-full rounded-xl" placeholder="V-12345678" maxlength="14" />
+									</div>
+
+									<div class="flex flex-col gap-1.5 sm:col-span-2 xl:col-span-3">
+										<span class="font-medium text-sm">Nombre completo del usuario</span>
+										<div class="flex flex-col gap-3">
+											<div class="flex flex-col gap-1.5">
+												<label for="nombre" class="font-medium text-sm">Primer nombre<span class="text-error"> *</span></label>
+												<input id="nombre" name="nombre" type="text" class="input h-10 w-full rounded-xl" placeholder="Ej. María" autocomplete="given-name" maxlength="30" required />
+											</div>
+											<div class="flex flex-col gap-1.5">
+												<label for="segundoNombre" class="font-medium text-sm">Segundo nombre<span class="text-error"> *</span></label>
+												<input id="segundoNombre" name="segundoNombre" type="text" class="input h-10 w-full rounded-xl" placeholder="Ej. José" autocomplete="additional-name" maxlength="30" required />
+											</div>
+											<div class="flex flex-col gap-1.5">
+												<label for="apellido" class="font-medium text-sm">Primer apellido<span class="text-error"> *</span></label>
+												<input id="apellido" name="apellido" type="text" class="input h-10 w-full rounded-xl" placeholder="Ej. Pérez" autocomplete="family-name" maxlength="30" required />
+											</div>
+											<div class="flex flex-col gap-1.5">
+												<label for="segundoApellido" class="font-medium text-sm">Segundo apellido<span class="text-error"> *</span></label>
+												<input id="segundoApellido" name="segundoApellido" type="text" class="input h-10 w-full rounded-xl" placeholder="Ej. Gómez" autocomplete="family-name" maxlength="30" required />
+											</div>
+										</div>
+									</div>
+
+									<div class="flex flex-col gap-1.5">
+										<label for="cedula" class="font-medium text-sm">Cédula del usuario<span class="text-error"> *</span></label>
+										<input id="cedula" name="cedula" type="text" class="input h-10 w-full rounded-xl" placeholder="V-12345678" maxlength="14" />
+										<p class="text-base-content/55 text-sm">Puedes escribirla con o sin el prefijo y el guion.</p>
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="fechaNacimiento" class="font-medium text-sm">Fecha de nacimiento<span class="text-error"> *</span></label>
+										<input id="fechaNacimiento" name="fechaNacimiento" type="date" class="input h-10 w-full rounded-xl" />
+									</div>
+
+									<div class="flex flex-col gap-1.5">
+										<label for="sexo" class="font-medium text-sm">Sexo</label>
+										<select id="sexo" name="sexo" class="select h-10 w-full rounded-xl">
+											<option value="Femenino" selected>Femenino</option>
+											<option value="Masculino">Masculino</option>
+											<option value="Otro">Otro</option>
+										</select>
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="telefono" class="font-medium text-sm">Teléfono</label>
+										<input id="telefono" name="telefono" type="tel" class="input h-10 w-full rounded-xl" placeholder="0414-1234567" autocomplete="tel" />
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="correo" class="font-medium text-sm">Correo electrónico</label>
+										<input id="correo" name="correo" type="email" class="input h-10 w-full rounded-xl" placeholder="nombre@correo.com" autocomplete="email" />
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="region" class="font-medium text-sm">Región</label>
+										<select id="region" name="region" class="select h-10 w-full rounded-xl">
+											<option value="Capital" selected>Capital</option>
+											<option value="Central">Central</option>
+											<option value="Occidente">Occidente</option>
+										</select>
+										<p class="text-base-content/55 text-sm">Se usa para verificar la disponibilidad de las vacunas.</p>
+									</div>
+
+									<div class="flex flex-col gap-1.5">
+										<label for="tipoSangre" class="font-medium text-sm">Tipo de sangre</label>
+										<select id="tipoSangre" name="tipoSangre" class="select h-10 w-full rounded-xl">
+											<option value="" selected>No registrado</option>
+											<option value="O+">O+</option>
+											<option value="O-">O-</option>
+											<option value="A+">A+</option>
+											<option value="A-">A-</option>
+											<option value="B+">B+</option>
+											<option value="B-">B-</option>
+											<option value="AB+">AB+</option>
+											<option value="AB-">AB-</option>
+										</select>
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="alergias" class="font-medium text-sm">Alergias</label>
+										<input id="alergias" name="alergias" type="text" class="input h-10 w-full rounded-xl" placeholder="Ninguna" />
+									</div>
+
+									<div class="flex flex-col gap-1.5">
+										<label for="centroFijo" class="font-medium text-sm">Centro de salud<span class="text-error"> *</span></label>
+										<input id="centroFijo" type="text" class="input h-10 w-full rounded-xl" data-centro-fijo readonly />
+										<p class="text-base-content/55 text-sm">Se toma automáticamente del usuario de la sesión.</p>
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="direccion" class="font-medium text-sm">Dirección</label>
+										<input id="direccion" name="direccion" type="text" class="input h-10 w-full rounded-xl" placeholder="Dirección de residencia" />
+									</div>
+
+									<label for="crearCuenta" class="flex items-start gap-3 rounded-xl bg-base-200/60 p-4 sm:col-span-2 xl:col-span-3">
+										<input id="crearCuenta" name="crearCuenta" type="checkbox" class="checkbox checkbox-primary mt-0.5" checked />
+										<span class="min-w-0">
+											<span class="block font-medium text-sm">Crear cuenta de acceso del usuario</span>
+											<span class="mt-0.5 block text-base-content/60 text-sm">Si se activa, el correo es obligatorio. Se genera un usuario y la contraseña temporal “demo”.</span>
+										</span>
+									</label>
+								</div>
+
+								<div class="flex flex-wrap gap-2">
+									<button type="submit" class="btn btn-primary min-h-11 rounded-xl font-medium text-base">Registrar usuario</button>
+									<button type="reset" class="btn btn-outline min-h-11 rounded-xl font-medium text-base">Limpiar formulario</button>
+								</div>
+							</form>
+						</div>
+					</section>
+				</div>
+			</main>
+		</div>
+
+		<div hidden data-cedulas-registradas>
+			<span data-cedula="V-10234567"></span>
+			<span data-cedula="V-14567890"></span>
+			<span data-cedula="V-8765432"></span>
+			<span data-cedula="V-19345678"></span>
+			<span data-cedula="V-12345678"></span>
+			<span data-cedula="V-20123456"></span>
+			<span data-cedula="V-9876543"></span>
+			<span data-cedula="V-21456789"></span>
+			<span data-cedula="V-11223344"></span>
+			<span data-cedula="V-55667788"></span>
+		</div>
+
+		<div hidden data-centro-actual data-centro-id="c1" data-nombre="Centro de Vacunación Libertador" data-estado="Distrito Capital" data-municipio="Libertador" data-region="Capital" data-direccion="Av. Sucre, Caracas" data-telefono="0212-5550101"></div>
+	</body>
+</html>

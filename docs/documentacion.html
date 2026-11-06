@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Documentación técnica · Salud Vacunas</title>
+		<style>
+			@page {
+				size: A4;
+				margin: 16mm 15mm 18mm;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html {
+				font-size: 10.5pt;
+			}
+
+			body {
+				margin: 0;
+				color: #243447;
+				font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+				line-height: 1.55;
+				-webkit-print-color-adjust: exact;
+				print-color-adjust: exact;
+			}
+
+			h1,
+			h2,
+			h3,
+			h4 {
+				color: #0b2a4a;
+				line-height: 1.2;
+				margin: 0;
+			}
+
+			h2 {
+				font-size: 21pt;
+				margin: 0 0 8pt;
+				padding: 0 0 7pt 10pt;
+				border-left: 5pt solid #0066cc;
+				border-bottom: 1px solid #dbe8f5;
+			}
+
+			h3 {
+				font-size: 13.5pt;
+				margin: 16pt 0 6pt;
+			}
+
+			h4 {
+				font-size: 11.5pt;
+				margin: 12pt 0 4pt;
+			}
+
+			p {
+				margin: 0 0 7pt;
+			}
+
+			ul,
+			ol {
+				margin: 0 0 8pt 0;
+				padding-left: 17pt;
+			}
+
+			li {
+				margin: 0 0 3pt;
+			}
+
+			code {
+				font-family: Consolas, "Courier New", monospace;
+				font-size: 0.9em;
+				background: #eef5fc;
+				color: #0b4f8a;
+				padding: 1pt 3pt;
+				border-radius: 3pt;
+			}
+
+			pre {
+				margin: 7pt 0 10pt;
+				padding: 9pt 11pt;
+				background: #0f1b2d;
+				color: #e7eef8;
+				border-radius: 6pt;
+				font-family: Consolas, "Courier New", monospace;
+				font-size: 8.3pt;
+				line-height: 1.45;
+				white-space: pre-wrap;
+				word-break: break-word;
+				break-inside: avoid;
+			}
+
+			pre code {
+				background: transparent;
+				color: inherit;
+				padding: 0;
+				font-size: inherit;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 7pt 0 11pt;
+				font-size: 8.9pt;
+				break-inside: avoid;
+			}
+
+			th {
+				background: #0066cc;
+				color: #ffffff;
+				text-align: left;
+				padding: 5pt 6pt;
+				font-weight: 600;
+			}
+
+			td {
+				border-bottom: 1px solid #dbe8f5;
+				padding: 5pt 6pt;
+				vertical-align: top;
+			}
+
+			tr:nth-child(even) td {
+				background: #f6faff;
+			}
+
+			.note,
+			.warning,
+			.tip {
+				padding: 8pt 10pt;
+				border-radius: 6pt;
+				margin: 8pt 0 11pt;
+				break-inside: avoid;
+			}
+
+			.note {
+				background: #eaf4ff;
+				border-left: 4pt solid #0066cc;
+			}
+
+			.warning {
+				background: #fff4e8;
+				border-left: 4pt solid #b45309;
+			}
+
+			.tip {
+				background: #eaf7ee;
+				border-left: 4pt solid #2e7d32;
+			}
+
+			.cover {
+				position: relative;
+				min-height: 255mm;
+				margin: -16mm -15mm 0;
+				padding: 30mm 22mm;
+				background: linear-gradient(145deg, #0057b8 0%, #0b7ad9 55%, #38a3f1 100%);
+				color: #ffffff;
+				overflow: hidden;
+				break-after: page;
+			}
+
+			.cover::after {
+				content: "";
+				position: absolute;
+				right: -45mm;
+				bottom: -45mm;
+				width: 150mm;
+				height: 150mm;
+				border-radius: 50%;
+				background: rgba(255, 255, 255, 0.09);
+			}
+
+			.cover::before {
+				content: "";
+				position: absolute;
+				left: -35mm;
+				top: 105mm;
+				width: 105mm;
+				height: 105mm;
+				border-radius: 50%;
+				background: rgba(255, 255, 255, 0.07);
+			}
+
+			.cover-badge {
+				display: inline-block;
+				padding: 5pt 10pt;
+				border: 1px solid rgba(255, 255, 255, 0.45);
+				border-radius: 20pt;
+				font-size: 8.5pt;
+				letter-spacing: 0.8pt;
+				text-transform: uppercase;
+				margin-bottom: 16pt;
+			}
+
+			.cover h1 {
+				color: #ffffff;
+				font-size: 43pt;
+				letter-spacing: -1.5pt;
+				margin-bottom: 8pt;
+			}
+
+			.cover-sub {
+				font-size: 16pt;
+				max-width: 155mm;
+				color: #e3f2ff;
+				margin-bottom: 28pt;
+			}
+
+			.cover-meta {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 7pt 12pt;
+				max-width: 155mm;
+				font-size: 9.5pt;
+			}
+
+			.cover-meta div {
+				padding: 8pt 10pt;
+				border: 1px solid rgba(255, 255, 255, 0.25);
+				border-radius: 6pt;
+				background: rgba(0, 0, 0, 0.08);
+			}
+
+			.cover-meta strong {
+				display: block;
+				color: #cfe8ff;
+				font-size: 7.5pt;
+				text-transform: uppercase;
+				letter-spacing: 0.7pt;
+				margin-bottom: 2pt;
+			}
+
+			.cover-meta span {
+				color: #ffffff;
+			}
+
+			.toc {
+				break-after: page;
+			}
+
+			.toc ol {
+				padding-left: 0;
+				list-style: none;
+				counter-reset: toc;
+			}
+
+			.toc li {
+				counter-increment: toc;
+				display: flex;
+				gap: 8pt;
+				padding: 5pt 0;
+				border-bottom: 1px dotted #cfdeee;
+				font-size: 10pt;
+			}
+
+			.toc li::before {
+				content: counter(toc, decimal-leading-zero);
+				color: #0066cc;
+				font-weight: 700;
+				min-width: 18pt;
+			}
+
+			.section {
+				break-before: page;
+			}
+
+			.kicker {
+				display: block;
+				color: #0066cc;
+				font-size: 8pt;
+				font-weight: 700;
+				letter-spacing: 1.2pt;
+				text-transform: uppercase;
+				margin-bottom: 4pt;
+			}
+
+			.lead {
+				font-size: 11.5pt;
+				color: #38536f;
+				margin-bottom: 12pt;
+			}
+
+			.flow {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 5pt;
+				margin: 10pt 0 13pt;
+			}
+
+			.flow-box {
+				padding: 7pt 8pt;
+				border: 1px solid #b9d4ee;
+				border-radius: 5pt;
+				background: #f3f9ff;
+				font-size: 8.5pt;
+				font-weight: 600;
+				color: #0b2a4a;
+			}
+
+			.flow-arrow {
+				color: #0066cc;
+				font-weight: 700;
+			}
+
+			.grid-2 {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 9pt;
+				margin: 8pt 0 11pt;
+			}
+
+			.card {
+				border: 1px solid #dbe8f5;
+				border-radius: 6pt;
+				padding: 8pt 10pt;
+				background: #fbfdff;
+				break-inside: avoid;
+			}
+
+			.card h4 {
+				margin-top: 0;
+				color: #0066cc;
+			}
+
+			.small {
+				font-size: 8.5pt;
+				color: #5b7188;
+			}
+
+			.tag {
+				display: inline-block;
+				padding: 1pt 5pt;
+				border-radius: 10pt;
+				background: #eaf4ff;
+				color: #0066cc;
+				font-size: 7.8pt;
+				font-weight: 600;
+			}
+
+			.checklist li {
+				margin-bottom: 4pt;
+			}
+
+			.no-break {
+				break-inside: avoid;
+			}
+
+			.footer-note {
+				margin-top: 18pt;
+				padding-top: 7pt;
+				border-top: 1px solid #dbe8f5;
+				font-size: 8pt;
+				color: #6b8299;
+			}
+
+			@media print {
+				a {
+					color: inherit;
+					text-decoration: none;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<section class="cover">
+			<div class="cover-badge">Documentación técnica</div>
+			<h1>Salud Vacunas</h1>
+			<p class="cover-sub">Cómo funcionan los datos del proyecto, la carpeta <code>src</code> y la modificación del código.</p>
+			<div class="cover-meta">
+				<div><strong>Proyecto</strong><span>Pro2 · Sistema de vacunación</span></div>
+				<div><strong>Stack</strong><span>HTML, CSS, JavaScript nativo, Tailwind CSS y daisyUI</span></div>
+				<div><strong>Alcance</strong><span>Frontend estático, datos de demostración y sesión del navegador</span></div>
+				<div><strong>Actualizado</strong><span>5 de noviembre de 2026</span></div>
+			</div>
+		</section>
+
+		<section class="toc">
+			<span class="kicker">Contenido</span>
+			<h2>Índice</h2>
+			<ol>
+				<li>Visión general del proyecto</li>
+				<li>Estructura de carpetas y archivos</li>
+				<li>Cómo se carga y se inicializa una página</li>
+				<li>El sistema de datos con atributos <code>data-*</code></li>
+				<li>La carpeta <code>src</code>: JavaScript y CSS</li>
+				<li>Cómo modificar apartados del código</li>
+				<li>Sesión, persistencia y modelo de datos</li>
+				<li>Relación con <code>esquema.sql</code></li>
+				<li>Errores frecuentes y lista de verificación</li>
+				<li>Referencia rápida</li>
+			</ol>
+		</section>
+
+		<section class="section">
+			<span class="kicker">Sección 01</span>
+			<h2>Visión general del proyecto</h2>
+			<p class="lead">Salud Vacunas es una aplicación web estática con tres perfiles. No usa un framework de interfaz ni un servidor: cada vista es una página HTML independiente que carga JavaScript clásico y un CSS compilado.</p>
+
+			<h3>Qué hace la aplicación</h3>
+			<ul>
+				<li><strong>Perfil 1 · Centro de salud:</strong> registra usuarios y vacunaciones, con peso, altura, vacuna, lote y vencimiento.</li>
+				<li><strong>Perfil 2 · Sub-región:</strong> consulta el historial de certificados médicos y permite registrar nuevos certificados.</li>
+				<li><strong>Perfil 3 · Master:</strong> consulta la red completa: historial de vacunaciones, certificados, centros, perfiles y avisos.</li>
+				<li><strong>Páginas públicas:</strong> inicio de sesión de demostración, recuperación de contraseña y verificación de certificados.</li>
+			</ul>
+
+			<h3>Cómo se abre</h3>
+			<p>El punto de entrada es <code>index.html</code>. Se puede abrir directamente con doble clic; no hace falta instalar un servidor. La aplicación está pensada para funcionar con <code>file://</code>, por eso no usa módulos ES ni importaciones entre archivos JavaScript.</p>
+
+			<div class="note"><strong>Importante:</strong> los datos que se crean mientras se navega no se guardan en una base de datos. Se guardan en la sesión del navegador y se pierden al cerrar la pestaña o el navegador. La base de datos solo está definida en <code>esquema.sql</code>; todavía no está conectada a la interfaz.</div>
+
+			<h3>Qué significa que sea estática</h3>
+			<ul>
+				<li>No hay <code>fetch</code> a una API ni endpoints de backend.</li>
+				<li>Los datos de demostración están escritos en bloques ocultos dentro del HTML.</li>
+				<li>Los formularios leen y escriben en el DOM y en la sesión del navegador.</li>
+				<li>El CSS se compila con Tailwind CSS y daisyUI mediante npm.</li>
+			</ul>
+		</section>
+
+		<section class="section">
+			<span class="kicker">Sección 02</span>
+			<h2>Estructura de carpetas y archivos</h2>
+			<p class="lead">Cada carpeta agrupa una responsabilidad concreta. Las páginas de los perfiles están separadas por perfil para que cada una sea autónoma y fácil de abrir directamente.</p>
+
+			<pre><code>Pro2/
+├─ index.html
+├─ recuperar-contrasena.html
+├─ verificar.html
+├─ assets/
+│  ├─ css/estilos.css
+│  ├─ fuentes/
+│  ├─ favicon.svg
+│  └─ afiche-certificado-medico.svg
+├─ src/
+│  ├─ css/estilos-fuente.css
+│  └─ js/
+│     ├─ nucleo.js
+│     ├─ datos.js
+│     ├─ comun.js
+│     ├─ publico.js
+│     ├─ historial.js
+│     ├─ consulta.js
+│     ├─ certificados.js
+│     ├─ centro.js
+│     ├─ avisos.js
+│     └─ app.js
+├─ master/
+│  ├─ historial.html
+│  ├─ certificados.html
+│  ├─ centros.html
+│  ├─ consulta.html
+│  └─ avisos.html
+├─ subregion/
+│  ├─ certificados-historial.html
+│  └─ certificados.html
+├─ centro/
+│  ├─ usuarios/registrar.html
+│  └─ vacunas/registrar.html
+├─ esquema.sql
+├─ INSTRUCCIONES.md
+├─ README.md
+├─ package.json
+└─ node_modules/</code></pre>
+
+			<table>
+				<thead>
+					<tr><th>Carpeta o archivo</th><th>Para qué sirve</th><th>Qué se modifica allí</th></tr>
+				</thead>
+				<tbody>
+					<tr><td><code>index.html</code></td><td>Inicio de sesión de demostración y accesos a los tres perfiles.</td><td>Textos, accesos, estructura de la portada.</td></tr>
+					<tr><td><code>recuperar-contrasena.html</code></td><td>Formulario visual de recuperación de contraseña.</td><td>Campos y mensajes del formulario.</td></tr>
+					<tr><td><code>verificar.html</code></td><td>Verificación pública de certificados por código.</td><td>Formulario de búsqueda y presentación del resultado.</td></tr>
+					<tr><td><code>master/</code></td><td>Vistas del Perfil 3: historial, certificados, centros, consulta y avisos.</td><td>HTML de cada vista y sus datos ocultos.</td></tr>
+					<tr><td><code>subregion/</code></td><td>Vistas del Perfil 2: historial de certificados y registro de certificados.</td><td>HTML de las dos vistas y sus datos ocultos.</td></tr>
+					<tr><td><code>centro/</code></td><td>Vistas del Perfil 1: registrar usuario y registrar vacunación.</td><td>Formularios y datos del centro.</td></tr>
+					<tr><td><code>src/js/</code></td><td>Código JavaScript fuente de toda la aplicación.</td><td>Comportamiento, validaciones, lectura de datos y renderizado.</td></tr>
+					<tr><td><code>src/css/estilos-fuente.css</code></td><td>Fuente del CSS: temas, componentes, iconos y estilos de impresión.</td><td>Colores, tipografía, iconos, reglas globales.</td></tr>
+					<tr><td><code>assets/css/estilos.css</code></td><td>CSS compilado que cargan las páginas.</td><td>No se edita a mano: se genera con <code>npm run css</code>.</td></tr>
+					<tr><td><code>assets/fuentes/</code></td><td>Archivos de la tipografía Inter Variable.</td><td>Solo si se cambia la tipografía.</td></tr>
+					<tr><td><code>assets/</code></td><td>Favicon, afiche descargable y recursos estáticos.</td><td>Imágenes, SVG, documentos descargables.</td></tr>
+					<tr><td><code>esquema.sql</code></td><td>Esquema PostgreSQL del modelo de datos.</td><td>Tablas, columnas, claves foráneas e índices.</td></tr>
+					<tr><td><code>INSTRUCCIONES.md</code></td><td>Especificación funcional de las vistas.</td><td>Requisitos y comportamientos esperados.</td></tr>
+					<tr><td><code>README.md</code></td><td>Guía breve de uso y estructura.</td><td>Instrucciones generales del proyecto.</td></tr>
+					<tr><td><code>package.json</code></td><td>Dependencias y comandos de compilación del CSS.</td><td>Versiones y scripts npm.</td></tr>
+					<tr><td><code>node_modules/</code></td><td>Dependencias instaladas por npm.</td><td>No se edita manualmente.</td></tr>
+				</tbody>
+			</table>
+
+			<div class="tip"><strong>Regla práctica:</strong> si el cambio es visual o de texto, empieza por el HTML de la vista. Si el cambio es de comportamiento, validación o cálculo, ve a <code>src/js/</code>. Si el cambio es de color, tipografía o icono, ve a <code>src/css/estilos-fuente.css</code> y recompila.</div>
+		</section>
+
+		<section class="section">
+			<span class="kicker">Sección 03</span>
+			<h2>Cómo se carga y se inicializa una página</h2>
+			<p class="lead">Todas las vistas cargan los scripts en un orden concreto. Ese orden es importante: cada archivo depende de funciones que han sido publicadas antes en el espacio global <code>window.Pro2</code>.</p>
+
+			<h3>Orden típico de scripts</h3>
+			<pre><code>&lt;script src="../src/js/nucleo.js"&gt;&lt;/script&gt;
+&lt;script src="../src/js/datos.js"&gt;&lt;/script&gt;
+&lt;script src="../src/js/comun.js"&gt;&lt;/script&gt;
+&lt;script src="../src/js/publico.js"&gt;&lt;/script&gt;
+&lt;script src="../src/js/certificados.js"&gt;&lt;/script&gt;
+&lt;script src="../src/js/app.js"&gt;&lt;/script&gt;</code></pre>
+
+			<table>
+				<thead><tr><th>Archivo</th><th>Qué aporta</th><th>Se necesita antes de…</th></tr></thead>
+				<tbody>
+					<tr><td><code>nucleo.js</code></td><td>Utilidades, tema, sesión, alertas y constantes.</td><td>Cualquier otro módulo.</td></tr>
+					<tr><td><code>datos.js</code></td><td>Lectores de datos: usuarios, registros, vacunas, centros y certificados.</td><td>Los módulos que consultan datos.</td></tr>
+					<tr><td><code>comun.js</code></td><td>Fichas de usuario, esquema de vacunación y HTML de certificados.</td><td>Consulta y certificados.</td></tr>
+					<tr><td><code>publico.js</code></td><td>Navegación, salida, tema, login, verificación y recuperación.</td><td><code>app.js</code>.</td></tr>
+					<tr><td><code>módulo de vista</code></td><td>Lógica propia de la vista: historial, centro, certificados, avisos, etc.</td><td><code>app.js</code>.</td></tr>
+					<tr><td><code>app.js</code></td><td>Ejecuta la navegación y el inicializador de la página.</td><td>Al final de todos.</td></tr>
+				</tbody>
+			</table>
+
+			<h3>El atributo <code>data-pagina</code></h3>
+			<p>Cada <code>&lt;body&gt;</code> declara qué vista es. Por ejemplo:</p>
+			<pre><code>&lt;body data-pagina="centro-registrar-vacunacion"&gt;</code></pre>
+			<p><code>app.js</code> usa ese valor para buscar el inicializador correcto:</p>
+			<pre><code>const paginas = {
+  login: [Pro2.iniciarLogin],
+  recuperar: [Pro2.iniciarRecuperar],
+  verificar: [Pro2.iniciarVerificar],
+  "centro-registrar-usuario": [Pro2.iniciarRegistroUsuario],
+  "centro-registrar-vacunacion": [Pro2.iniciarVacunacion],
+  "master-historial": [Pro2.iniciarHistorial],
+  "master-certificados": [Pro2.iniciarHistorialCertificados],
+  "master-centros": [Pro2.iniciarCentros],
+  "master-avisos": [Pro2.iniciarAvisos],
+  "subregion-certificados": [Pro2.iniciarCertificados],
+  "subregion-certificados-historial": [Pro2.iniciarHistorialCertificados],
+  consulta: [Pro2.iniciarConsulta]
+};
+
+document.addEventListener("DOMContentLoaded", () =&gt; {
+  Pro2.iniciarNavegacion();
+  const acciones = (paginas[document.body.dataset.pagina] ?? []).filter(Boolean);
+  acciones.forEach((accion) =&gt; accion());
+});</code></pre>
+
+			<h3>Qué ocurre al abrir una página</h3>
+			<div class="flow">
+				<div class="flow-box">HTML</div><span class="flow-arrow">→</span>
+				<div class="flow-box">Carga scripts en orden</div><span class="flow-arrow">→</span>
+				<div class="flow-box">DOMContentLoaded</div><span class="flow-arrow">→</span>
+				<div class="flow-box">data-pagina</div><span class="flow-arrow">→</span>
+				<div class="flow-box">Inicializador</div><span class="flow-arrow">→</span>
+				<div class="flow-box">DOM + datos</div>
+			</div>
+
+			<div class="warning"><strong>Error frecuente:</strong> si una página no hace nada, revisa primero que el valor de <code>data-pagina</code> coincida exactamente con una clave de <code>app.js</code>. También revisa que el script del módulo esté incluido antes de <code>app.js</code>.</div>
+		</section>
+
+		<section class="section">
+			<span class="kicker">Sección 04</span>
+			<h2>El sistema de datos con atributos <code>data-*</code></h2>
+			<p class="lead">Los atributos <code>data-*</code> son la columna vertebral del proyecto. Se usan como ganchos para JavaScript, como almacenamiento de datos de demostración y como configuración de cada página.</p>
+
+			<h3>Cómo se leen desde JavaScript</h3>
+			<p>Un atributo con guiones se convierte en una propiedad <code>dataset</code> en formato camelCase:</p>
+			<pre><code>data-usuario-id      → elemento.dataset.usuarioId
+data-dosis-esquema   → elemento.dataset.dosisEsquema
+data-consultorio     → elemento.dataset.consultorio
+data-campo-fecha     → elemento.dataset.campoFecha</code></pre>
+			<p>Los atributos se pueden seleccionar con selectores CSS:</p>
+			<pre><code>const formulario = document.querySelector("[data-form-vacunacion]");
+const campo = formulario.querySelector("[data-campo-fecha]");</code></pre>
+
+			<h3>Los tres usos principales</h3>
+			<div class="grid-2">
+				<div class="card">
+					<h4>1. Ganchos de comportamiento</h4>
+					<p>No contienen datos de negocio: sirven para encontrar elementos y conectar eventos.</p>
+					<p><span class="tag">data-form-*</span> <span class="tag">data-campo-*</span> <span class="tag">data-tabla-*</span> <span class="tag">data-stat-*</span> <span class="tag">data-salir</span> <span class="tag">data-tema</span></p>
+					<p class="small">Ejemplo: <code>[data-form-vacunacion]</code>, <code>[data-campo-vacuna]</code>, <code>[data-tabla-historial]</code>.</p>
+				</div>
+				<div class="card">
+					<h4>2. Datos de demostración</h4>
+					<p>Están dentro de contenedores ocultos y representan registros completos.</p>
+					<p><span class="tag">data-datos-usuarios</span> <span class="tag">data-datos-registros</span> <span class="tag">data-datos-vacunas</span> <span class="tag">data-datos-centros</span> <span class="tag">data-datos-certificados</span></p>
+					<p class="small">Ejemplo: un <code>&lt;article data-usuario&gt;</code> con atributos de nombre, cédula, centro y datos de contacto. El peso y la altura se leen de cada registro de dosis.</p>
+				</div>
+				<div class="card">
+					<h4>3. Configuración de página</h4>
+					<p>Indican contexto, comportamiento o alcance de la vista.</p>
+					<p><span class="tag">data-pagina</span> <span class="tag">data-inicio</span> <span class="tag">data-theme</span> <span class="tag">data-alcance</span> <span class="tag">data-placeholder</span></p>
+					<p class="small">Ejemplo: <code>data-alcance="red"</code> en la consulta del Master.</p>
+				</div>
+				<div class="card">
+					<h4>4. Estado de controles</h4>
+					<p>Algunos atributos se agregan o actualizan desde JavaScript.</p>
+					<p><span class="tag">data-tema-listo</span> <span class="tag">data-usuario-id</span> <span class="tag">data-lote</span></p>
+					<p class="small">No siempre están escritos en el HTML inicial; pueden aparecer después de una acción.</p>
+				</div>
+			</div>
+
+			<h3>Los bloques ocultos de datos</h3>
+			<p>Los datos de demostración están en elementos con el atributo <code>hidden</code>. No se ven en pantalla, pero siguen en el DOM y <code>datos.js</code> los puede leer.</p>
+			<table>
+				<thead><tr><th>Bloque</th><th>Registro</th><th>Campos principales</th><th>Lector</th></tr></thead>
+				<tbody>
+					<tr><td><code>[data-datos-usuarios]</code></td><td><code>[data-usuario]</code></td><td>id, nombre, cédula, nacimiento, sexo, región, centro, teléfono, correo, sangre, dirección, alergias, registrado por.</td><td><code>leerUsuarios()</code></td></tr>
+					<tr><td><code>[data-datos-registros]</code></td><td><code>[data-registro]</code></td><td>fecha, vacuna, tipo, procedencia, lote y vencimiento, dosis, cantidad, peso, altura, usuario, cédula, centro, aplicador, atención.</td><td><code>leerRegistros()</code></td></tr>
+					<tr><td><code>[data-datos-vacunas]</code></td><td><code>[data-vacuna]</code> + <code>[data-lote]</code></td><td>id, nombre, tipo, procedencia, laboratorio, descripción, esquema, refuerzo, cobertura y lotes.</td><td><code>leerVacunas()</code></td></tr>
+					<tr><td><code>[data-datos-centros]</code></td><td><code>[data-centro]</code></td><td>id, nombre, tipo de centro, autorización, estado, municipio, parroquia, dirección, teléfono, región.</td><td><code>leerCentros()</code></td></tr>
+					<tr><td><code>[data-datos-certificados]</code></td><td><code>[data-certificado]</code> + <code>[data-examen-tipo]</code> + <code>[data-documento]</code> + <code>[data-dosis-respaldo]</code></td><td>código, usuario, estado, emisión, vigencia, examen y centro emisor, bioanalista, médico, sello, firma, exámenes con fecha/centro, documentación y dosis de respaldo.</td><td><code>leerCertificados()</code></td></tr>
+					<tr><td><code>[data-datos-personal]</code></td><td><code>[data-personal]</code></td><td>nombre, cargo, centro.</td><td>Lectura directa en <code>centro.js</code>.</td></tr>
+					<tr><td><code>[data-cedulas-registradas]</code></td><td><code>[data-cedula]</code></td><td>Cédulas ya registradas para evitar duplicados.</td><td>Lectura directa en <code>centro.js</code>.</td></tr>
+					<tr><td><code>[data-centro-actual]</code></td><td>—</td><td>Centro de la sesión: id, nombre, estado, municipio, región, dirección, teléfono.</td><td>Lectura directa en <code>centro.js</code>.</td></tr>
+				</tbody>
+			</table>
+
+			<h3>Ejemplo de usuario</h3>
+			<pre><code>&lt;article data-usuario
+  data-usuario-id="p1"
+  data-nombre="Ana Torres"
+  data-cedula="V-10234567"
+  data-nacimiento="1991-04-18"
+  data-sexo="Femenino"
+  data-region="Capital"
+  data-centro-id="c1"
+  data-centro="Centro de Vacunación Libertador"&gt;&lt;/article&gt;</code></pre>
+
+			<h3>Ejemplo de vacuna con lotes</h3>
+			<pre><code>&lt;article data-vacuna
+  data-vacuna-id="v-covid"
+  data-nombre="COVID-19"
+  data-tipo="ARNm"
+  data-procedencia="Internacional"
+  data-laboratorio="Pfizer-BioNTech"
+  data-dosis-esquema="2"
+  data-refuerzo-meses="12"
+  data-cobertura="Capital,Central,Occidente"&gt;
+  &lt;span data-lote data-codigo="COV-2601" data-vence="2026-12-31"&gt;&lt;/span&gt;
+  &lt;span data-lote data-codigo="COV-2602" data-vence="2027-03-31"&gt;&lt;/span&gt;
+&lt;/article&gt;</code></pre>
+
+			<h3>Ejemplo de certificado con exámenes</h3>
+			<pre><code>&lt;article data-certificado
+  data-codigo="CERT-2026-0002"
+  data-usuario-id="p1"
+  data-estado="Vigente"
+  data-emision="2026-02-10"
+  data-vigencia="2027-02-10"
+  data-examen-fecha="2026-02-08"
+  data-centro="Centro de Vacunación Libertador"
+  data-centro-id="c1"
+  data-centro-direccion="Av. Sucre, Caracas"
+  data-centro-telefono="0212-5550101"
+  data-centro-municipio="Libertador"
+  data-centro-estado="Distrito Capital"
+  data-usuario-nombre="Ana Torres"
+  data-usuario-cedula="V-10234567"
+  data-usuario-municipio="Libertador"
+  data-usuario-estado="Distrito Capital"&gt;
+  &lt;span data-examen-tipo
+    data-nombre="Hematología"
+    data-descripcion="Hemograma completo"
+    data-resultado="14.2"
+    data-unidad="g/dL"
+    data-referencia="12.0 - 16.0"
+    data-fecha="2026-02-08"
+    data-centro="Centro de Vacunación Libertador"&gt;&lt;/span&gt;
+  &lt;span data-documento
+    data-nombre="Informe-hematologia.pdf"
+    data-tipo="application/pdf"
+    data-tamano="245760"&gt;&lt;/span&gt;
+  &lt;span data-dosis-respaldo
+    data-vacuna="COVID-19"
+    data-dosis="Dosis 2 de 2"
+    data-fecha="2024-04-09"
+    data-lote="COV-2403"
+    data-lote-vence="2025-12-31"
+    data-centro="Centro de Vacunación Libertador"
+    data-aplicador="Dra. Elena Pérez"
+    data-cargo="Médico vacunador"&gt;&lt;/span&gt;
+&lt;/article&gt;</code></pre>
+
+			<h3>El flujo completo de los datos</h3>
+			<div class="flow">
+				<div class="flow-box">HTML oculto<br /><span class="small">data-datos-*</span></div><span class="flow-arrow">→</span>
+				<div class="flow-box">datos.js<br /><span class="small">lee y combina</span></div><span class="flow-arrow">→</span>
+				<div class="flow-box">window.Pro2<br /><span class="small">funciones y datos</span></div><span class="flow-arrow">→</span>
+				<div class="flow-box">Módulo de vista<br /><span class="small">renderiza</span></div><span class="flow-arrow">→</span>
+				<div class="flow-box">Formulario<br /><span class="small">envía</span></div><span class="flow-arrow">→</span>
+				<div class="flow-box">Sesión<br /><span class="small">sessionStorage</span></div>
+			</div>
+
+			<div class="warning"><strong>Muy importante:</strong> cada página HTML es independiente. Si una página necesita usuarios, vacunas o certificados, debe incluir su propio bloque <code>data-datos-*</code>. No existe un archivo global de datos que todas las páginas compartan. Por eso los mismos datos aparecen duplicados en varias vistas.</div>
+		</section>
+
+		<section class="section">
+			<span class="kicker">Sección 05</span>
+			<h2>La carpeta <code>src</code>: JavaScript y CSS</h2>
+			<p class="lead">La carpeta <code>src</code> contiene el código fuente. <code>src/js</code> tiene el comportamiento y <code>src/css</code> tiene la fuente de los estilos.</p>
+
+			<h3>Archivos de <code>src/js</code></h3>
+			<table>
+				<thead><tr><th>Archivo</th><th>Responsabilidad</th><th>Funciones principales</th></tr></thead>
+				<tbody>
+					<tr><td><code>nucleo.js</code></td><td>Base compartida: constantes, tema claro/oscuro, utilidades, sesión y alertas.</td><td><code>$</code>, <code>$$</code>, <code>esc</code>, <code>normalizar</code>, <code>cedulaValida</code>, <code>fechaCorta</code>, <code>calcularEdad</code>, <code>leerSesion</code>, <code>modificarSesion</code>, <code>iniciarTema</code>.</td></tr>
+					<tr><td><code>datos.js</code></td><td>Lee los datos de demostración del HTML y los combina con los datos nuevos de la sesión.</td><td><code>leerRegistros</code>, <code>leerUsuarios</code>, <code>leerVacunas</code>, <code>leerCentros</code>, <code>leerCertificados</code>.</td></tr>
+					<tr><td><code>comun.js</code></td><td>Componentes compartidos de ficha de usuario, esquema de vacunación y certificado.</td><td><code>esquemaUsuario</code>, <code>vacunasObligatoriasFaltantes</code>, <code>htmlFichaUsuario</code>, <code>htmlResumenEsquema</code>, <code>htmlCertificado</code>.</td></tr>
+					<tr><td><code>publico.js</code></td><td>Navegación general, botón de tema, salida, login de boceto, verificación y recuperación.</td><td><code>iniciarNavegacion</code>, <code>iniciarLogin</code>, <code>iniciarVerificar</code>, <code>iniciarRecuperar</code>.</td></tr>
+					<tr><td><code>historial.js</code></td><td>Historial de vacunaciones con filtros, estadísticas y tabla; gestión de centros.</td><td><code>iniciarHistorial</code>, <code>iniciarCentros</code>.</td></tr>
+					<tr><td><code>consulta.js</code></td><td>Consulta de perfil por cédula, limitada por <code>data-alcance</code>.</td><td><code>iniciarConsulta</code>.</td></tr>
+					<tr><td><code>certificados.js</code></td><td>Registro y emisión de certificados médicos; historial de certificados otorgados.</td><td><code>iniciarCertificados</code>, <code>iniciarHistorialCertificados</code>.</td></tr>
+					<tr><td><code>centro.js</code></td><td>Registro de usuarios y registro de vacunación del Perfil 1.</td><td><code>iniciarRegistroUsuario</code>, <code>iniciarVacunacion</code>.</td></tr>
+					<tr><td><code>avisos.js</code></td><td>Preparación de avisos, selección de destinatarios y enlace de correo.</td><td><code>iniciarAvisos</code>.</td></tr>
+					<tr><td><code>app.js</code></td><td>Arranque: navegación y despacho del inicializador según <code>data-pagina</code>.</td><td>Mapa <code>paginas</code> y <code>DOMContentLoaded</code>.</td></tr>
+				</tbody>
+			</table>
+
+			<h3>Cómo se publican las funciones</h3>
+			<p>Cada archivo es una IIFE (función autoejecutable) que agrega sus funciones a <code>window.Pro2</code>. Así los demás módulos las pueden usar sin importaciones:</p>
+			<pre><code>(function () {
+  "use strict";
+
+  const { $, esc } = window.Pro2;
+
+  function hacerAlgo() {
+    // ...
+  }
+
+  Object.assign(window.Pro2, {
+    hacerAlgo
+  });
+})();</code></pre>
+
+			<h3>El archivo CSS fuente</h3>
+			<p><code>src/css/estilos-fuente.css</code> es la fuente que se compila. Contiene:</p>
+			<ul>
+				<li>La importación de Tailwind CSS y el plugin de daisyUI.</li>
+				<li>Los temas <code>salud</code> (claro) y <code>saluddark</code> (oscuro).</li>
+				<li>La tipografía Inter Variable.</li>
+				<li>Los iconos SVG convertidos en máscaras CSS (<code>.icono-*</code>).</li>
+				<li>Estilos base, de componentes, de la barra superior y de impresión.</li>
+				<li>La regla que mantiene el certificado con fondo claro en modo oscuro.</li>
+			</ul>
+			<p>El resultado compilado se guarda en <code>assets/css/estilos.css</code>. Las páginas cargan ese archivo compilado, no el fuente.</p>
+
+			<div class="note"><strong>Comandos:</strong> desde la raíz del proyecto, <code>npm run css</code> compila una vez y <code>npm run css:watch</code> queda observando cambios. Si agregas clases nuevas de Tailwind en HTML o JavaScript, debes recompilar.</div>
+		</section>
+
+		<section class="section">
+			<span class="kicker">Sección 06</span>
+			<h2>Cómo modificar apartados del código</h2>
+			<p class="lead">Esta sección reúne los cambios más frecuentes y el orden recomendado para hacerlos sin romper la lectura de datos ni la inicialización de la vista.</p>
+
+			<h3>6.1 Cambiar un texto o una etiqueta</h3>
+			<ol>
+				<li>Busca el texto en el HTML de la vista.</li>
+				<li>Si el texto se genera desde JavaScript, edita la plantilla correspondiente en <code>src/js/</code>.</li>
+				<li>Si el texto está en una alerta o mensaje, revisa el módulo que llama a <code>mostrarAlerta()</code> o <code>htmlAlerta()</code>.</li>
+			</ol>
+			<div class="note">Los textos visibles suelen estar en HTML; los mensajes dinámicos están en JavaScript.</div>
+
+			<h3>6.2 Agregar un campo a un formulario</h3>
+			<p>Ejemplo real: peso y altura en el formulario de vacunación.</p>
+			<ol>
+				<li><strong>HTML:</strong> agrega el campo con un <code>id</code>, un <code>name</code> y, si el JavaScript lo necesita, un atributo <code>data-*</code>.</li>
+				<li><strong>JavaScript:</strong> obtén el elemento con <code>$("[data-campo-peso]")</code> y léelo en el <code>submit</code>.</li>
+				<li><strong>Validación:</strong> agrega las reglas antes de guardar.</li>
+				<li><strong>Persistencia:</strong> guarda el valor en el objeto o en la sesión con <code>modificarSesion()</code>.</li>
+				<li><strong>Lectura:</strong> si el dato debe recuperarse en otra página, agrégalo al lector de <code>datos.js</code>.</li>
+				<li><strong>Visualización:</strong> agrega el dato a la ficha, tabla o tarjeta correspondiente.</li>
+				<li><strong>Estilos:</strong> si usaste clases nuevas de Tailwind, ejecuta <code>npm run css</code>.</li>
+			</ol>
+			<pre><code>&lt;!-- HTML --&gt;
+&lt;div class="flex flex-col gap-1.5"&gt;
+  &lt;label for="vacunacionPeso"&gt;Peso (kg)&lt;/label&gt;
+  &lt;input id="vacunacionPeso" type="number" data-campo-peso /&gt;
+&lt;/div&gt;
+
+// JavaScript
+const campoPeso = $("[data-campo-peso]", contenedor);
+const peso = campoPeso?.value.trim() ?? "";
+
+if (!peso || Number(peso) &lt;= 0 || Number(peso) &gt; 500) {
+  errores.push("El peso es obligatorio y debe estar entre 1 y 500 kg.");
+}</code></pre>
+
+			<h3>6.3 Agregar o modificar datos de demostración</h3>
+			<ol>
+				<li>Localiza el bloque oculto correcto: <code>[data-datos-usuarios]</code>, <code>[data-datos-vacunas]</code>, etc.</li>
+				<li>Agrega un registro con un <code>id</code> único y todos los atributos que espera el lector.</li>
+				<li>Si agregas un campo nuevo, actualiza el mapeo de <code>datos.js</code>.</li>
+				<li>Duplica el bloque en todas las páginas que deban ver ese dato.</li>
+				<li>Verifica que los nombres de atributos estén en kebab-case: <code>data-dosis-esquema</code>, no <code>data-dosisEsquema</code>.</li>
+			</ol>
+			<pre><code>&lt;article data-vacuna
+  data-vacuna-id="v-varicela"
+  data-nombre="Varicela"
+  data-tipo="Virus atenuado"
+  data-procedencia="Internacional"
+  data-dosis-esquema="2"
+  data-cobertura="Capital,Central"&gt;
+  &lt;span data-lote data-codigo="VAR-2601" data-vence="2027-12-31"&gt;&lt;/span&gt;
+&lt;/article&gt;</code></pre>
+
+			<h3>6.4 Crear una vista nueva</h3>
+			<ol>
+				<li>Crea un archivo HTML dentro de la carpeta del perfil.</li>
+				<li>Copia la cabecera y la navegación de una vista existente del mismo perfil.</li>
+				<li>Incluye los scripts en el orden correcto, terminando con <code>app.js</code>.</li>
+				<li>Asigna un valor único a <code>&lt;body data-pagina="mi-vista"&gt;</code>.</li>
+				<li>Agrega el inicializador en el mapa de <code>app.js</code>.</li>
+				<li>Agrega el enlace en la navegación de las vistas del perfil.</li>
+				<li>Incluye los bloques <code>data-datos-*</code> que necesite la vista.</li>
+				<li>Actualiza <code>index.html</code>, <code>README.md</code> e <code>INSTRUCCIONES.md</code> si corresponde.</li>
+			</ol>
+			<pre><code>// app.js
+const paginas = {
+  // ...
+  "master-mi-vista": [Pro2.iniciarMiVista]
+};</code></pre>
+
+			<h3>6.5 Crear un módulo JavaScript nuevo</h3>
+			<pre><code>(function () {
+  "use strict";
+
+  const { $, $$, esc, mostrarAlerta } = window.Pro2;
+
+  function iniciarMiVista() {
+    const contenedor = $("[data-mi-vista]");
+    if (!contenedor) return;
+    // lógica de la vista
+  }
+
+  Object.assign(window.Pro2, {
+    iniciarMiVista
+  });
+})();</code></pre>
+			<p>Después incluye el script antes de <code>app.js</code> y registra el inicializador en el mapa de páginas.</p>
+
+			<h3>6.6 Agregar un filtro al historial</h3>
+			<ol>
+				<li>Agrega el control con <code>data-filtro="nombreDelFiltro"</code> o <code>data-filtro-multiple="campo"</code>.</li>
+				<li>Agrega la propiedad al objeto <code>filtros</code> de <code>historial.js</code>.</li>
+				<li>Inclúyela en <code>coincide()</code> para que afecte la tabla.</li>
+				<li>Inclúyela en el botón “Limpiar filtros”.</li>
+				<li>Si es selección múltiple, usa <code>opcionesMultiples()</code>.</li>
+			</ol>
+
+			<h3>6.7 Cambiar colores, tema o tipografía</h3>
+			<ol>
+				<li>Edita <code>src/css/estilos-fuente.css</code>.</li>
+				<li>Para el tema claro, modifica el bloque <code>name: "salud"</code>.</li>
+				<li>Para el tema oscuro, modifica <code>name: "saluddark"</code>.</li>
+				<li>Ejecuta <code>npm run css</code>.</li>
+				<li>Recarga la página con <kbd>Ctrl</kbd> + <kbd>F5</kbd>.</li>
+			</ol>
+			<pre><code>@plugin "daisyui/theme" {
+  name: "salud";
+  default: true;
+  color-scheme: light;
+  --color-primary: #0066cc;
+  --color-base-100: #ffffff;
+  --color-base-content: #2c3e50;
+}</code></pre>
+
+			<h3>6.8 Agregar un icono</h3>
+			<p>Los iconos son SVG en base64 usados como máscaras CSS. Se declaran en <code>src/css/estilos-fuente.css</code>:</p>
+			<pre><code>.icono-nuevo {
+  --icono-url: url("data:image/svg+xml;base64,...");
+}</code></pre>
+			<p>Luego se usa en HTML:</p>
+			<pre><code>&lt;span class="icono icono-nuevo size-5" aria-hidden="true"&gt;&lt;/span&gt;</code></pre>
+
+			<h3>6.9 Agregar un archivo descargable</h3>
+			<ol>
+				<li>Coloca el archivo en <code>assets/</code>.</li>
+				<li>Enlázalo con una ruta relativa correcta.</li>
+				<li>Usa el atributo <code>download</code> si debe descargarse en lugar de abrirse.</li>
+			</ol>
+			<pre><code>&lt;a href="../assets/afiche-certificado-medico.svg"
+   download="afiche-certificado-medico.svg"&gt;
+  Descargar afiche
+&lt;/a&gt;</code></pre>
+		</section>
+
+		<section class="section">
+			<span class="kicker">Sección 07</span>
+			<h2>Sesión, persistencia y modelo de datos</h2>
+			<p class="lead">La aplicación no tiene backend. Los cambios de la sesión se guardan en <code>sessionStorage</code> y, como respaldo para <code>file://</code>, en <code>window.name</code>.</p>
+
+			<h3>Funciones de sesión</h3>
+			<pre><code>leerSesion()       // devuelve el objeto de sesión o null
+guardarSesion(obj) // guarda el objeto completo
+modificarSesion(fn)// lee, modifica con fn y vuelve a guardar
+cerrarSesion()     // elimina la sesión</code></pre>
+
+			<h3>Claves de sesión</h3>
+			<table>
+				<thead><tr><th>Clave</th><th>Contenido</th><th>Dónde se usa</th></tr></thead>
+				<tbody>
+					<tr><td><code>usuariosNuevos</code></td><td>Usuarios creados desde el formulario.</td><td><code>centro.js</code> y <code>datos.js</code>.</td></tr>
+					<tr><td><code>usuariosMedidas</code></td><td>Medidas heredadas de versiones anteriores. Las medidas nuevas se guardan dentro de cada dosis, en <code>registrosNuevos</code>.</td><td><code>datos.js</code>.</td></tr>
+					<tr><td><code>registrosNuevos</code></td><td>Vacunaciones aplicadas.</td><td><code>centro.js</code> y <code>datos.js</code>.</td></tr>
+					<tr><td><code>centrosNuevos</code></td><td>Centros creados desde el Master.</td><td><code>historial.js</code> y <code>datos.js</code>.</td></tr>
+					<tr><td><code>centrosEliminados</code></td><td>Ids de centros eliminados.</td><td><code>historial.js</code> y <code>datos.js</code>.</td></tr>
+					<tr><td><code>certificadosNuevos</code></td><td>Certificados emitidos.</td><td><code>certificados.js</code> y <code>datos.js</code>.</td></tr>
+				</tbody>
+			</table>
+
+			<h3>Cómo se combinan los datos</h3>
+			<pre><code>// datos.js: ejemplo simplificado
+const base = $$("[data-datos-usuarios] [data-usuario]").map(...);
+const sesion = leerSesion();
+const nuevos = sesion?.usuariosNuevos ?? [];
+const medidas = sesion?.usuariosMedidas ?? {};
+
+const combinar = (usuario) =&gt; ({
+  ...usuario,
+  ...(medidas[usuario.id] ?? {})
+});
+
+return base.map(combinar).concat(nuevos.map(combinar));</code></pre>
+			<p>El resultado es siempre una lista combinada: primero los datos de demostración y luego los datos nuevos de la sesión. El peso y la altura de cada aplicación viajan dentro del registro de la dosis.</p>
+
+			<div class="note"><strong>El tema</strong> se guarda aparte en <code>localStorage</code> con la clave <code>pro2-tema</code>, porque debe conservarse entre páginas y visitas. Los datos de negocio usan <code>sessionStorage</code>.</div>
+
+			<h3>Qué se pierde y qué se conserva</h3>
+			<ul>
+				<li>Al cambiar de página dentro de la misma pestaña, la sesión se conserva.</li>
+				<li>Al cerrar la pestaña o el navegador, la sesión se pierde.</li>
+				<li>El tema claro/oscuro se conserva en <code>localStorage</code>.</li>
+				<li>Los datos de demostración siempre vuelven al abrir de nuevo.</li>
+			</ul>
+		</section>
+
+		<section class="section">
+			<span class="kicker">Sección 08</span>
+			<h2>Relación con <code>esquema.sql</code></h2>
+			<p class="lead"><code>esquema.sql</code> es el esquema relacional del sistema, pensado para PostgreSQL. No está conectado a la interfaz: es la definición de la base de datos que se usaría en una versión con backend.</p>
+
+			<table>
+				<thead><tr><th>Entidad</th><th>Columnas clave</th><th>Relaciones</th></tr></thead>
+				<tbody>
+					<tr><td><code>centros</code></td><td><code>id</code>, <code>name</code>, <code>tipo_centro</code>, <code>autorizado</code>, estado, municipio, parroquia, dirección, teléfono</td><td>La subregión es un centro con <code>tipo_centro = 1</code>. Cada persona y cada dosis se vinculan al centro donde se atienden.</td></tr>
+					<tr><td><code>personas</code></td><td><code>id</code>, <code>primer_nombre</code>, <code>segundo_nombre</code>, <code>primer_apellido</code>, <code>segundo_apellido</code>, cédula, nacimiento, sexo, teléfono, correo, región, dirección, tipo_sangre, alergias, centro_id, registrado_por</td><td>Pertenece a un centro y, a través de él, a una subregión.</td></tr>
+					<tr><td><code>vacunas</code></td><td><code>id</code>, nombre, tipo, procedencia, laboratorio, descripción, refuerzo_meses, obligatoria, dosis_obligatorias, lotes</td><td>Catálogo de vacunas. <code>dosis.vacuna_id</code> referencia la vacuna aplicada; <code>lotes</code> guarda los lotes disponibles en el catálogo.</td></tr>
+					<tr><td><code>dosis</code></td><td><code>id</code>, persona_id, centro_id, vacuna_id, vacuna, tipo_vacuna, procedencia, lote, lote_vence, cantidad, peso, altura, dosis, fecha, aplicador, cargo_aplicador, atención</td><td>Registra cada vacunación aplicada a una persona en un centro. <code>peso</code> y <code>altura</code> son las medidas tomadas en esa aplicación y con ellas se calcula <code>cantidad</code>. <code>vacuna_id</code> apunta al catálogo; <code>vacuna</code>, <code>tipo_vacuna</code> y <code>procedencia</code> conservan la copia del momento de la aplicación.</td></tr>
+					<tr><td><code>certificados_salud</code></td><td><code>id</code>, código, persona_id, centro_id, dosis_id, examen_id, estado, emisión, vigencia, examen_fecha, bioanalista, médico, emisor, observaciones, sello, firma, documentación</td><td>Se relaciona con <code>personas</code>, <code>centros</code>, <code>dosis</code> (dosis principal) y <code>examenes</code> (examen principal). El detalle completo de exámenes queda en <code>examenes.certificado_id</code>.</td></tr>
+					<tr><td><code>examenes</code></td><td><code>id</code>, certificado_id, centro_id, fecha, tipo, descripción, resultado, unidad, referencia</td><td>Pertenece a un certificado y a un centro; representa cada prueba realizada y guarda su fecha y resultado.</td></tr>
+				</tbody>
+			</table>
+
+			<p>La columna <code>centros.tipo_centro</code> usa cuatro valores enteros: <strong>1</strong> Subregión, <strong>2</strong> CDI, <strong>3</strong> Módulo y <strong>4</strong> Hospital. La columna <code>centros.autorizado</code> indica con <code>TRUE</code> o <code>FALSE</code> si el centro está autorizado para operar.</p>
+
+			<p>Los cuatro campos de nombre de <code>personas</code> (<code>primer_nombre</code>, <code>segundo_nombre</code>, <code>primer_apellido</code> y <code>segundo_apellido</code>) son obligatorios en todos los formularios de registro. La columna <code>registrado_por</code> guarda quién realizó el registro.</p>
+
+			<p>Todas las columnas de datos de las seis entidades son obligatorias (<code>NOT NULL</code>). La FK del examen principal es diferida (<code>DEFERRABLE INITIALLY DEFERRED</code>), porque <code>certificados_salud</code> y <code>examenes</code> se referencian mutuamente. Los centros con registros asociados no se pueden eliminar mientras esos registros no se reasignen.</p>
+
+			<p>La entidad <code>vacunas</code> define cada vacuna del catálogo: nombre, tipo, procedencia, laboratorio, descripción, meses para el refuerzo, obligatoriedad, dosis obligatorias y lotes disponibles. <code>dosis.vacuna_id</code> la referencia y los campos de texto de <code>dosis</code> conservan la copia histórica del momento de la aplicación.</p>
+
+			<p>La columna <code>certificados_salud.documentacion</code> exige un arreglo JSON con al menos un documento, y la columna <code>dosis.lote_vence</code> no puede ser anterior a la fecha de aplicación.</p>
+
+			<p>El peso y la altura se guardan en cada fila de <code>dosis</code>, no en <code>personas</code>, porque corresponden al momento de la aplicación. La cantidad aplicada se obtiene con la superficie corporal de Mosteller: <code>√(peso × altura / 3600)</code>, escalada respecto a <code>1,73 m²</code>. El aplicador escribe la cantidad de referencia y el formulario muestra la cantidad calculada antes de guardar.</p>
+
+			<p>En una versión con backend, los lectores de <code>datos.js</code> se reemplazarían por llamadas a una API y los formularios enviarían los datos al servidor. La estructura de las vistas y los atributos <code>data-*</code> podría mantenerse casi igual.</p>
+
+			<p>La interfaz estática conserva algunos atributos de demostración que no existen como columnas en <code>esquema.sql</code>: <code>data-dosis-esquema</code>, <code>data-cobertura</code> y <code>data-registrado-por-cedula</code>. Son metadatos de las vistas de ejemplo; la base de datos no los almacena.</p>
+		</section>
+
+		<section class="section">
+			<span class="kicker">Sección 09</span>
+			<h2>Errores frecuentes y lista de verificación</h2>
+			<p class="lead">Antes de dar por terminado un cambio, revisa esta lista. La mayoría de los problemas del proyecto vienen de la carga de scripts, de datos que faltan en la página o de clases de Tailwind sin compilar.</p>
+
+			<h3>Errores frecuentes</h3>
+			<table>
+				<thead><tr><th>Síntoma</th><th>Causa probable</th><th>Solución</th></tr></thead>
+				<tbody>
+					<tr><td>La página no reacciona.</td><td><code>data-pagina</code> no coincide con <code>app.js</code> o falta el script del módulo.</td><td>Revisa el valor del body y el orden de scripts.</td></tr>
+					<tr><td>No aparecen datos.</td><td>Falta el bloque <code>data-datos-*</code> en esa página.</td><td>Duplica el bloque oculto en la página.</td></tr>
+					<tr><td>Un campo nuevo no se guarda.</td><td>No se leyó en el <code>submit</code> o no se agregó al objeto/sesión.</td><td>Agrega la lectura, validación y persistencia.</td></tr>
+					<tr><td>El dato se guarda pero no se ve en otra vista.</td><td>Falta agregarlo a <code>datos.js</code> o a la función de renderizado.</td><td>Actualiza el lector y la plantilla visual.</td></tr>
+					<tr><td>Los estilos nuevos no se aplican.</td><td>No se recompiló el CSS.</td><td>Ejecuta <code>npm run css</code>.</td></tr>
+					<tr><td>Los cambios desaparecen al recargar.</td><td>Se guardaron solo en memoria y no en la sesión.</td><td>Usa <code>modificarSesion()</code>.</td></tr>
+					<tr><td>Una imagen o un enlace no carga.</td><td>Ruta relativa incorrecta.</td><td>Revisa <code>../</code> según la profundidad de la página.</td></tr>
+					<tr><td>Se ve HTML roto o texto raro.</td><td>Datos sin escapar en una plantilla.</td><td>Usa <code>esc()</code> antes de interpolar.</td></tr>
+				</tbody>
+			</table>
+
+			<h3>Lista de verificación</h3>
+			<ul class="checklist">
+				<li>El HTML tiene etiquetas <code>label</code> asociadas a sus campos.</li>
+				<li>Los <code>id</code> son únicos dentro de la página.</li>
+				<li>Los nombres de atributos <code>data-*</code> están en kebab-case.</li>
+				<li>El body tiene el <code>data-pagina</code> correcto.</li>
+				<li>El módulo de la vista está incluido antes de <code>app.js</code>.</li>
+				<li>Los bloques de datos necesarios están en esa página.</li>
+				<li>Los datos nuevos se guardan con <code>modificarSesion()</code>.</li>
+				<li>Los textos dinámicos usan <code>esc()</code>.</li>
+				<li>Se ejecutó <code>npm run css</code> si se agregaron clases.</li>
+				<li>Se probó en modo claro y oscuro.</li>
+				<li>Se probó en pantalla grande y en móvil.</li>
+				<li>No hay errores en la consola del navegador.</li>
+			</ul>
+		</section>
+
+		<section class="section">
+			<span class="kicker">Sección 10</span>
+			<h2>Referencia rápida</h2>
+
+			<h3>Archivo → responsabilidad</h3>
+			<table>
+				<thead><tr><th>Archivo o carpeta</th><th>Responsabilidad</th></tr></thead>
+				<tbody>
+					<tr><td><code>index.html</code></td><td>Entrada, login de demostración y accesos a perfiles.</td></tr>
+					<tr><td><code>verificar.html</code></td><td>Verificación pública de certificados.</td></tr>
+					<tr><td><code>master/</code></td><td>Vistas del Perfil 3.</td></tr>
+					<tr><td><code>subregion/</code></td><td>Historial y registro de certificados del Perfil 2.</td></tr>
+					<tr><td><code>centro/</code></td><td>Registro de usuarios y vacunación del Perfil 1.</td></tr>
+					<tr><td><code>src/js/nucleo.js</code></td><td>Utilidades, sesión, tema y alertas.</td></tr>
+					<tr><td><code>src/js/datos.js</code></td><td>Lectura y combinación de datos.</td></tr>
+					<tr><td><code>src/js/app.js</code></td><td>Despacho de la vista por <code>data-pagina</code>.</td></tr>
+					<tr><td><code>src/css/estilos-fuente.css</code></td><td>Fuente de estilos y temas.</td></tr>
+					<tr><td><code>assets/css/estilos.css</code></td><td>CSS compilado que usan las páginas.</td></tr>
+					<tr><td><code>esquema.sql</code></td><td>Modelo relacional PostgreSQL.</td></tr>
+				</tbody>
+			</table>
+
+			<h3>Atributos más usados</h3>
+			<table>
+				<thead><tr><th>Atributo</th><th>Uso</th></tr></thead>
+				<tbody>
+					<tr><td><code>data-pagina</code></td><td>Indica el inicializador de la vista.</td></tr>
+					<tr><td><code>data-inicio</code></td><td>Página a la que vuelve “Salir”.</td></tr>
+					<tr><td><code>data-theme</code></td><td>Tema activo: <code>salud</code> o <code>saluddark</code>.</td></tr>
+					<tr><td><code>data-form-*</code></td><td>Formulario que un módulo debe controlar.</td></tr>
+					<tr><td><code>data-campo-*</code></td><td>Campo concreto dentro de un formulario.</td></tr>
+					<tr><td><code>data-datos-*</code></td><td>Contenedor oculto de datos de demostración.</td></tr>
+					<tr><td><code>data-usuario</code>, <code>data-registro</code>, <code>data-vacuna</code>, <code>data-centro</code>, <code>data-certificado</code></td><td>Registros de datos.</td></tr>
+					<tr><td><code>data-filtro</code>, <code>data-filtro-multiple</code></td><td>Controles del historial.</td></tr>
+					<tr><td><code>data-alcance</code></td><td>Limita la consulta a la red o a la subregión.</td></tr>
+					<tr><td><code>data-salir</code></td><td>Botón que vuelve al inicio.</td></tr>
+					<tr><td><code>data-tema</code></td><td>Botón de cambio de tema.</td></tr>
+				</tbody>
+			</table>
+
+			<h3>Comandos</h3>
+			<pre><code>npm install       # instala dependencias
+npm run css       # compila Tailwind + daisyUI una vez
+npm run css:watch # recompila al guardar cambios</code></pre>
+
+			<div class="tip"><strong>Recomendación de trabajo:</strong> antes de modificar, identifica si el cambio pertenece a HTML (estructura/texto), JS (comportamiento) o CSS (apariencia). Después revisa si el dato atraviesa <code>datos.js</code> y la sesión. Esa separación es la que mantiene el proyecto ordenado y fácil de ampliar.</div>
+
+			<p class="footer-note">Documento generado para el proyecto Pro2 · Salud Vacunas. Las rutas y nombres de archivo corresponden a la estructura actual del proyecto.</p>
+		</section>
+	</body>
+</html>

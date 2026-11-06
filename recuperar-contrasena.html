@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es" data-theme="salud">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Salud Vacunas · Recuperar contraseña</title>
+		<link rel="stylesheet" href="assets/css/estilos.css" />
+		<script src="src/js/nucleo.js"></script>
+		<script src="src/js/datos.js"></script>
+		<script src="src/js/publico.js"></script>
+		<script src="src/js/app.js"></script>
+	</head>
+	<body data-pagina="recuperar">
+		<main class="flex min-h-svh flex-col items-center justify-center bg-base-200 p-4 sm:p-6">
+			<div class="w-full max-w-md">
+				<header class="mb-6 flex flex-col items-center gap-2 text-center">
+					<span class="flex size-14 items-center justify-center rounded-box bg-primary text-primary-content">
+						<span class="icono icono-key size-[30px]" aria-hidden="true"></span>
+					</span>
+					<h1 class="font-semibold text-2xl tracking-tight">Recuperar contraseña</h1>
+					<p class="text-base-content/60 text-sm">Boceto del formulario de recuperación. Los usuarios de login se agregarán posteriormente.</p>
+				</header>
+
+				<section class="rounded-2xl bg-base-100 shadow-sm ring-1 ring-base-300/50">
+					<div class="flex flex-col gap-5 p-4 sm:p-5">
+						<div data-recuperar-alerta></div>
+						<div data-recuperar-exito hidden></div>
+
+						<form data-form-recuperar class="flex flex-col gap-4">
+							<div class="flex flex-col gap-1.5">
+								<label for="recuperarUsuario" class="font-medium text-sm">Nombre de usuario<span class="text-error"> *</span></label>
+								<input id="recuperarUsuario" name="usuario" type="text" class="input h-10 w-full rounded-xl" autocomplete="username" placeholder="Usuario" />
+							</div>
+							<div class="flex flex-col gap-1.5">
+								<label for="recuperarCorreo" class="font-medium text-sm">Correo electrónico<span class="text-error"> *</span></label>
+								<input id="recuperarCorreo" name="correo" type="email" class="input h-10 w-full rounded-xl" autocomplete="email" placeholder="nombre@correo.com" />
+							</div>
+							<button type="submit" class="btn btn-primary min-h-11 w-full rounded-xl font-medium text-base">Enviar enlace de recuperación</button>
+						</form>
+
+						<p class="text-center">
+							<a href="index.html" class="text-base-content/60 text-sm hover:text-primary hover:underline">Volver al inicio de sesión</a>
+						</p>
+					</div>
+				</section>
+			</div>
+		</main>
+	</body>
+</html>

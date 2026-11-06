@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1131" viewBox="0 0 800 1131" role="img" aria-labelledby="titulo afiche">
+	<title id="titulo">Afiche de certificado médico de Salud Vacunas</title>
+	<desc id="afiche">Afiche descargable con un certificado médico de ejemplo de la red Salud Vacunas.</desc>
+	<defs>
+		<linearGradient id="fondo" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#eaf4ff"/>
+			<stop offset="1" stop-color="#f8fbff"/>
+		</linearGradient>
+		<linearGradient id="banda" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#0057b8"/>
+			<stop offset="1" stop-color="#0b7ad9"/>
+		</linearGradient>
+		<filter id="sombra" x="-20%" y="-20%" width="140%" height="140%">
+			<feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#0b2a4a" flood-opacity=".16"/>
+		</filter>
+	</defs>
+
+	<rect width="800" height="1131" fill="url(#fondo)"/>
+	<circle cx="710" cy="120" r="150" fill="#ffffff" opacity=".10"/>
+	<circle cx="80" cy="260" r="110" fill="#ffffff" opacity=".18"/>
+	<rect width="800" height="190" fill="url(#banda)"/>
+
+	<g transform="translate(58 44)">
+		<rect width="58" height="58" rx="16" fill="#ffffff"/>
+		<rect x="25" y="12" width="8" height="34" rx="4" fill="#0066cc"/>
+		<rect x="12" y="25" width="34" height="8" rx="4" fill="#0066cc"/>
+		<text x="76" y="26" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" letter-spacing=".4">SALUD VACUNAS</text>
+		<text x="76" y="50" fill="#cfe8ff" font-family="Inter, Arial, sans-serif" font-size="14">Red nacional de vacunación</text>
+	</g>
+
+	<text x="58" y="268" fill="#0b2a4a" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="800" letter-spacing="-1">Certificado médico</text>
+	<text x="58" y="304" fill="#38536f" font-family="Inter, Arial, sans-serif" font-size="20">Tu salud, verificada y respaldada.</text>
+
+	<g filter="url(#sombra)">
+		<rect x="58" y="344" width="684" height="470" rx="26" fill="#ffffff"/>
+		<rect x="58" y="344" width="684" height="10" rx="5" fill="#2e7d32"/>
+	</g>
+
+	<g transform="translate(92 388)">
+		<rect width="44" height="44" rx="12" fill="#0066cc"/>
+		<rect x="19" y="8" width="6" height="28" rx="3" fill="#ffffff"/>
+		<rect x="8" y="19" width="28" height="6" rx="3" fill="#ffffff"/>
+		<text x="60" y="18" fill="#0b2a4a" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2">CERTIFICADO MÉDICO</text>
+		<text x="60" y="40" fill="#5b7188" font-family="Inter, Arial, sans-serif" font-size="12">Salud Vacunas · Sub-región Capital</text>
+
+		<text x="0" y="98" fill="#38536f" font-family="Inter, Arial, sans-serif" font-size="14">Este documento certifica que</text>
+		<text x="0" y="132" fill="#0b2a4a" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Ana Torres</text>
+		<text x="0" y="158" fill="#5b7188" font-family="Inter, Arial, sans-serif" font-size="14">V-10234567 · 35 años</text>
+
+		<line x1="0" y1="188" x2="616" y2="188" stroke="#dbe8f5" stroke-width="1"/>
+		<text x="0" y="220" fill="#5b7188" font-family="Inter, Arial, sans-serif" font-size="13">Código único</text>
+		<text x="0" y="244" fill="#0b2a4a" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing=".5">CERT-2026-0002</text>
+
+		<text x="220" y="220" fill="#5b7188" font-family="Inter, Arial, sans-serif" font-size="13">Emisión</text>
+		<text x="220" y="244" fill="#0b2a4a" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">10 feb 2026</text>
+
+		<text x="420" y="220" fill="#5b7188" font-family="Inter, Arial, sans-serif" font-size="13">Vigencia</text>
+		<text x="420" y="244" fill="#0b2a4a" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">10 feb 2027</text>
+
+		<g transform="translate(468 318)">
+			<circle cx="74" cy="46" r="52" fill="#e8f6ed" stroke="#2e7d32" stroke-width="2"/>
+			<circle cx="74" cy="46" r="42" fill="none" stroke="#2e7d32" stroke-width="1" stroke-dasharray="3 4"/>
+			<path d="M52 47l14 14 30-32" fill="none" stroke="#2e7d32" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+			<text x="74" y="114" text-anchor="middle" fill="#2e7d32" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700">CERTIFICADO VÁLIDO</text>
+		</g>
+
+		<line x1="0" y1="318" x2="360" y2="318" stroke="#dbe8f5" stroke-width="1"/>
+		<text x="0" y="342" fill="#5b7188" font-family="Inter, Arial, sans-serif" font-size="12">Firma digital verificada</text>
+		<text x="0" y="366" fill="#0b2a4a" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600">Dra. Elena Pérez</text>
+		<text x="0" y="386" fill="#5b7188" font-family="Inter, Arial, sans-serif" font-size="11">Médico evaluador</text>
+	</g>
+
+	<g transform="translate(58 862)">
+		<rect width="684" height="88" rx="18" fill="#ffffff"/>
+		<g transform="translate(26 22)">
+			<circle cx="22" cy="22" r="22" fill="#e8f2ff"/>
+			<path d="M14 22l6 6 11-13" fill="none" stroke="#0066cc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+			<text x="58" y="18" fill="#0b2a4a" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Verificación en línea</text>
+			<text x="58" y="40" fill="#5b7188" font-family="Inter, Arial, sans-serif" font-size="12">Consulta el código único en el portal de Salud Vacunas.</text>
+		</g>
+	</g>
+
+	<text x="58" y="1000" fill="#0b2a4a" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Descarga, imprime y comparte tu certificado.</text>
+	<text x="58" y="1030" fill="#38536f" font-family="Inter, Arial, sans-serif" font-size="14">Un documento claro, verificable y válido en toda la red nacional de vacunación.</text>
+
+	<text x="58" y="1092" fill="#6b8299" font-family="Inter, Arial, sans-serif" font-size="11">Documento de ejemplo con fines informativos y demostrativos.</text>
+</svg>

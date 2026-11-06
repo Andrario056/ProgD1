@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salud Vacunas · Cómo funciona</title>
+<style>
+	:root {
+		--ink: #12263a;
+		--muted: #5b7083;
+		--line: #d9e4ee;
+		--bg: #eef4f8;
+		--panel: #ffffff;
+		--teal: #0f766e;
+		--teal-dark: #115e59;
+		--teal-soft: #ccfbf1;
+		--blue: #1d4ed8;
+		--blue-soft: #dbeafe;
+		--violet: #6d28d9;
+		--violet-soft: #ede9fe;
+		--amber: #b45309;
+		--amber-soft: #fef3c7;
+		--rose: #be123c;
+		--rose-soft: #ffe4e6;
+		--slate: #334155;
+		--shadow: 0 12px 32px rgba(18, 38, 58, 0.07);
+	}
+
+	* { box-sizing: border-box; }
+
+	html { scroll-behavior: smooth; }
+
+	body {
+		margin: 0;
+		background: var(--bg);
+		color: var(--ink);
+		font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+		line-height: 1.58;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	/* ---------- Portada ---------- */
+	.hero {
+		background:
+			radial-gradient(circle at 88% 12%, rgba(153, 246, 228, 0.22), transparent 34%),
+			radial-gradient(circle at 6% 90%, rgba(59, 130, 246, 0.25), transparent 38%),
+			linear-gradient(135deg, #082f2e 0%, #0f5c57 52%, #0f766e 100%);
+		color: #fff;
+		padding: 54px 24px 42px;
+	}
+
+	.hero-inner { max-width: 1200px; margin: 0 auto; }
+
+	.eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 11.5px;
+		font-weight: 700;
+		letter-spacing: 0.17em;
+		text-transform: uppercase;
+		color: #99f6e4;
+	}
+
+	.eyebrow::before {
+		content: "";
+		width: 26px;
+		height: 2px;
+		background: #5eead4;
+		border-radius: 2px;
+	}
+
+	.hero h1 {
+		margin: 14px 0 10px;
+		font-size: clamp(30px, 4.4vw, 48px);
+		line-height: 1.06;
+		letter-spacing: -0.025em;
+		font-weight: 800;
+	}
+
+	.hero p {
+		margin: 0;
+		max-width: 830px;
+		font-size: 16.5px;
+		color: #d5f5f0;
+	}
+
+	.hero-chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 24px;
+	}
+
+	.hero-chips span {
+		font-size: 12px;
+		font-weight: 600;
+		padding: 6px 12px;
+		border-radius: 999px;
+		border: 1px solid rgba(204, 251, 241, 0.28);
+		background: rgba(255, 255, 255, 0.08);
+		color: #ecfdf5;
+	}
+
+	/* ---------- Navegación ---------- */
+	.toc {
+		position: sticky;
+		top: 0;
+		z-index: 20;
+		background: rgba(255, 255, 255, 0.93);
+		backdrop-filter: blur(12px);
+		border-bottom: 1px solid var(--line);
+	}
+
+	.toc-inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		gap: 4px;
+		overflow-x: auto;
+		padding: 9px 24px;
+		scrollbar-width: thin;
+	}
+
+	.toc a {
+		flex: 0 0 auto;
+		text-decoration: none;
+		color: var(--muted);
+		font-size: 12.5px;
+		font-weight: 600;
+		padding: 7px 11px;
+		border-radius: 8px;
+		white-space: nowrap;
+	}
+
+	.toc a:hover { background: var(--teal-soft); color: var(--teal-dark); }
+
+	/* ---------- Contenido ---------- */
+	main {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 30px 24px 80px;
+		display: grid;
+		gap: 26px;
+	}
+
+	.card {
+		background: var(--panel);
+		border: 1px solid var(--line);
+		border-radius: 20px;
+		padding: 28px;
+		box-shadow: var(--shadow);
+		min-width: 0;
+	}
+
+	.card h2 {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin: 0 0 6px;
+		font-size: 23px;
+		line-height: 1.25;
+		letter-spacing: -0.015em;
+	}
+
+	.card h2 .num {
+		flex: 0 0 auto;
+		display: inline-grid;
+		place-items: center;
+		width: 34px;
+		height: 34px;
+		border-radius: 10px;
+		background: var(--teal-soft);
+		color: var(--teal-dark);
+		font-size: 15px;
+		font-weight: 800;
+	}
+
+	.lead {
+		margin: 0 0 22px;
+		color: var(--muted);
+		font-size: 14.5px;
+		max-width: 880px;
+	}
+
+	.lead strong { color: var(--ink); }
+
+	h3 {
+		margin: 26px 0 10px;
+		font-size: 15px;
+		letter-spacing: 0.01em;
+		color: var(--ink);
+	}
+
+	/* ---------- Capas ---------- */
+	.layers {
+		display: flex;
+		align-items: stretch;
+		gap: 0;
+		overflow-x: auto;
+		padding: 4px 2px 10px;
+	}
+
+	.layer {
+		flex: 1 1 0;
+		min-width: 158px;
+		padding: 14px 12px 13px;
+		border-radius: 15px;
+		border: 1px solid var(--line);
+		background: #fbfdff;
+		position: relative;
+	}
+
+	.layer .tag {
+		display: inline-block;
+		font-size: 9.5px;
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		padding: 3px 7px;
+		border-radius: 999px;
+		margin-bottom: 8px;
+	}
+
+	.layer h4 { margin: 0 0 3px; font-size: 15px; }
+	.layer .sub { font-size: 11.5px; color: var(--muted); margin: 0 0 10px; }
+	.layer ul { margin: 0; padding-left: 15px; font-size: 11.5px; color: #3d5568; }
+	.layer li { margin: 3px 0; }
+	.layer code, .chip-code { font-family: "Cascadia Code", Consolas, "Courier New", monospace; font-size: 10.8px; }
+
+	.layer.p1 { border-top: 4px solid var(--blue); }
+	.layer.p1 .tag { background: var(--blue-soft); color: var(--blue); }
+	.layer.p2 { border-top: 4px solid var(--teal); }
+	.layer.p2 .tag { background: var(--teal-soft); color: var(--teal-dark); }
+	.layer.p3 { border-top: 4px solid var(--violet); }
+	.layer.p3 .tag { background: var(--violet-soft); color: var(--violet); }
+	.layer.p4 { border-top: 4px solid var(--amber); }
+	.layer.p4 .tag { background: var(--amber-soft); color: var(--amber); }
+	.layer.p5 { border-top: 4px solid var(--slate); }
+	.layer.p5 .tag { background: #e2e8f0; color: var(--slate); }
+
+	.arrow {
+		flex: 0 0 48px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 2px;
+		color: var(--teal);
+		padding: 0 2px;
+	}
+
+	.arrow b { font-size: 20px; line-height: 1; }
+	.arrow span {
+		font-size: 8.5px;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		color: var(--muted);
+		text-transform: uppercase;
+		text-align: center;
+	}
+
+	/* ---------- Notas ---------- */
+	.note {
+		border-radius: 12px;
+		padding: 13px 16px;
+		font-size: 12.8px;
+		border: 1px solid;
+		background: #f8fbfd;
+		color: #334b5e;
+	}
+
+	.note b { color: var(--ink); }
+	.note.info { background: #f0f9ff; border-color: #bae6fd; }
+	.note.ok { background: #f0fdfa; border-color: #99f6e4; }
+	.note.warn { background: #fffbeb; border-color: #fde68a; }
+	.note.rose { background: #fff1f2; border-color: #fecdd3; }
+	.note + .note { margin-top: 10px; }
+
+	/* ---------- Hub de modelos ---------- */
+	.hub { margin-top: 6px; }
+
+	.hub-top {
+		max-width: 430px;
+		margin: 0 auto;
+		text-align: center;
+		border: 1.5px solid var(--amber);
+		background: linear-gradient(180deg, #fffbeb, #fff);
+		border-radius: 14px;
+		padding: 12px 16px;
+	}
+
+	.hub-top strong { display: block; font-size: 15px; }
+	.hub-top span { font-size: 11.5px; color: var(--muted); }
+
+	.hub-arrow {
+		text-align: center;
+		color: var(--amber);
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		padding: 6px 0 3px;
+	}
+
+	.hub-models {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 10px;
+	}
+
+	.model-card {
+		border: 1px solid var(--line);
+		border-left: 4px solid var(--amber);
+		border-radius: 12px;
+		padding: 11px 13px;
+		background: #fffdf7;
+		min-width: 0;
+	}
+
+	.model-card b { display: block; font-size: 13px; }
+	.model-card .table {
+		display: inline-block;
+		font-family: "Cascadia Code", Consolas, monospace;
+		font-size: 10.5px;
+		color: var(--amber);
+		margin: 2px 0 5px;
+	}
+	.model-card p { margin: 0; font-size: 11.2px; color: var(--muted); }
+
+	.hub-support {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 10px;
+		max-width: 780px;
+		margin: 0 auto;
+	}
+
+	.support-card {
+		border: 1px dashed #c7b28a;
+		border-radius: 12px;
+		padding: 11px 14px;
+		background: #fffefb;
+	}
+
+	.support-card b { font-size: 13px; }
+	.support-card p { margin: 3px 0 0; font-size: 11.3px; color: var(--muted); }
+
+	/* ---------- Tablas ---------- */
+	.table-wrap { overflow-x: auto; margin-top: 4px; }
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 12.5px;
+		min-width: 640px;
+	}
+
+	th {
+		text-align: left;
+		font-size: 10.5px;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--muted);
+		background: #f6fafc;
+		border-bottom: 1px solid var(--line);
+		padding: 9px 12px;
+	}
+
+	td {
+		border-bottom: 1px solid #edf3f8;
+		padding: 9px 12px;
+		vertical-align: top;
+	}
+
+	tr:last-child td { border-bottom: 0; }
+	td code, th code { font-family: "Cascadia Code", Consolas, monospace; font-size: 11px; color: var(--teal-dark); }
+	td.muted { color: var(--muted); }
+
+	/* ---------- Flujos ---------- */
+	.flow {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 24px;
+		margin-top: 6px;
+	}
+
+	.step {
+		position: relative;
+		background: #f9fcfe;
+		border: 1px solid var(--line);
+		border-radius: 14px;
+		padding: 16px 13px 14px;
+		min-width: 0;
+	}
+
+	.step::after {
+		content: "→";
+		position: absolute;
+		right: -19px;
+		top: 50%;
+		transform: translateY(-50%);
+		color: var(--teal);
+		font-size: 18px;
+		font-weight: 800;
+	}
+
+	.step:last-child::after { display: none; }
+
+	.step .n {
+		display: inline-grid;
+		place-items: center;
+		width: 26px;
+		height: 26px;
+		border-radius: 50%;
+		background: var(--teal);
+		color: #fff;
+		font-weight: 800;
+		font-size: 12px;
+		margin-bottom: 8px;
+	}
+
+	.step h4 { margin: 0 0 5px; font-size: 12.8px; line-height: 1.3; }
+	.step p { margin: 0; font-size: 11.2px; color: var(--muted); }
+
+	.step .file {
+		display: inline-block;
+		margin-top: 7px;
+		font-family: "Cascadia Code", Consolas, monospace;
+		font-size: 9.8px;
+		color: var(--teal-dark);
+		background: var(--teal-soft);
+		border-radius: 5px;
+		padding: 2px 5px;
+		word-break: break-word;
+	}
+
+	.step.warn-step .n { background: var(--amber); }
+	.step.warn-step .file { background: var(--amber-soft); color: var(--amber); }
+	.step.final .n { background: var(--blue); }
+	.step.final .file { background: var(--blue-soft); color: var(--blue); }
+	.step.bad .n { background: var(--rose); }
+	.step.bad .file { background: var(--rose-soft); color: var(--rose); }
+
+	/* ---------- SVG ---------- */
+	.scroll { overflow-x: auto; padding-bottom: 6px; }
+
+	svg.diagram {
+		display: block;
+		width: 100%;
+		height: auto;
+		min-width: 980px;
+	}
+
+	svg.diagram text { font-family: "Segoe UI", system-ui, sans-serif; }
+
+	/* ER */
+	.er-box { fill: #ffffff; stroke: #c9d8e5; stroke-width: 1.4; }
+	.er-name { font-size: 14px; font-weight: 800; fill: #12263a; }
+	.er-tag { font-size: 9.5px; font-weight: 700; fill: #8095a8; letter-spacing: 0.07em; }
+	.er-divider { stroke: #dbe6ef; stroke-width: 1.2; }
+	.er-fld { font-size: 11.6px; fill: #334b5e; font-family: "Cascadia Code", Consolas, monospace; }
+	.er-key { font-size: 8.4px; font-weight: 800; letter-spacing: 0.05em; }
+	.er-key.pk { fill: #b45309; }
+	.er-key.fk { fill: #1d4ed8; }
+	.er-key.uq { fill: #6d28d9; }
+	.er-key.json { fill: #0f766e; }
+	.er-rel { stroke: #5b7083; stroke-width: 1.6; fill: none; }
+	.er-rel.dashed { stroke: #b45309; stroke-dasharray: 6 5; }
+	.er-badge { fill: #ffffff; stroke: #c9d8e5; stroke-width: 1; }
+	.er-badge-text { font-size: 10px; font-weight: 800; fill: #0f766e; letter-spacing: 0.04em; }
+	.er-badge-text.muted { fill: #b45309; }
+
+	/* Secuencia */
+	.seq-head { fill: #f8fbfd; stroke: #c9d8e5; stroke-width: 1.3; }
+	.seq-head-title { font-size: 12.2px; font-weight: 800; fill: #12263a; }
+	.seq-head-sub { font-size: 10px; fill: #6b8194; }
+	.seq-life { stroke: #c9d8e5; stroke-width: 1.3; stroke-dasharray: 5 5; }
+	.seq-msg { stroke: #0f766e; stroke-width: 1.7; fill: none; }
+	.seq-msg.ret { stroke: #64748b; stroke-dasharray: 5 4; stroke-width: 1.5; }
+	.seq-label { font-size: 11.4px; fill: #1f3b4d; font-weight: 600; }
+	.seq-label.ret { fill: #5b7083; font-weight: 500; }
+	.seq-active { fill: #ccfbf1; stroke: #0f766e; stroke-width: 1; }
+	.seq-note { font-size: 11.6px; font-weight: 700; fill: #be123c; }
+	.seq-phase { font-size: 9px; font-weight: 800; letter-spacing: 0.12em; fill: #8095a8; }
+
+	/* ---------- Estados ---------- */
+	.stateflow {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px;
+		margin-top: 6px;
+	}
+
+	.state {
+		border: 1.5px solid;
+		border-radius: 12px;
+		padding: 10px 16px;
+		min-width: 130px;
+		text-align: center;
+	}
+
+	.state b { display: block; font-size: 13px; }
+	.state span { font-size: 10.5px; color: var(--muted); }
+	.state.emision { border-color: #93c5fd; background: #eff6ff; }
+	.state.vigente { border-color: #5eead4; background: #f0fdfa; }
+	.state.vencido { border-color: #fda4af; background: #fff1f2; }
+	.state-arrow { color: var(--teal); font-size: 20px; font-weight: 800; }
+	.state-note { font-size: 11px; color: var(--muted); }
+
+	/* ---------- Reglas ---------- */
+	.rules {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 11px;
+	}
+
+	.rule {
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		padding: 13px 14px;
+		background: #fbfdff;
+	}
+
+	.rule b { display: block; font-size: 12.6px; margin-bottom: 3px; }
+	.rule p { margin: 0; font-size: 11.3px; color: var(--muted); }
+	.rule .icon { font-size: 15px; margin-right: 4px; }
+
+	/* ---------- Código ---------- */
+	pre {
+		margin: 8px 0 0;
+		background: #0f2233;
+		color: #d7e9f5;
+		border-radius: 12px;
+		padding: 16px 18px;
+		overflow-x: auto;
+		font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+		font-size: 11.6px;
+		line-height: 1.65;
+	}
+
+	pre .c { color: #7fb3c9; }
+	pre .g { color: #86efac; }
+	pre .y { color: #fde68a; }
+
+	/* ---------- Pie ---------- */
+	footer {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 24px 46px;
+		font-size: 11.5px;
+		color: var(--muted);
+		text-align: center;
+	}
+
+	/* ---------- Responsive ---------- */
+	@media (max-width: 980px) {
+		.layers { flex-direction: column; }
+		.arrow { flex: 0 0 auto; padding: 8px 0; transform: rotate(90deg); }
+		.flow { grid-template-columns: 1fr; gap: 18px; }
+		.step::after { content: "↓"; right: 50%; top: auto; bottom: -21px; transform: translateX(50%); }
+		.rules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		.hub-models { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	}
+
+	@media (max-width: 640px) {
+		.card { padding: 20px 16px; border-radius: 16px; }
+		.hero { padding: 40px 18px 32px; }
+		main { padding: 20px 14px 60px; gap: 18px; }
+		.toc-inner { padding: 8px 14px; }
+		.hub-models, .hub-support, .rules { grid-template-columns: 1fr; }
+		.stateflow { align-items: stretch; }
+		.state-arrow { transform: rotate(90deg); text-align: center; }
+	}
+
+	@media print {
+		body { background: #fff; }
+		.toc { display: none; }
+		.hero { background: #0f766e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+		.card { box-shadow: none; break-inside: avoid; }
+		.scroll { overflow: visible; }
+		svg.diagram { min-width: 0; }
+		@page { margin: 11mm; }
+	}
+</style>
+</head>
+<body>
+
+<header class="hero">
+	<div class="hero-inner">
+		<div class="eyebrow">Salud Vacunas · Arquitectura</div>
+		<h1>Cómo funciona el sistema,<br>de la pantalla a MySQL</h1>
+		<p>
+			Recorrido visual de las capas, las seis tablas, las relaciones y los flujos
+			principales: registrar una vacuna, emitir un certificado con exámenes y
+			verificarlo públicamente.
+		</p>
+		<div class="hero-chips">
+			<span>5 capas</span>
+			<span>6 tablas InnoDB</span>
+			<span>7 recursos de API</span>
+			<span>SQL parametrizado</span>
+			<span>Transacciones</span>
+			<span>Sin frameworks de interfaz</span>
+		</div>
+	</div>
+</header>
+
+<nav class="toc" aria-label="Contenido">
+	<div class="toc-inner">
+		<a href="#capas">1 · Vista general</a>
+		<a href="#models">2 · Capa models</a>
+		<a href="#er">3 · Modelo de datos</a>
+		<a href="#dosis">4 · Registrar vacunación</a>
+		<a href="#certificado">5 · Emitir certificado</a>
+		<a href="#verificar">6 · Verificar certificado</a>
+		<a href="#estados">7 · Estados</a>
+		<a href="#api">8 · API y reglas</a>
+	</div>
+</nav>
+
+<main>
+
+	<!-- ================= 1. CAPAS ================= -->
+	<section class="card" id="capas">
+		<h2><span class="num">1</span> Vista general por capas</h2>
+		<p class="lead">
+			Una petición entra por la interfaz, viaja por Express, la atiende una ruta,
+			la ruta delega en un modelo y el modelo ejecuta SQL contra MySQL. La
+			respuesta recorre el camino inverso hasta convertirse en JSON.
+		</p>
+
+		<div class="layers">
+			<div class="layer p1">
+				<span class="tag">1 · Presentación</span>
+				<h4>Navegador</h4>
+				<p class="sub">HTML + CSS + JS nativo</p>
+				<ul>
+					<li><code>index.html</code>, <code>verificar.html</code></li>
+					<li><code>centro/</code>, <code>subregion/</code>, <code>master/</code></li>
+					<li><code>src/js/*.js</code></li>
+				</ul>
+			</div>
+
+			<div class="arrow" aria-hidden="true"><b>→</b><span>HTTP / JSON</span></div>
+
+			<div class="layer p2">
+				<span class="tag">2 · Servidor</span>
+				<h4>Express</h4>
+				<p class="sub"><code>server.js</code></p>
+				<ul>
+					<li>CORS y JSON</li>
+					<li>Sirve las vistas estáticas</li>
+					<li>Monta <code>/api/*</code></li>
+				</ul>
+			</div>
+
+			<div class="arrow" aria-hidden="true"><b>→</b><span>app.use</span></div>
+
+			<div class="layer p3">
+				<span class="tag">3 · Rutas</span>
+				<h4>Controladores HTTP</h4>
+				<p class="sub"><code>routes/*.js</code></p>
+				<ul>
+					<li>Leen <code>req.params</code> y <code>req.query</code></li>
+					<li>Eligen el método del modelo</li>
+					<li>Responden <code>{ datos }</code></li>
+				</ul>
+			</div>
+
+			<div class="arrow" aria-hidden="true"><b>→</b><span>await</span></div>
+
+			<div class="layer p4">
+				<span class="tag">4 · Datos</span>
+				<h4>Modelos</h4>
+				<p class="sub"><code>models/*.js</code></p>
+				<ul>
+					<li>Validan y mapean campos</li>
+					<li>Construyen SQL seguro</li>
+					<li>Promesas y transacciones</li>
+				</ul>
+			</div>
+
+			<div class="arrow" aria-hidden="true"><b>→</b><span>pool.execute</span></div>
+
+			<div class="layer p5">
+				<span class="tag">5 · Persistencia</span>
+				<h4>MySQL 8</h4>
+				<p class="sub">base <code>salud_vacunas</code></p>
+				<ul>
+					<li>6 tablas InnoDB</li>
+					<li>Claves foráneas y CHECK</li>
+					<li>Índices por cédula, fecha y centro</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="note info" style="margin-top:16px">
+			<b>El viaje de vuelta:</b> MySQL devuelve filas → el modelo las convierte a
+			objetos camelCase → la ruta las envuelve en JSON → la interfaz las pinta.
+			Los modelos nunca escriben código HTTP y las rutas nunca escriben SQL.
+		</div>
+
+		<h3>Dos modos de uso del proyecto</h3>
+		<div class="table-wrap">
+			<table>
+				<thead>
+					<tr>
+						<th>Aspecto</th>
+						<th>Modo demostración</th>
+						<th>Modo servidor + API</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><b>Cómo se abre</b></td>
+						<td><code>index.html</code> directamente (<code>file://</code>)</td>
+						<td><code>npm start</code> y <code>http://localhost:3000</code></td>
+					</tr>
+					<tr>
+						<td><b>De dónde salen los datos</b></td>
+						<td>Bloques <code>data-*</code> del HTML y <code>sessionStorage</code></td>
+						<td>Base de datos MySQL</td>
+					</tr>
+					<tr>
+						<td><b>Lógica</b></td>
+						<td><code>src/js/</code> (núcleo, datos, vistas)</td>
+						<td><code>server.js</code> → <code>routes/</code> → <code>models/</code></td>
+					</tr>
+					<tr>
+						<td><b>Estado actual</b></td>
+						<td>Funciona sin instalar nada</td>
+						<td>API lista; las vistas actuales todavía usan datos de demostración</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="note warn" style="margin-top:14px">
+			<b>Importante:</b> la API existe y está conectada a MySQL, pero el JavaScript
+			de las vistas todavía no hace <code>fetch()</code> a <code>/api</code>. Esa es
+			la pieza que falta para pasar del boceto a la aplicación con datos reales.
+		</div>
+
+		<h3>Del HTTP al SQL en una línea</h3>
+<pre><span class="c">// POST /api/personas</span>
+routes/personas.js      router.post('/', ...)      <span class="c">// recibe req.body</span>
+  <span class="y">await</span> personas.crear(req.body)                   <span class="c">// llama al modelo</span>
+    utiles.construirInsercion(...)                   <span class="c">// mapea camelCase → columnas</span>
+    conexion.consulta(<span class="g">'INSERT INTO personas (...) VALUES (...)'</span>, valores)
+      <span class="c">// mysql2 envía los valores como parámetros (?)</span>
+<span class="c">// respuesta: 201 { datos: persona }</span></pre>
+	</section>
+
+	<!-- ================= 2. MODELS ================= -->
+	<section class="card" id="models">
+		<h2><span class="num">2</span> Dentro de la capa <code>models/</code></h2>
+		<p class="lead">
+			<code>models/index.js</code> es la puerta única: agrupa los seis modelos y la
+			conexión. Cada archivo de modelo representa una tabla. Dos módulos de apoyo
+			—<code>conexion.js</code> y <code>utiles.js</code>— evitan repetir pool,
+			mapeo, filtros y validaciones.
+		</p>
+
+		<div class="hub">
+			<div class="hub-top">
+				<strong>models/index.js</strong>
+				<span>Exporta todo lo que el resto del servidor puede usar</span>
+			</div>
+
+			<div class="hub-arrow">↓ &nbsp;require / module.exports</div>
+
+			<div class="hub-models">
+				<div class="model-card">
+					<b>centros</b>
+					<span class="table">tabla centros</span>
+					<p>Catálogo de centros, subregiones y dependencias.</p>
+				</div>
+				<div class="model-card">
+					<b>personas</b>
+					<span class="table">tabla personas</span>
+					<p>Usuarios, búsqueda por cédula y listado por centro.</p>
+				</div>
+				<div class="model-card">
+					<b>vacunas</b>
+					<span class="table">tabla vacunas</span>
+					<p>Catálogo de vacunas, obligatoriedad y lotes JSON.</p>
+				</div>
+				<div class="model-card">
+					<b>dosis</b>
+					<span class="table">tabla dosis</span>
+					<p>Aplicaciones, peso/altura, historial y estadísticas.</p>
+				</div>
+				<div class="model-card">
+					<b>certificadosSalud</b>
+					<span class="table">tabla certificados_salud</span>
+					<p>Emisión, verificación, vencimiento y transacción con exámenes.</p>
+				</div>
+				<div class="model-card">
+					<b>examenes</b>
+					<span class="table">tabla examenes</span>
+					<p>Exámenes de cada certificado; inserción individual o masiva.</p>
+				</div>
+			</div>
+
+			<div class="hub-arrow">↓ &nbsp;todos usan</div>
+
+			<div class="hub-support">
+				<div class="support-card">
+					<b>conexion.js</b>
+					<p><code>pool</code> de mysql2, <code>consulta()</code>, <code>unaFila()</code>,
+					<code>transaccion()</code>, <code>probarConexion()</code> y <code>cerrar()</code>.</p>
+				</div>
+				<div class="support-card">
+					<b>utiles.js</b>
+					<p><code>filtros()</code>, <code>paginacion()</code>, mapeo camelCase,
+					construcción de INSERT/UPDATE, validaciones y JSON.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="note ok" style="margin-top:16px">
+			<b>Contrato común:</b> todos los métodos devuelven promesas. Por eso las rutas
+			pueden usar <code>async/await</code> sin saber si hay pool, transacción o
+			reintento detrás.
+		</div>
+	</section>
+
+	<!-- ================= 3. ER ================= -->
+	<section class="card" id="er">
+		<h2><span class="num">3</span> Modelo entidad-relación</h2>
+		<p class="lead">
+			Seis tablas, un núcleo claro: <strong>centros</strong> y
+			<strong>personas</strong> son el eje; <strong>vacunas</strong> alimenta
+			<strong>dosis</strong>; y <strong>certificados_salud</strong> une persona,
+			centro y dosis con uno o varios <strong>exámenes</strong>.
+		</p>
+
+		<div class="scroll">
+			<svg class="diagram" viewBox="0 0 1210 735" role="img" aria-labelledby="er-title er-desc">
+				<title id="er-title">Diagrama entidad-relación de Salud Vacunas</title>
+				<desc id="er-desc">Centros se relaciona con personas, dosis y certificados. Personas con dosis y certificados. Vacunas con dosis. Dosis con certificados. Certificados con exámenes.</desc>
+
+				<!-- Relaciones (debajo de las cajas) -->
+				<!-- centros 1:N personas -->
+				<path class="er-rel" d="M290 150 H430"/>
+				<g><rect class="er-badge" x="337" y="140" width="46" height="20" rx="10"/><text class="er-badge-text" x="360" y="154" text-anchor="middle">1 : N</text></g>
+
+				<!-- centros 1:N certificados -->
+				<path class="er-rel" d="M165 274 V390"/>
+				<g><rect class="er-badge" x="167" y="322" width="46" height="20" rx="10"/><text class="er-badge-text" x="190" y="336" text-anchor="middle">1 : N</text></g>
+
+				<!-- centros 1:N dosis -->
+				<path class="er-rel" d="M290 230 H370 V470 H430"/>
+				<g><rect class="er-badge" x="382" y="320" width="46" height="20" rx="10"/><text class="er-badge-text" x="405" y="334" text-anchor="middle">1 : N</text></g>
+
+				<!-- personas 1:N dosis -->
+				<path class="er-rel" d="M545 243 V390"/>
+				<g><rect class="er-badge" x="537" y="310" width="46" height="20" rx="10"/><text class="er-badge-text" x="560" y="324" text-anchor="middle">1 : N</text></g>
+
+				<!-- personas 1:N certificados -->
+				<path class="er-rel" d="M430 220 H340 V350 H240 V390"/>
+				<g><rect class="er-badge" x="267" y="328" width="46" height="20" rx="10"/><text class="er-badge-text" x="290" y="342" text-anchor="middle">1 : N</text></g>
+
+				<!-- vacunas 1:N dosis -->
+				<path class="er-rel" d="M1035 222 V320 H730 V500 H700"/>
+				<g><rect class="er-badge" x="1050" y="275" width="46" height="20" rx="10"/><text class="er-badge-text" x="1073" y="289" text-anchor="middle">1 : N</text></g>
+
+				<!-- dosis 1:N certificados -->
+				<path class="er-rel" d="M430 530 H320"/>
+				<g><rect class="er-badge" x="352" y="508" width="46" height="20" rx="10"/><text class="er-badge-text" x="375" y="522" text-anchor="middle">1 : N</text></g>
+
+				<!-- certificados 1:N examenes -->
+				<path class="er-rel" d="M180 614 V690 H840 V590 H900"/>
+				<g><rect class="er-badge" x="487" y="668" width="46" height="20" rx="10"/><text class="er-badge-text" x="510" y="682" text-anchor="middle">1 : N</text></g>
+
+				<!-- ===== centros ===== -->
+				<g>
+					<rect class="er-box" x="40" y="50" width="250" height="224" rx="12"/>
+					<text class="er-name" x="56" y="78">centros</text>
+					<text class="er-tag" x="274" y="78" text-anchor="end">CATÁLOGO</text>
+					<line class="er-divider" x1="40" y1="92" x2="290" y2="92"/>
+					<text class="er-key pk" x="54" y="114">PK</text><text class="er-fld" x="86" y="114">id</text>
+					<text class="er-key uq" x="54" y="135">UQ</text><text class="er-fld" x="86" y="135">name</text>
+					<text class="er-fld" x="54" y="156">tipo_centro</text>
+					<text class="er-fld" x="54" y="177">autorizado</text>
+					<text class="er-fld" x="54" y="198">estado</text>
+					<text class="er-fld" x="54" y="219">municipio</text>
+					<text class="er-fld" x="54" y="240">parroquia</text>
+					<text class="er-fld" x="54" y="261">telefono</text>
+				</g>
+
+				<!-- ===== personas ===== -->
+				<g>
+					<rect class="er-box" x="430" y="40" width="270" height="203" rx="12"/>
+					<text class="er-name" x="446" y="68">personas</text>
+					<text class="er-tag" x="684" y="68" text-anchor="end">USUARIOS</text>
+					<line class="er-divider" x1="430" y1="82" x2="700" y2="82"/>
+					<text class="er-key pk" x="444" y="104">PK</text><text class="er-fld" x="476" y="104">id</text>
+					<text class="er-key uq" x="444" y="125">UQ</text><text class="er-fld" x="476" y="125">cedula</text>
+					<text class="er-fld" x="444" y="146">primer_nombre</text>
+					<text class="er-fld" x="444" y="167">primer_apellido</text>
+					<text class="er-fld" x="444" y="188">nacimiento</text>
+					<text class="er-fld" x="444" y="209">region</text>
+					<text class="er-key fk" x="444" y="230">FK</text><text class="er-fld" x="476" y="230">centro_id</text>
+				</g>
+
+				<!-- ===== vacunas ===== -->
+				<g>
+					<rect class="er-box" x="900" y="40" width="270" height="182" rx="12"/>
+					<text class="er-name" x="916" y="68">vacunas</text>
+					<text class="er-tag" x="1154" y="68" text-anchor="end">CATÁLOGO</text>
+					<line class="er-divider" x1="900" y1="82" x2="1170" y2="82"/>
+					<text class="er-key pk" x="914" y="104">PK</text><text class="er-fld" x="946" y="104">id</text>
+					<text class="er-key uq" x="914" y="125">UQ</text><text class="er-fld" x="946" y="125">nombre</text>
+					<text class="er-fld" x="914" y="146">tipo</text>
+					<text class="er-fld" x="914" y="167">laboratorio</text>
+					<text class="er-fld" x="914" y="188">obligatoria</text>
+					<text class="er-key json" x="914" y="209">JSON</text><text class="er-fld" x="946" y="209">lotes</text>
+				</g>
+
+				<!-- ===== certificados ===== -->
+				<g>
+					<rect class="er-box" x="40" y="390" width="280" height="224" rx="12"/>
+					<text class="er-name" x="56" y="418">certificados_salud</text>
+					<text class="er-tag" x="304" y="418" text-anchor="end">EMISIÓN</text>
+					<line class="er-divider" x1="40" y1="432" x2="320" y2="432"/>
+					<text class="er-key pk" x="54" y="454">PK</text><text class="er-fld" x="86" y="454">id</text>
+					<text class="er-key uq" x="54" y="475">UQ</text><text class="er-fld" x="86" y="475">codigo</text>
+					<text class="er-key fk" x="54" y="496">FK</text><text class="er-fld" x="86" y="496">persona_id</text>
+					<text class="er-key fk" x="54" y="517">FK</text><text class="er-fld" x="86" y="517">centro_id</text>
+					<text class="er-key fk" x="54" y="538">FK</text><text class="er-fld" x="86" y="538">dosis_id</text>
+					<text class="er-key fk" x="54" y="559">FK</text><text class="er-fld" x="86" y="559">examen_id · NULL</text>
+					<text class="er-fld" x="54" y="580">estado · ENUM</text>
+					<text class="er-fld" x="54" y="601">vigencia</text>
+				</g>
+
+				<!-- ===== dosis ===== -->
+				<g>
+					<rect class="er-box" x="430" y="390" width="270" height="245" rx="12"/>
+					<text class="er-name" x="446" y="418">dosis</text>
+					<text class="er-tag" x="684" y="418" text-anchor="end">HECHO CENTRAL</text>
+					<line class="er-divider" x1="430" y1="432" x2="700" y2="432"/>
+					<text class="er-key pk" x="444" y="454">PK</text><text class="er-fld" x="476" y="454">id</text>
+					<text class="er-key fk" x="444" y="475">FK</text><text class="er-fld" x="476" y="475">persona_id</text>
+					<text class="er-key fk" x="444" y="496">FK</text><text class="er-fld" x="476" y="496">centro_id</text>
+					<text class="er-key fk" x="444" y="517">FK</text><text class="er-fld" x="476" y="517">vacuna_id</text>
+					<text class="er-fld" x="444" y="538">lote</text>
+					<text class="er-fld" x="444" y="559">peso</text>
+					<text class="er-fld" x="444" y="580">altura</text>
+					<text class="er-fld" x="444" y="601">fecha</text>
+					<text class="er-fld" x="444" y="622">aplicador</text>
+				</g>
+
+				<!-- ===== examenes ===== -->
+				<g>
+					<rect class="er-box" x="900" y="430" width="270" height="161" rx="12"/>
+					<text class="er-name" x="916" y="458">examenes</text>
+					<text class="er-tag" x="1154" y="458" text-anchor="end">DETALLE</text>
+					<line class="er-divider" x1="900" y1="472" x2="1170" y2="472"/>
+					<text class="er-key pk" x="914" y="494">PK</text><text class="er-fld" x="946" y="494">id</text>
+					<text class="er-key fk" x="914" y="515">FK</text><text class="er-fld" x="946" y="515">certificado_id</text>
+					<text class="er-key fk" x="914" y="536">FK</text><text class="er-fld" x="946" y="536">centro_id</text>
+					<text class="er-fld" x="914" y="557">tipo</text>
+					<text class="er-fld" x="914" y="578">resultado</text>
+				</g>
+			</svg>
+		</div>
+
+		<div class="note info" style="margin-top:10px">
+			<b>Leyenda:</b> <b>PK</b> clave primaria · <b>FK</b> clave foránea · <b>UQ</b> único ·
+			<b>JSON</b> columna JSON. Las líneas indican relaciones 1 : N; las flechas no
+			se dibujan para no saturar, pero la FK vive siempre en el lado “N”.
+		</div>
+
+		<div class="note warn" style="margin-top:10px">
+			<b>Relación circular:</b> <code>certificados_salud.examen_id</code> apunta al
+			examen principal y <code>examenes.certificado_id</code> apunta de vuelta al
+			certificado. MySQL no permite FK diferidas, así que el modelo inserta primero
+			el certificado con <code>examen_id = NULL</code>, luego los exámenes y al final
+			actualiza el examen principal. Todo dentro de una transacción.
+		</div>
+
+		<div class="note" style="margin-top:10px">
+			<b>No dibujado para no saturar:</b> <code>dosis.centro_id</code>,
+			<code>certificados_salud.centro_id</code> y <code>examenes.centro_id</code>
+			también referencian a <code>centros</code>. Es decir, un centro aparece en
+			todas las tablas operativas.
+		</div>
+	</section>
+
+	<!-- ================= 4. FLUJO DOSIS ================= -->
+	<section class="card" id="dosis">
+		<h2><span class="num">4</span> Flujo: registrar una vacunación</h2>
+		<p class="lead">
+			Es el flujo más frecuente del Perfil 1. El formulario envía una dosis aplicada
+			con sus medidas, lote y aplicador; el modelo valida y hace un solo
+			<code>INSERT</code>.
+		</p>
+
+		<div class="flow">
+			<div class="step">
+				<span class="n">1</span>
+				<h4>Formulario</h4>
+				<p>El usuario elige persona, vacuna, lote y completa peso, altura y datos del aplicador.</p>
+				<span class="file">src/js/centro.js</span>
+			</div>
+
+			<div class="step">
+				<span class="n">2</span>
+				<h4>Petición HTTP</h4>
+				<p>Se envía el JSON al recurso de dosis.</p>
+				<span class="file">POST /api/dosis</span>
+			</div>
+
+			<div class="step">
+				<span class="n">3</span>
+				<h4>La ruta delega</h4>
+				<p>La ruta valida el cuerpo y llama al modelo; no escribe SQL.</p>
+				<span class="file">routes/dosis.js</span>
+			</div>
+
+			<div class="step warn-step">
+				<span class="n">4</span>
+				<h4>Validar + insertar</h4>
+				<p><code>exigir()</code> comprueba campos; el INSERT va parametrizado. MySQL aplica FK y CHECK.</p>
+				<span class="file">models/dosis.js</span>
+			</div>
+
+			<div class="step final">
+				<span class="n">5</span>
+				<h4>Respuesta</h4>
+				<p><code>201 { datos: dosis }</code>. Si algo falla: 400 por validación o 500 por base de datos.</p>
+				<span class="file">JSON</span>
+			</div>
+		</div>
+
+		<div class="note ok" style="margin-top:16px">
+			<b>Regla del modelo:</b> <code>peso</code> y <code>altura</code> se guardan en
+			cada fila de <code>dosis</code>, no en <code>personas</code>. Así queda el
+			historial antropométrico en el momento de cada aplicación.
+		</div>
+
+		<div class="note warn" style="margin-top:10px">
+			<b>Restricciones que protegen el registro:</b> la persona, el centro y la
+			vacuna deben existir (FK); <code>cantidad</code>, <code>peso</code> y
+			<code>altura</code> deben ser positivos y estar en rango; y
+			<code>lote_vence</code> no puede ser anterior a <code>fecha</code>.
+		</div>
+	</section>
+
+	<!-- ================= 5. FLUJO CERTIFICADO ================= -->
+	<section class="card" id="certificado">
+		<h2><span class="num">5</span> Flujo: emitir un certificado con exámenes</h2>
+		<p class="lead">
+			Es la operación más delicada: toca dos tablas con una relación circular.
+			<code>certificadosSalud.crearConExamenes()</code> la resuelve con una
+			transacción: o se guarda todo, o no se guarda nada.
+		</p>
+
+		<div class="scroll">
+			<svg class="diagram" viewBox="0 0 1120 665" role="img" aria-labelledby="seq-title seq-desc">
+				<title id="seq-title">Diagrama de secuencia de creación de certificado con exámenes</title>
+				<desc id="seq-desc">El navegador envía un POST a la ruta, la ruta llama al modelo, el modelo abre una transacción, inserta el certificado con examen_id nulo, inserta los exámenes, actualiza el examen principal, hace commit y devuelve el certificado completo.</desc>
+
+				<defs>
+					<marker id="ar-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+						<path d="M0,0 L10,5 L0,10 z" fill="#0f766e"/>
+					</marker>
+					<marker id="ar-slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+						<path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+					</marker>
+				</defs>
+
+				<!-- participantes -->
+				<g>
+					<rect class="seq-head" x="20" y="14" width="200" height="46" rx="10"/>
+					<text class="seq-head-title" x="120" y="34" text-anchor="middle">Navegador</text>
+					<text class="seq-head-sub" x="120" y="49" text-anchor="middle">formulario / fetch</text>
+				</g>
+				<g>
+					<rect class="seq-head" x="260" y="14" width="240" height="46" rx="10"/>
+					<text class="seq-head-title" x="380" y="34" text-anchor="middle">routes/certificados.js</text>
+					<text class="seq-head-sub" x="380" y="49" text-anchor="middle">controlador HTTP</text>
+				</g>
+				<g>
+					<rect class="seq-head" x="530" y="14" width="240" height="46" rx="10"/>
+					<text class="seq-head-title" x="650" y="34" text-anchor="middle">certificadosSalud.js</text>
+					<text class="seq-head-sub" x="650" y="49" text-anchor="middle">modelo + transacción</text>
+				</g>
+				<g>
+					<rect class="seq-head" x="850" y="14" width="180" height="46" rx="10"/>
+					<text class="seq-head-title" x="940" y="34" text-anchor="middle">MySQL</text>
+					<text class="seq-head-sub" x="940" y="49" text-anchor="middle">InnoDB</text>
+				</g>
+
+				<!-- líneas de vida -->
+				<line class="seq-life" x1="120" y1="60" x2="120" y2="620"/>
+				<line class="seq-life" x1="380" y1="60" x2="380" y2="620"/>
+				<line class="seq-life" x1="650" y1="60" x2="650" y2="620"/>
+				<line class="seq-life" x1="940" y1="60" x2="940" y2="620"/>
+
+				<!-- activación del modelo -->
+				<rect class="seq-active" x="644" y="180" width="12" height="272" rx="3"/>
+
+				<!-- mensajes -->
+				<text class="seq-label" x="250" y="88" text-anchor="middle">POST /api/certificados</text>
+				<line class="seq-msg" x1="120" y1="97" x2="374" y2="97" marker-end="url(#ar-teal)"/>
+
+				<text class="seq-label" x="515" y="135" text-anchor="middle">crearConExamenes(datos, examenes)</text>
+				<line class="seq-msg" x1="380" y1="144" x2="644" y2="144" marker-end="url(#ar-teal)"/>
+
+				<text class="seq-label" x="795" y="182" text-anchor="middle">BEGIN</text>
+				<line class="seq-msg" x1="650" y1="190" x2="934" y2="190" marker-end="url(#ar-teal)"/>
+
+				<text class="seq-label" x="795" y="230" text-anchor="middle">INSERT certificado · examen_id = NULL</text>
+				<line class="seq-msg" x1="650" y1="238" x2="934" y2="238" marker-end="url(#ar-teal)"/>
+
+				<text class="seq-label ret" x="795" y="277" text-anchor="middle">insertId</text>
+				<line class="seq-msg ret" x1="940" y1="285" x2="656" y2="285" marker-end="url(#ar-slate)"/>
+
+				<text class="seq-label" x="795" y="327" text-anchor="middle">INSERT examenes (1..N, certificado_id)</text>
+				<line class="seq-msg" x1="650" y1="335" x2="934" y2="335" marker-end="url(#ar-teal)"/>
+
+				<text class="seq-label" x="795" y="375" text-anchor="middle">UPDATE certificado · examen_id = principal</text>
+				<line class="seq-msg" x1="650" y1="383" x2="934" y2="383" marker-end="url(#ar-teal)"/>
+
+				<text class="seq-label" x="795" y="423" text-anchor="middle">COMMIT</text>
+				<line class="seq-msg" x1="650" y1="431" x2="934" y2="431" marker-end="url(#ar-teal)"/>
+
+				<text class="seq-label ret" x="515" y="471" text-anchor="middle">certificado completo</text>
+				<line class="seq-msg ret" x1="644" y1="479" x2="386" y2="479" marker-end="url(#ar-slate)"/>
+
+				<text class="seq-label ret" x="250" y="519" text-anchor="middle">201 { datos: certificado }</text>
+				<line class="seq-msg ret" x1="380" y1="527" x2="126" y2="527" marker-end="url(#ar-slate)"/>
+
+				<!-- nota de rollback -->
+				<rect x="245" y="565" width="630" height="42" rx="10" fill="#fff1f2" stroke="#fecdd3" stroke-width="1.2"/>
+				<text class="seq-note" x="560" y="591" text-anchor="middle">Si cualquier paso falla → ROLLBACK: no queda ningún registro a medias</text>
+			</svg>
+		</div>
+
+		<div class="note ok" style="margin-top:14px">
+			<b>Por qué así:</b> MySQL no admite claves foráneas diferidas. Insertar el
+			certificado con <code>examen_id = NULL</code> rompe el círculo; luego se
+			insertan los exámenes, que ya pueden apuntar al certificado; y al final se
+			asigna el primero como examen principal.
+		</div>
+
+		<div class="note rose" style="margin-top:10px">
+			<b>Si algo falla:</b> <code>conexion.transaccion()</code> ejecuta
+			<code>rollback()</code> en el <code>catch</code> y libera la conexión en
+			<code>finally</code>. El error se propaga a la ruta y esta responde con el
+			estado HTTP adecuado. Nunca queda un certificado sin exámenes.
+		</div>
+
+		<div class="note info" style="margin-top:10px">
+			<b>Después del commit:</b> el modelo devuelve el certificado completo con sus
+			exámenes mediante <code>obtenerCompleto()</code>, para que la interfaz no tenga
+			que hacer una segunda consulta.
+		</div>
+	</section>
+
+	<!-- ================= 6. VERIFICAR ================= -->
+	<section class="card" id="verificar">
+		<h2><span class="num">6</span> Flujo: verificar un certificado</h2>
+		<p class="lead">
+			Es el flujo público de <code>verificar.html</code>: cualquiera puede consultar
+			un certificado por su código y ver si está vigente. No requiere sesión.
+		</p>
+
+		<div class="flow">
+			<div class="step">
+				<span class="n">1</span>
+				<h4>Consulta pública</h4>
+				<p>El usuario introduce el código del certificado (o busca por cédula en el Perfil 2).</p>
+				<span class="file">verificar.html</span>
+			</div>
+
+			<div class="step">
+				<span class="n">2</span>
+				<h4>Ruta de verificación</h4>
+				<p>La ruta pública no exige autenticación y valida el código recibido.</p>
+				<span class="file">GET /api/certificados/verificar/:codigo</span>
+			</div>
+
+			<div class="step">
+				<span class="n">3</span>
+				<h4>Buscar el certificado</h4>
+				<p><code>verificarPorCodigo()</code> consulta por el código único.</p>
+				<span class="file">models/certificadosSalud.js</span>
+			</div>
+
+			<div class="step warn-step">
+				<span class="n">4</span>
+				<h4>Reunir el contexto</h4>
+				<p>El resultado incluye a la persona, al centro, el id de la dosis, los exámenes y un booleano <code>vigente</code>.</p>
+				<span class="file">SELECT + JOIN</span>
+			</div>
+
+			<div class="step final">
+				<span class="n">5</span>
+				<h4>Veredicto</h4>
+				<p><code>{ datos }</code> con <code>estado</code> y <code>vigente</code>. Si el código no existe: 404.</p>
+				<span class="file">JSON</span>
+			</div>
+		</div>
+
+		<div class="note warn" style="margin-top:16px">
+			<b>Diferencia con el listado:</b> <code>verificarPorCodigo()</code> es para el
+			público y devuelve la información necesaria para validar el documento;
+			<code>obtenerCompleto()</code> es para el panel interno y reúne todos los
+			exámenes del certificado.
+		</div>
+	</section>
+
+	<!-- ================= 7. ESTADOS ================= -->
+	<section class="card" id="estados">
+		<h2><span class="num">7</span> Ciclo de vida del certificado</h2>
+		<p class="lead">
+			El estado no es un cálculo de la interfaz: vive en la columna
+			<code>estado</code> (<code>ENUM('Vigente','Vencido')</code>) y se actualiza en
+			la base de datos.
+		</p>
+
+		<div class="stateflow">
+			<div class="state emision">
+				<b>Emisión</b>
+				<span><code>emision</code> y <code>vigencia</code></span>
+			</div>
+			<div class="state-arrow">→</div>
+			<div class="state vigente">
+				<b>Vigente</b>
+				<span>estado inicial</span>
+			</div>
+			<div class="state-arrow">→</div>
+			<div class="state vencido">
+				<b>Vencido</b>
+				<span>cuando <code>vigencia &lt; hoy</code></span>
+			</div>
+		</div>
+
+		<div class="note info" style="margin-top:16px">
+			<b>Dos formas de llegar a “Vencido”:</b>
+			<code>actualizarEstado(id, 'Vencido')</code> para un caso puntual, o
+			<code>marcarVencidos(fecha)</code> para actualizar en bloque todos los
+			certificados cuya vigencia ya pasó. La ruta expone
+			<code>PATCH /api/certificados/marcar-vencidos</code>.
+		</div>
+
+		<div class="note" style="margin-top:10px">
+			<b>Regla de integridad:</b> el esquema exige
+			<code>vigencia &gt;= emision</code>. Un certificado no puede vencer antes de
+			haber sido emitido.
+		</div>
+	</section>
+
+	<!-- ================= 8. API Y REGLAS ================= -->
+	<section class="card" id="api">
+		<h2><span class="num">8</span> API y reglas que sostienen el sistema</h2>
+		<p class="lead">
+			Siete recursos cuelgan de <code>/api</code>. Todos los listados aceptan
+			<code>limite</code>, <code>desplazamiento</code>, <code>orden</code> y filtros
+			propios, y responden <code>{ total, datos }</code>.
+		</p>
+
+		<div class="table-wrap">
+			<table>
+				<thead>
+					<tr>
+						<th>Recurso</th>
+						<th>Ruta base</th>
+						<th>Modelo</th>
+						<th>Qué resuelve</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><b>Estado</b></td>
+						<td><code>/api/salud</code></td>
+						<td><code>conexion.probarConexion</code></td>
+						<td>Comprueba que MySQL responde.</td>
+					</tr>
+					<tr>
+						<td><b>Centros</b></td>
+						<td><code>/api/centros</code></td>
+						<td><code>centros</code></td>
+						<td>Catálogo, subregiones y dependencias.</td>
+					</tr>
+					<tr>
+						<td><b>Personas</b></td>
+						<td><code>/api/personas</code></td>
+						<td><code>personas</code></td>
+						<td>Usuarios, cédula y búsqueda.</td>
+					</tr>
+					<tr>
+						<td><b>Vacunas</b></td>
+						<td><code>/api/vacunas</code></td>
+						<td><code>vacunas</code></td>
+						<td>Catálogo, lotes y obligatoriedad.</td>
+					</tr>
+					<tr>
+						<td><b>Dosis</b></td>
+						<td><code>/api/dosis</code></td>
+						<td><code>dosis</code></td>
+						<td>Aplicaciones, historial y estadísticas.</td>
+					</tr>
+					<tr>
+						<td><b>Certificados</b></td>
+						<td><code>/api/certificados</code></td>
+						<td><code>certificadosSalud</code></td>
+						<td>Emisión, verificación y estado.</td>
+					</tr>
+					<tr>
+						<td><b>Exámenes</b></td>
+						<td><code>/api/examenes</code></td>
+						<td><code>examenes</code></td>
+						<td>Detalle de cada certificado.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>Garantías del código</h3>
+		<div class="rules">
+			<div class="rule">
+				<b><span class="icon">🛡️</span>SQL parametrizado</b>
+				<p>Los valores viajan como <code>?</code>. Los <code>ORDER BY</code> y
+				<code>LIMIT</code> se resuelven con listas blancas y números validados.</p>
+			</div>
+			<div class="rule">
+				<b><span class="icon">🔁</span>camelCase ↔ snake_case</b>
+				<p>La API usa <code>primerNombre</code>, <code>centroId</code>; MySQL usa
+				<code>primer_nombre</code>, <code>centro_id</code>. El mapeo es automático.</p>
+			</div>
+			<div class="rule">
+				<b><span class="icon">🧩</span>JSON automático</b>
+				<p><code>lotes</code> y <code>documentacion</code> se aceptan como
+				arreglos/objetos JS y se serializan al guardar.</p>
+			</div>
+			<div class="rule">
+				<b><span class="icon">📅</span>Fechas estables</b>
+				<p><code>dateStrings: true</code> devuelve <code>YYYY-MM-DD</code>, sin
+				desfases de zona horaria.</p>
+			</div>
+			<div class="rule">
+				<b><span class="icon">⚠️</span>Duplicados claros</b>
+				<p>Un <code>ER_DUP_ENTRY</code> se traduce a un error con
+				<code>codigo: 'DUPLICADO'</code> para que la ruta responda bien.</p>
+			</div>
+			<div class="rule">
+				<b><span class="icon">🔒</span>Transacciones</b>
+				<p>Las operaciones de varias tablas usan <code>transaccion()</code>:
+				<code>commit</code> si todo va bien, <code>rollback</code> si algo falla.</p>
+			</div>
+			<div class="rule">
+				<b><span class="icon">📄</span>Paginación acotada</b>
+				<p><code>limite</code> se limita a 200 y nunca se concatena directamente en
+				el SQL.</p>
+			</div>
+			<div class="rule">
+				<b><span class="icon">🧱</span>Separación de capas</b>
+				<p>Las rutas no escriben SQL y los modelos no contienen lógica HTTP ni
+				vistas.</p>
+			</div>
+			<div class="rule">
+				<b><span class="icon">🧪</span>Validación doble</b>
+				<p>El modelo exige campos y coherencia; MySQL refuerza con FK y CHECK. La
+				interfaz valida antes de enviar.</p>
+			</div>
+		</div>
+
+		<div class="note ok" style="margin-top:18px">
+			<b>En una frase:</b> las vistas capturan y muestran datos; las rutas traducen
+			HTTP a llamadas de modelo; los modelos construyen SQL seguro y devuelven
+			promesas; MySQL garantiza la integridad. Cada capa hace una sola cosa.
+		</div>
+	</section>
+
+</main>
+
+<footer>
+	Documento generado a partir de <code>server.js</code>, <code>routes/</code>,
+	<code>models/</code> y <code>src/js/</code> · Salud Vacunas · Noviembre 2026
+</footer>
+
+</body>
+</html>

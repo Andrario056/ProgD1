@@ -1,0 +1,235 @@
+﻿<!doctype html>
+<html lang="es" data-theme="salud" data-inicio="../../index.html">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Salud Vacunas · Registrar vacunación</title>
+		<link rel="stylesheet" href="../../assets/css/estilos.css" />
+		<script src="../../src/js/nucleo.js"></script>
+		<script src="../../src/js/datos.js"></script>
+		<script src="../../src/js/publico.js"></script>
+		<script src="../../src/js/centro.js"></script>
+		<script src="../../src/js/app.js"></script>
+	</head>
+	<body data-pagina="centro-registrar-vacunacion">
+		<div class="min-h-svh bg-base-200">
+			<header class="sticky top-0 z-20 border-base-300 border-b bg-base-100/95 backdrop-blur print:hidden">
+				<div class="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-10">
+					<div class="flex min-h-14 items-center justify-between gap-4">
+						<a href="../usuarios/registrar.html" class="flex min-w-0 items-center gap-3">
+							<span class="flex size-9 shrink-0 items-center justify-center rounded-box bg-primary text-primary-content">
+								<span class="icono icono-vaccine size-[21px]" aria-hidden="true"></span>
+							</span>
+							<span class="min-w-0">
+								<span class="block truncate font-semibold leading-tight">Salud Vacunas</span>
+								<span class="block truncate text-base-content/55 text-sm">Sistema de vacunación</span>
+							</span>
+						</a>
+						<div class="flex shrink-0 items-center gap-3">
+							<span class="hidden text-right font-medium text-sm sm:inline">Perfil 1</span>
+							<button type="button" data-salir class="inline-flex min-h-10 items-center gap-2 rounded-lg px-3 font-medium text-primary text-sm transition hover:bg-primary/10" aria-label="Salir">
+								<span class="icono icono-logout size-[18px]" aria-hidden="true"></span>
+								<span class="hidden sm:inline">Salir</span>
+							</button>
+						</div>
+					</div>
+					<nav aria-label="Navegación principal" class="flex gap-1 overflow-x-auto pb-1">
+						<a href="../usuarios/registrar.html" class="shrink-0 rounded-lg px-3 py-1.5 font-medium text-base-content/65 text-sm transition hover:bg-base-200 hover:text-base-content">Registrar usuario</a>
+						<a href="registrar.html" aria-current="page" class="shrink-0 rounded-lg bg-primary/10 px-3 py-1.5 font-medium text-primary text-sm transition">Registrar vacunación</a>
+					</nav>
+				</div>
+			</header>
+
+			<main class="mx-auto w-full max-w-[1600px] flex-1 px-4 py-4 sm:px-6 sm:py-5 lg:px-10 lg:py-6">
+				<div class="flex flex-col gap-4">
+					<header>
+						<h1 class="font-semibold text-2xl text-base-content tracking-tight sm:text-3xl">Registrar vacunación</h1>
+						<p class="mt-2 max-w-3xl text-base text-base-content/65">Selecciona un usuario de tu centro, indica la fecha, el aplicador y la vacuna con su lote. Las vacunas no disponibles en la región del usuario quedan bloqueadas al guardar.</p>
+					</header>
+
+					<div data-sin-usuarios hidden>
+						<div role="alert" class="alert alert-warning items-start rounded-xl">
+							<span class="icono icono-alert-triangle mt-0.5 size-5 shrink-0" aria-hidden="true"></span>
+							<div>
+								<p class="font-semibold">El centro todavía no tiene usuarios registrados.</p>
+								<p class="mt-1 text-sm">Primero registra un usuario para poder vacunarlo.</p>
+								<a href="../usuarios/registrar.html" class="btn btn-warning btn-sm mt-3">Registrar usuario</a>
+							</div>
+						</div>
+					</div>
+
+					<div data-sin-vacunas hidden>
+						<div role="alert" class="alert alert-warning items-start rounded-xl">
+							<span class="icono icono-alert-triangle mt-0.5 size-5 shrink-0" aria-hidden="true"></span>
+							<div>
+								<p class="font-semibold">No hay vacunas disponibles en el catálogo.</p>
+								<p class="mt-1 text-sm">El Perfil 3 debe registrar las vacunas antes de aplicar dosis.</p>
+							</div>
+						</div>
+					</div>
+
+					<div data-vacunacion class="flex flex-col gap-4">
+						<form data-form-vacunacion class="flex flex-col gap-4">
+							<div data-vacunacion-alerta class="xl:col-span-2"></div>
+							<div data-vacunacion-exito hidden class="xl:col-span-2"></div>
+
+							<section class="rounded-2xl bg-base-100 p-4 shadow-sm ring-1 ring-base-300/50 sm:p-5">
+								<h2 class="font-semibold text-lg tracking-tight">Usuario</h2>
+								<p class="mt-1 text-base-content/60 text-sm">Busca por cédula o nombre. Solo aparecen los usuarios de tu centro.</p>
+
+								<div class="relative mt-3 max-w-2xl">
+									<label for="vacunacionUsuario" class="font-medium text-sm">Buscar usuario</label>
+									<label class="input mt-1.5 h-10 w-full rounded-xl">
+										<span class="icono icono-search size-[17px] text-base-content/40" aria-hidden="true"></span>
+										<input id="vacunacionUsuario" type="search" class="grow" data-usuario-busqueda placeholder="V-10234567 o Ana Torres" autocomplete="off" />
+									</label>
+									<div data-usuario-sugerencias hidden class="absolute z-30 mt-1 w-full overflow-hidden rounded-xl border border-base-300 bg-base-100 shadow-lg"></div>
+								</div>
+								<div class="mt-4" data-usuario-seleccionado hidden></div>
+								<button type="button" class="btn btn-ghost btn-sm mt-2 text-primary" data-limpiar-usuario hidden>Limpiar búsqueda</button>
+
+								<div class="mt-4 flex flex-col gap-3">
+									<div class="flex flex-col gap-1.5">
+										<label for="vacunacionPeso" class="font-medium text-sm">Peso (kg)</label>
+										<input id="vacunacionPeso" type="number" min="1" max="500" step="0.1" class="input h-10 w-full rounded-xl" data-campo-peso placeholder="Ej. 70" inputmode="decimal" disabled />
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="vacunacionAltura" class="font-medium text-sm">Altura (cm)</label>
+										<input id="vacunacionAltura" type="number" min="30" max="300" step="0.1" class="input h-10 w-full rounded-xl" data-campo-altura placeholder="Ej. 170" inputmode="decimal" disabled />
+									</div>
+									<p class="text-base-content/55 text-xs">Estas medidas se guardan con la dosis aplicada. La cantidad a aplicar se calcula a partir de ellas.</p>
+								</div>
+
+								<div class="mt-4 flex flex-col gap-3">
+									<div class="flex flex-col gap-1.5">
+										<label for="vacunacionFecha" class="font-medium text-sm">Fecha de aplicación<span class="text-error"> *</span></label>
+										<input id="vacunacionFecha" type="date" class="input h-10 w-full rounded-xl" data-campo-fecha />
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="vacunacionAplicador" class="font-medium text-sm">Médico o enfermero que aplica<span class="text-error"> *</span></label>
+										<div class="relative">
+											<label class="input h-10 w-full rounded-xl">
+												<span class="icono icono-search size-[17px] text-base-content/40" aria-hidden="true"></span>
+												<input id="vacunacionAplicador" type="search" class="grow" data-campo-aplicador placeholder="Escribe el nombre del aplicador" autocomplete="off" />
+											</label>
+											<div data-aplicador-sugerencias hidden class="absolute z-30 mt-1 w-full overflow-hidden rounded-xl border border-base-300 bg-base-100 shadow-lg"></div>
+										</div>
+										<p class="text-base-content/55 text-xs" data-aplicador-ayuda hidden></p>
+									</div>
+									<div class="flex flex-col gap-1.5 sm:col-span-2">
+										<label for="vacunacionAtencion" class="font-medium text-sm">Atención prestada<span class="text-error"> *</span></label>
+										<textarea id="vacunacionAtencion" class="textarea min-h-20 w-full rounded-xl" data-campo-atencion placeholder="Describe la atención prestada al usuario"></textarea>
+									</div>
+								</div>
+							</section>
+
+							<section class="rounded-2xl bg-base-100 p-4 shadow-sm ring-1 ring-base-300/50 sm:p-5">
+								<div>
+									<h2 class="font-semibold text-lg tracking-tight">Vacuna y lote</h2>
+									<p class="mt-1 text-base-content/60 text-sm">Elige la vacuna aplicada y su lote. Las vacunas están disponibles aunque todavía no hayas seleccionado al usuario.</p>
+								</div>
+								<div class="mt-3 flex flex-col gap-3">
+									<div class="flex flex-col gap-1.5">
+										<label for="vacunacionVacuna" class="font-medium text-sm">Vacuna disponible<span class="text-error"> *</span></label>
+										<select id="vacunacionVacuna" class="select h-10 w-full rounded-xl" data-campo-vacuna></select>
+										<p class="text-base-content/55 text-xs" data-vacuna-info>Selecciona una vacuna para ver su información.</p>
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="vacunacionLote" class="font-medium text-sm">Lote de la vacuna<span class="text-error"> *</span></label>
+										<select id="vacunacionLote" class="select h-10 w-full rounded-xl" data-campo-lote disabled></select>
+										<p class="text-base-content/55 text-xs" data-lote-info>Selecciona primero una vacuna.</p>
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="vacunacionCantidad" class="font-medium text-sm">Cantidad de referencia (ml)<span class="text-error"> *</span></label>
+										<input id="vacunacionCantidad" type="number" min="0.01" max="100" step="0.01" class="input h-10 w-full rounded-xl" data-campo-cantidad placeholder="Ej. 0.5" inputmode="decimal" />
+										<p class="text-base-content/55 text-xs">Dosis estándar indicada para la vacuna. El sistema la ajusta según el peso y la altura.</p>
+									</div>
+									<div class="flex flex-col gap-1.5">
+										<label for="vacunacionCantidadFinal" class="font-medium text-sm">Cantidad a aplicar (ml)</label>
+										<input id="vacunacionCantidadFinal" type="text" class="input h-10 w-full rounded-xl bg-base-200" data-campo-cantidad-final placeholder="Se calcula con peso y altura" readonly />
+										<p class="text-base-content/55 text-xs" data-cantidad-final-info>Escribe la cantidad de referencia y completa el peso y la altura.</p>
+									</div>
+								</div>
+								<div data-calculo-dosis hidden class="mt-3 rounded-xl bg-primary/5 p-4 ring-1 ring-primary/20">
+									<p class="font-semibold text-sm">Cálculo de la dosis a aplicar</p>
+									<p class="mt-1 text-base-content/60 text-xs">Superficie corporal (Mosteller): √(peso kg × altura cm / 3600), escalada respecto a 1,73 m².</p>
+									<div class="mt-3 grid gap-3 text-sm sm:grid-cols-3">
+										<div><span class="block text-base-content/55 text-xs">Superficie corporal</span><span class="font-medium" data-calculo-superficie>—</span></div>
+										<div><span class="block text-base-content/55 text-xs">Factor de ajuste</span><span class="font-medium" data-calculo-factor>—</span></div>
+										<div><span class="block text-base-content/55 text-xs">Cantidad a aplicar</span><span class="font-semibold text-primary" data-calculo-cantidad>—</span></div>
+									</div>
+								</div>
+								<div class="mt-3" data-vacuna-aviso hidden></div>
+							</section>
+
+							<section id="resumenSeleccion" class="rounded-2xl bg-base-100 p-4 shadow-sm ring-1 ring-base-300/50 sm:p-5 xl:col-span-2">
+								<h2 class="font-semibold text-lg tracking-tight">Resumen de la selección</h2>
+								<div class="mt-3" data-resumen-seleccion></div>
+								<div class="mt-5 flex flex-wrap gap-2 border-base-300 border-t pt-5">
+									<button type="submit" class="btn btn-primary min-h-11 rounded-xl font-medium text-base">Guardar vacunación</button>
+									<button type="button" class="btn btn-outline min-h-11 rounded-xl font-medium text-base" data-limpiar-seleccion>Limpiar selección</button>
+									<button type="button" class="btn btn-ghost min-h-11 rounded-xl font-medium text-base" data-cancelar-seleccion>Cancelar selección</button>
+									<a href="#resumenSeleccion" class="btn btn-ghost min-h-11 rounded-xl font-medium text-base">Ver resumen</a>
+								</div>
+							</section>
+						</form>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		<div hidden data-datos-usuarios>
+			<article data-usuario data-usuario-id="p1" data-nombre="Ana Torres" data-cedula="V-10234567" data-nacimiento="1991-04-18" data-sexo="Femenino" data-region="Capital" data-estado="Distrito Capital" data-municipio="Libertador" data-telefono="0414-1234567" data-correo="ana.torres@correo.com" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-sangre="O+" data-direccion="Av. Sucre, Caracas" data-alergias="Penicilina" data-registrado-por="Enf. Carmen Díaz" data-registrado-por-cedula="V-11222333" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101"></article>
+			<article data-usuario data-usuario-id="p2" data-nombre="José Ramírez" data-cedula="V-14567890" data-nacimiento="1978-09-02" data-sexo="Masculino" data-region="Capital" data-estado="Distrito Capital" data-municipio="Chacao" data-telefono="0424-2345678" data-correo="jose.ramirez@correo.com" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-sangre="A+" data-direccion="Calle 5, Caracas" data-alergias="Ninguna" data-registrado-por="Enf. Carmen Díaz" data-registrado-por-cedula="V-11222333" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101"></article>
+			<article data-usuario data-usuario-id="p6" data-nombre="María Fernanda Rojas" data-cedula="V-20123456" data-nacimiento="1993-11-30" data-sexo="Femenino" data-region="Capital" data-estado="Distrito Capital" data-municipio="Libertador" data-telefono="0426-6789012" data-correo="maria.rojas@correo.com" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-sangre="O+" data-direccion="Parroquia La Vega, Caracas" data-alergias="Látex" data-registrado-por="Enf. Carmen Díaz" data-registrado-por-cedula="V-11222333" data-centro-direccion="Av. Sucre, Caracas" data-centro-telefono="0212-5550101"></article>
+		</div>
+
+		<div hidden data-datos-registros>
+			<table><tbody>
+				<tr data-registro data-id="r1" data-fecha="2024-03-12" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2403" data-dosis="Dosis 1 de 2" data-usuario-id="p1" data-usuario="Ana Torres" data-cedula="V-10234567" data-edad="35" data-telefono="0414-1234567" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Esquema COVID-19 iniciado" data-cantidad="0.3" data-lote-vence="2025-12-31"></tr>
+				<tr data-registro data-id="r2" data-fecha="2024-04-09" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2403" data-dosis="Dosis 2 de 2" data-usuario-id="p1" data-usuario="Ana Torres" data-cedula="V-10234567" data-edad="35" data-telefono="0414-1234567" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Esquema COVID-19 completado" data-cantidad="0.3" data-lote-vence="2025-12-31"></tr>
+				<tr data-registro data-id="r3" data-fecha="2024-05-21" data-vacuna-id="v-fiebre" data-vacuna="Fiebre amarilla" data-tipo="Virus atenuado" data-procedencia="Internacional" data-lote="FIE-2401" data-dosis="Dosis única" data-usuario-id="p1" data-usuario="Ana Torres" data-cedula="V-10234567" data-edad="35" data-telefono="0414-1234567" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Enf. Carmen Díaz" data-cargo="Enfermera vacunadora" data-atencion="Certificado de viaje" data-cantidad="0.5" data-lote-vence="2026-05-31"></tr>
+				<tr data-registro data-id="r5" data-fecha="2024-06-15" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2402" data-dosis="Dosis 1 de 2" data-usuario-id="p2" data-usuario="José Ramírez" data-cedula="V-14567890" data-edad="48" data-telefono="0424-2345678" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Primera dosis" data-cantidad="0.3" data-lote-vence="2025-06-30"></tr>
+				<tr data-registro data-id="r6" data-fecha="2025-10-12" data-vacuna-id="v-influenza" data-vacuna="Influenza" data-tipo="Virus inactivado" data-procedencia="Internacional" data-lote="INF-2502" data-dosis="Refuerzo anual" data-usuario-id="p2" data-usuario="José Ramírez" data-cedula="V-14567890" data-edad="47" data-telefono="0424-2345678" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Campaña anual" data-cantidad="0.5" data-lote-vence="2026-12-31"></tr>
+				<tr data-registro data-id="r16" data-fecha="2024-09-14" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2402" data-dosis="Dosis 1 de 2" data-usuario-id="p6" data-usuario="María Fernanda Rojas" data-cedula="V-20123456" data-edad="32" data-telefono="0426-6789012" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Primera dosis" data-cantidad="0.3" data-lote-vence="2025-06-30"></tr>
+				<tr data-registro data-id="r17" data-fecha="2024-10-12" data-vacuna-id="v-covid" data-vacuna="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-lote="COV-2402" data-dosis="Dosis 2 de 2" data-usuario-id="p6" data-usuario="María Fernanda Rojas" data-cedula="V-20123456" data-edad="32" data-telefono="0426-6789012" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Dra. Elena Pérez" data-cargo="Médico vacunador" data-atencion="Segunda dosis" data-cantidad="0.3" data-lote-vence="2025-06-30"></tr>
+				<tr data-registro data-id="r18" data-fecha="2024-11-08" data-vacuna-id="v-fiebre" data-vacuna="Fiebre amarilla" data-tipo="Virus atenuado" data-procedencia="Internacional" data-lote="FIE-2401" data-dosis="Dosis única" data-usuario-id="p6" data-usuario="María Fernanda Rojas" data-cedula="V-20123456" data-edad="32" data-telefono="0426-6789012" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Enf. Carmen Díaz" data-cargo="Enfermera vacunadora" data-atencion="Viaje" data-cantidad="0.5" data-lote-vence="2026-05-31"></tr>
+				<tr data-registro data-id="r19" data-fecha="2025-03-03" data-vacuna-id="v-vph" data-vacuna="VPH" data-tipo="Recombinante" data-procedencia="Internacional" data-lote="VPH-2501" data-dosis="Dosis 1 de 2" data-usuario-id="p6" data-usuario="María Fernanda Rojas" data-cedula="V-20123456" data-edad="31" data-telefono="0426-6789012" data-centro-id="c1" data-centro="Centro de Vacunación Libertador" data-municipio="Libertador" data-estado="Distrito Capital" data-region="Capital" data-aplicador="Enf. Carmen Díaz" data-cargo="Enfermera vacunadora" data-atencion="Prevención de VPH" data-cantidad="0.5" data-lote-vence="2027-03-31"></tr>
+			</tbody></table>
+		</div>
+
+		<div hidden data-datos-vacunas>
+			<article data-vacuna data-vacuna-id="v-covid" data-nombre="COVID-19" data-tipo="ARNm" data-procedencia="Internacional" data-laboratorio="Pfizer-BioNTech" data-descripcion="Vacuna contra el SARS-CoV-2 con esquema de dos dosis." data-dosis-esquema="2" data-refuerzo-meses="12" data-cobertura="Capital,Central,Occidente">
+				<span data-lote data-codigo="COV-2601" data-vence="2026-12-31"></span>
+				<span data-lote data-codigo="COV-2602" data-vence="2027-03-31"></span>
+			</article>
+			<article data-vacuna data-vacuna-id="v-influenza" data-nombre="Influenza" data-tipo="Virus inactivado" data-procedencia="Internacional" data-laboratorio="Sanofi Pasteur" data-descripcion="Protección anual contra la influenza estacional." data-dosis-esquema="1" data-refuerzo-meses="12" data-cobertura="Capital,Central,Occidente">
+				<span data-lote data-codigo="INF-2601" data-vence="2026-11-30"></span>
+				<span data-lote data-codigo="INF-2602" data-vence="2027-01-31"></span>
+			</article>
+			<article data-vacuna data-vacuna-id="v-hepatitis" data-nombre="Hepatitis B" data-tipo="Recombinante" data-procedencia="Internacional" data-laboratorio="GSK" data-descripcion="Esquema de tres dosis para la prevención de la hepatitis B." data-dosis-esquema="3" data-refuerzo-meses="0" data-cobertura="Capital,Central">
+				<span data-lote data-codigo="HEP-2601" data-vence="2027-02-28"></span>
+			</article>
+			<article data-vacuna data-vacuna-id="v-sarampion" data-nombre="Sarampión" data-tipo="Virus atenuado" data-procedencia="Internacional" data-laboratorio="Merck" data-descripcion="Vacuna combinada para sarampión y rubéola." data-dosis-esquema="2" data-refuerzo-meses="0" data-cobertura="Capital,Central,Occidente">
+				<span data-lote data-codigo="SAR-2601" data-vence="2027-04-30"></span>
+			</article>
+			<article data-vacuna data-vacuna-id="v-tetanos" data-nombre="Tétanos" data-tipo="Toxoide" data-procedencia="Nacional" data-laboratorio="Instituto Butantan" data-descripcion="Refuerzo contra el tétanos y la difteria cada diez años." data-dosis-esquema="1" data-refuerzo-meses="120" data-cobertura="Capital,Central,Occidente">
+				<span data-lote data-codigo="TET-2601" data-vence="2027-06-30"></span>
+			</article>
+			<article data-vacuna data-vacuna-id="v-fiebre" data-nombre="Fiebre amarilla" data-tipo="Virus atenuado" data-procedencia="Internacional" data-laboratorio="Sanofi Pasteur" data-descripcion="Dosis única obligatoria para viajes internacionales." data-dosis-esquema="1" data-refuerzo-meses="0" data-cobertura="Capital,Occidente">
+				<span data-lote data-codigo="FIE-2601" data-vence="2027-05-31"></span>
+			</article>
+			<article data-vacuna data-vacuna-id="v-vph" data-nombre="VPH" data-tipo="Recombinante" data-procedencia="Internacional" data-laboratorio="Merck" data-descripcion="Vacuna contra el virus del papiloma humano." data-dosis-esquema="2" data-refuerzo-meses="0" data-cobertura="Capital,Central">
+				<span data-lote data-codigo="VPH-2601" data-vence="2027-08-31"></span>
+			</article>
+		</div>
+
+		<div hidden data-datos-personal>
+			<article data-personal data-centro-id="c1" data-nombre="Dra. Elena Pérez" data-cargo="Médico vacunador"></article>
+			<article data-personal data-centro-id="c1" data-nombre="Enf. Carmen Díaz" data-cargo="Enfermera vacunadora"></article>
+		</div>
+
+		<div hidden data-centro-actual data-centro-id="c1" data-nombre="Centro de Vacunación Libertador" data-estado="Distrito Capital" data-municipio="Libertador" data-region="Capital" data-direccion="Av. Sucre, Caracas" data-telefono="0212-5550101"></div>
+	</body>
+</html>

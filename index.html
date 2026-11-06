@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es" data-theme="salud">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Salud Vacunas · Iniciar sesión</title>
+		<link rel="stylesheet" href="assets/css/estilos.css" />
+		<script src="src/js/nucleo.js"></script>
+		<script src="src/js/datos.js"></script>
+		<script src="src/js/publico.js"></script>
+		<script src="src/js/app.js"></script>
+	</head>
+	<body data-pagina="login">
+		<main class="flex min-h-svh items-center justify-center bg-base-200 p-4 sm:p-6">
+			<div class="grid w-full max-w-5xl gap-5 lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:items-start">
+				<div class="w-full">
+					<header class="mb-4 flex flex-col items-center gap-1.5 text-center">
+						<span class="flex size-12 items-center justify-center rounded-box bg-primary text-primary-content">
+							<span class="icono icono-vaccine size-[26px]" aria-hidden="true"></span>
+						</span>
+						<h1 class="font-semibold text-2xl tracking-tight">Salud Vacunas</h1>
+						<p class="text-base-content/60 text-sm">Sistema de gestión de vacunación</p>
+					</header>
+
+					<section class="min-w-0 rounded-2xl bg-base-100 shadow-sm ring-1 ring-base-300/50">
+						<div class="flex min-w-0 flex-col gap-4 p-4 sm:p-5">
+							<h2 class="flex items-center gap-2 font-semibold text-lg">Iniciar sesión</h2>
+
+							<div data-login-alerta></div>
+
+							<form data-form-login class="flex flex-col gap-3">
+								<div class="flex flex-col gap-1.5">
+									<label for="loginUsuario" class="font-medium text-sm">Nombre de usuario<span class="text-error"> *</span></label>
+									<input id="loginUsuario" name="usuario" type="text" class="input h-10 w-full rounded-xl" autocomplete="username" placeholder="Usuario" required />
+								</div>
+
+								<div class="flex flex-col gap-1.5">
+									<label for="loginClave" class="font-medium text-sm">Contraseña<span class="text-error"> *</span></label>
+									<input id="loginClave" name="clave" type="password" class="input h-10 w-full rounded-xl" autocomplete="current-password" placeholder="Contraseña" required />
+								</div>
+
+								<button type="submit" class="btn btn-primary min-h-11 w-full rounded-xl font-medium text-base">Iniciar sesión</button>
+							</form>
+
+							<p class="rounded-xl bg-base-200/70 px-3 py-2.5 text-base-content/60 text-sm">Boceto: los usuarios de login y sus credenciales se agregarán posteriormente. Por ahora puedes recorrer las vistas desde los accesos de al lado.</p>
+
+							<p class="text-center">
+								<a href="recuperar-contrasena.html" class="text-base-content/60 text-sm hover:text-primary hover:underline">Recuperar contraseña</a>
+							</p>
+						</div>
+					</section>
+				</div>
+
+				<div class="flex w-full flex-col gap-3">
+					<div class="rounded-box border border-dashed border-base-300 bg-base-100/70 p-4 sm:p-5">
+						<p class="font-medium text-sm">Vistas de los perfiles</p>
+						<p class="mt-0.5 text-base-content/55 text-xs">Selecciona un perfil para abrir el boceto de sus vistas. Los usuarios de login de las regiones se configurarán después.</p>
+
+						<div class="mt-3 grid gap-2">
+							<a href="centro/usuarios/registrar.html" class="btn btn-outline min-h-10 justify-start rounded-xl font-medium text-base">
+								<span class="icono icono-building-hospital size-[18px]" aria-hidden="true"></span>
+								<span class="flex flex-col items-start leading-tight">
+									<span>Perfil 1 · Centro de salud</span>
+									<span class="font-normal text-base-content/55 text-xs">Registro de usuarios y vacunación</span>
+								</span>
+							</a>
+							<a href="subregion/certificados-historial.html" class="btn btn-outline min-h-10 justify-start rounded-xl font-medium text-base">
+								<span class="icono icono-map-pin size-[18px]" aria-hidden="true"></span>
+								<span class="flex flex-col items-start leading-tight">
+									<span>Perfil 2 · Sub-región</span>
+									<span class="font-normal text-base-content/55 text-xs">Historial de certificados médicos</span>
+								</span>
+							</a>
+							<a href="master/historial.html" class="btn btn-outline min-h-10 justify-start rounded-xl font-medium text-base">
+								<span class="icono icono-key size-[18px]" aria-hidden="true"></span>
+								<span class="flex flex-col items-start leading-tight">
+									<span>Perfil 3 · Master</span>
+									<span class="font-normal text-base-content/55 text-xs">Historial, centros, consulta, certificados y avisos</span>
+								</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
